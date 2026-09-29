@@ -114,7 +114,7 @@ class TicketStore:
             if row["assigned_to"] != staff_id:
                 raise PermissionError("Cán bộ phải nhận ticket trước khi phản hồi")
             connection.execute(
-                "UPDATE handover_tickets SET staff_reply = ?, updated_at = ? WHERE ticket_id = ?",
+                "UPDATE handover_tickets SET staff_reply = ?, status = 'resolved', updated_at = ? WHERE ticket_id = ?",
                 (reply, timestamp, ticket_id),
             )
         return self.get_for_staff(ticket_id)

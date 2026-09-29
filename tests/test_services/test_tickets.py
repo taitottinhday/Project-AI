@@ -25,8 +25,7 @@ def test_ticket_lifecycle_and_session_isolation(tmp_path):
 
     replied = store.reply(ticket.ticket_id, "staff-1", "Da kiem tra")
     assert replied.staff_reply == "Da kiem tra"
-    resolved = store.resolve(ticket.ticket_id, "staff-1")
-    assert resolved.status == TicketStatus.RESOLVED
+    assert replied.status == TicketStatus.RESOLVED
 
 
 def test_ticket_cannot_resolve_without_reply(tmp_path):

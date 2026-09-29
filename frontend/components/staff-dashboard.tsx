@@ -20,7 +20,7 @@ const STAFF_ANALYTICS_POLL_INTERVAL_MS = 30_000;
 const statusLabels: Record<TicketStatus, string> = {
   waiting: "Đang chờ",
   in_progress: "Đang xử lý",
-  resolved: "Đã giải quyết",
+  resolved: "Đã xử lý",
 };
 
 function percent(value: number | null | undefined): string {
@@ -180,13 +180,6 @@ export function StaffDashboard() {
     if (updated) setReply("");
   }
 
-  async function resolve() {
-    if (!selected) return;
-    await ticketAction(`/api/v1/staff/tickets/${encodeURIComponent(selected.ticket_id)}/resolve`, {
-      staff_id: staffId,
-    });
-  }
-
   function changeFilter(next: "all" | TicketStatus) {
     setFilter(next);
     const nextVisible = next === "all" ? tickets : tickets.filter((ticket) => ticket.status === next);
@@ -236,7 +229,7 @@ export function StaffDashboard() {
       <div className="staff-metrics">
         <article><span className="metric-icon waiting"><ClockIcon /></span><div><strong>{counts.waiting}</strong><span>Đang chờ</span></div></article>
         <article><span className="metric-icon progress"><StaffIcon /></span><div><strong>{counts.in_progress}</strong><span>Đang xử lý</span></div></article>
-        <article><span className="metric-icon resolved"><CheckIcon /></span><div><strong>{counts.resolved}</strong><span>Đã giải quyết</span></div></article>
+        <article><span className="metric-icon resolved"><CheckIcon /></span><div><strong>{counts.resolved}</strong><span>Đã xử lý</span></div></article>
       </div>
 
       <section className="analytics-panel">
@@ -309,11 +302,7 @@ export function StaffDashboard() {
               ) : null}
 
               {selected.staff_reply ? (
-                <div className="existing-reply"><span><CheckIcon /> Phản hồi đã gửi</span><p>{selected.staff_reply}</p></div>
-              ) : null}
-
-              {selected.status === "in_progress" && selected.assigned_to === staffId && selected.staff_reply ? (
-                <button className="button button-primary" disabled={actionLoading} onClick={() => void resolve()} type="button"><CheckIcon /> Đóng yêu cầu</button>
+                <div className="existing-reply"><span><CheckIcon /> Phản hồi đã gửi · Yêu cầu đã hoàn tất</span><p>{selected.staff_reply}</p></div>
               ) : null}
 
               {selected.status === "in_progress" && selected.assigned_to !== staffId ? (
