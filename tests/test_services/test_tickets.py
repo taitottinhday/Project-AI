@@ -1,6 +1,7 @@
 import pytest
 
 from src.models.schemas import TicketStatus
+from src.services.session import SessionStore
 from src.services.tickets import TicketStore
 
 
@@ -35,3 +36,13 @@ def test_ticket_cannot_resolve_without_reply(tmp_path):
 
     with pytest.raises(ValueError, match="phản hồi"):
         store.resolve(ticket.ticket_id, "staff-1")
+
+
+def test_anonymous_session_identifier_survives_process_restart():
+    """A persisted ticket remains readable when the API process recreates session memory."""
+    session_id = "anonymous-owner-token-1234567890"
+    first_process = SessionStore()
+    assert first_process.get_or_create(session_id).session_id == session_id
+
+    restarted_process = SessionStore()
+    assert restarted_process.get_or_create(session_id).session_id == session_id

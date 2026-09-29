@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 import { CheckIcon, ClockIcon, RefreshIcon, SendIcon, ShieldIcon, StaffIcon } from "@/components/icons";
 import {
@@ -14,6 +14,7 @@ import {
 
 const STAFF_TOKEN_KEY = "vinuni-staff-token";
 const STAFF_ID_KEY = "vinuni-staff-id";
+const STAFF_POLL_INTERVAL_MS = 5_000;
 
 const statusLabels: Record<TicketStatus, string> = {
   waiting: "Đang chờ",
@@ -59,7 +60,7 @@ export function StaffDashboard() {
     return () => window.clearTimeout(hydration);
   }, []);
 
-  async function loadTickets(activeToken = token) {
+  const loadTickets = useCallback(async (activeToken = token) => {
     if (!activeToken) return;
     setLoading(true);
     setError("");
@@ -75,10 +76,12 @@ export function StaffDashboard() {
       setTickets(data);
       setAnalytics(metricData);
       setLoggedIn(true);
-      if (data.length && !data.some((ticket) => ticket.ticket_id === selectedId)) {
-        setSelectedId(data[0].ticket_id);
-      }
-      if (!data.length) setSelectedId(null);
+      setSelectedId((currentSelected) => {
+        if (!data.length) return null;
+        return data.some((ticket) => ticket.ticket_id === currentSelected)
+          ? currentSelected
+          : data[0].ticket_id;
+      });
     } catch (caught) {
       const message = caught instanceof Error ? caught.message : "Không thể tải hàng chờ.";
       setError(message);
@@ -86,7 +89,13 @@ export function StaffDashboard() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [token]);
+
+  useEffect(() => {
+    if (!loggedIn || !token) return;
+    const interval = window.setInterval(() => void loadTickets(token), STAFF_POLL_INTERVAL_MS);
+    return () => window.clearInterval(interval);
+  }, [loadTickets, loggedIn, token]);
 
   async function login(event: FormEvent) {
     event.preventDefault();

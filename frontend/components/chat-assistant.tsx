@@ -36,6 +36,7 @@ type ConversationMessage = {
 const SESSION_KEY = "vinuni-guide-session";
 const MESSAGE_KEY = "vinuni-guide-messages";
 const TICKET_KEY = "vinuni-guide-tickets";
+const TICKET_POLL_INTERVAL_MS = 5_000;
 
 const welcomeMessage: ConversationMessage = {
   id: "welcome",
@@ -303,7 +304,7 @@ function TicketTracker({ sessionId, ticketIds }: { sessionId: string | null; tic
 
   useEffect(() => {
     const initialRefresh = window.setTimeout(() => void refresh(), 0);
-    const interval = window.setInterval(() => void refresh(), 20_000);
+    const interval = window.setInterval(() => void refresh(), TICKET_POLL_INTERVAL_MS);
     return () => {
       window.clearTimeout(initialRefresh);
       window.clearInterval(interval);
@@ -353,9 +354,13 @@ export function ChatAssistant() {
 
   useEffect(() => {
     const hydration = window.setTimeout(() => {
-      const storedSession = window.sessionStorage.getItem(SESSION_KEY);
+      // Tickets are not tied to an account. Keep only the anonymous ownership
+      // token and ticket IDs in this browser profile so a visitor can leave and
+      // return later without storing their conversation or requiring a login.
+      // Fall back to the prior sessionStorage keys to preserve existing users.
+      const storedSession = window.localStorage.getItem(SESSION_KEY) || window.sessionStorage.getItem(SESSION_KEY);
       const storedMessages = window.sessionStorage.getItem(MESSAGE_KEY);
-      const storedTickets = window.sessionStorage.getItem(TICKET_KEY);
+      const storedTickets = window.localStorage.getItem(TICKET_KEY) || window.sessionStorage.getItem(TICKET_KEY);
       if (storedSession) setSessionId(storedSession);
       if (storedMessages) {
         try { setMessages(JSON.parse(storedMessages) as ConversationMessage[]); } catch { /* ignore invalid browser state */ }
@@ -376,6 +381,12 @@ export function ChatAssistant() {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [hydrated, messages, loading]);
 
+  useEffect(() => {
+    if (!hydrated) return;
+    if (sessionId) window.localStorage.setItem(SESSION_KEY, sessionId);
+    window.localStorage.setItem(TICKET_KEY, JSON.stringify(ticketIds));
+  }, [hydrated, sessionId, ticketIds]);
+
   async function sendQuestion(override?: string) {
     const question = (override ?? draft).trim();
     if (!question || loading) return;
@@ -392,7 +403,6 @@ export function ChatAssistant() {
       });
       setSessionId(result.session_id);
       setLastReason(result.reason_code);
-      window.sessionStorage.setItem(SESSION_KEY, result.session_id);
       setMessages((current) => [
         ...current,
         { id: result.request_id, role: "assistant", text: result.response, result },
@@ -427,7 +437,6 @@ export function ChatAssistant() {
   function addTicket(ticket: Ticket) {
     const next = Array.from(new Set([ticket.ticket_id, ...ticketIds]));
     setTicketIds(next);
-    window.sessionStorage.setItem(TICKET_KEY, JSON.stringify(next));
   }
 
   return (

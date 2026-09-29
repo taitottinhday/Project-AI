@@ -44,8 +44,14 @@ class SessionStore:
     def get_or_create(self, session_id: str | None = None) -> Session:
         with self._lock:
             self._purge_expired()
-            if session_id and session_id in self._sessions:
-                session = self._sessions[session_id]
+            if session_id:
+                session = self._sessions.get(session_id)
+                if session is None:
+                    # The browser owns this high-entropy anonymous identifier.
+                    # Recreate its short-lived conversation state after a process
+                    # restart while keeping ownership of persisted handover tickets.
+                    session = Session(session_id=session_id)
+                    self._sessions[session_id] = session
                 session.updated_at = datetime.now(UTC)
                 return session
             new_id = secrets.token_urlsafe(24)
