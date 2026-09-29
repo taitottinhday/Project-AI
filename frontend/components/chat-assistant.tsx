@@ -387,11 +387,13 @@ export function ChatAssistant() {
     window.localStorage.setItem(TICKET_KEY, JSON.stringify(ticketIds));
   }, [hydrated, sessionId, ticketIds]);
 
-  async function sendQuestion(override?: string) {
+  async function sendQuestion(override?: string, isRetry = false) {
     const question = (override ?? draft).trim();
     if (!question || loading) return;
-    const userMessage: ConversationMessage = { id: makeId(), role: "user", text: question };
-    setMessages((current) => [...current, userMessage]);
+    if (!isRetry) {
+      const userMessage: ConversationMessage = { id: makeId(), role: "user", text: question };
+      setMessages((current) => [...current, userMessage]);
+    }
     setLastQuestion(question);
     setDraft("");
     setError("");
@@ -478,7 +480,7 @@ export function ChatAssistant() {
         ) : null}
 
         {error ? (
-          <div className="connection-error" role="alert"><span>{error}</span><button onClick={() => void sendQuestion(lastQuestion)} type="button"><RefreshIcon /> Thử lại</button></div>
+          <div className="connection-error" role="alert"><span>{error}</span><button onClick={() => void sendQuestion(lastQuestion, true)} type="button"><RefreshIcon /> Thử lại</button></div>
         ) : null}
 
         <div className="chat-composer-wrap">
