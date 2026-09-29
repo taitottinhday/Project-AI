@@ -1,0 +1,3685 @@
+{
+  "summary": {
+    "dataset_id": "vinuni_undergraduate_2026_2027",
+    "academic_year": "2026-2027",
+    "dataset_fingerprint": "77eff3a455c0926317b330734db26f581a00393b78f5d573f3f8cd73a80bf615",
+    "total_canonical_chunks": 219,
+    "all_chunks_have_valid_source_mapping": true,
+    "invalid_source_mapping_chunk_ids": [],
+    "case_counts": {
+      "answer": 113,
+      "safe": 5,
+      "metadata": 101
+    },
+    "answer_coverage": {
+      "passed": 113,
+      "total": 113,
+      "retrieved_target": 113
+    },
+    "safety_coverage": {
+      "passed": 5,
+      "total": 5,
+      "retrieved_target": 2
+    },
+    "metadata_structurally_audited": 101,
+    "failures": []
+  },
+  "cases": [
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:1",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Truyền thông Đa phương tiện",
+      "flags": [],
+      "query": "Chương trình Cử nhân Truyền thông Đa phương tiện tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:1"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:2",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kinh tế",
+      "flags": [],
+      "query": "Chương trình Cử nhân Kinh tế tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:2"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:3",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Tâm lý học",
+      "flags": [],
+      "query": "Chương trình Cử nhân Tâm lý học tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:3"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:4",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Quản trị Kinh doanh",
+      "flags": [],
+      "query": "Chương trình Cử nhân Quản trị Kinh doanh tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:4"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:5",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Tài chính và Ngân hàng",
+      "flags": [],
+      "query": "Chương trình Cử nhân Tài chính và Ngân hàng tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:5"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:6",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Khoa học Máy tính",
+      "flags": [],
+      "query": "Chương trình Cử nhân Khoa học Máy tính tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:6"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:7",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kỹ thuật Điện",
+      "flags": [],
+      "query": "Chương trình Cử nhân Kỹ thuật Điện tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:7"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:8",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kỹ thuật Cơ khí",
+      "flags": [],
+      "query": "Chương trình Cử nhân Kỹ thuật Cơ khí tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:8"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:9",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kỹ thuật Cơ khí > disputed program code",
+      "flags": [
+        "conflict"
+      ],
+      "query": "Mã ngành Kỹ thuật Cơ khí của VinUni là gì?",
+      "expected": "safe",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:9",
+        "vinuni_undergraduate_programs_2026_2027:8"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:10",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Khoa học Dữ liệu",
+      "flags": [],
+      "query": "Chương trình Cử nhân Khoa học Dữ liệu tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:10"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:11",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Điều dưỡng",
+      "flags": [],
+      "query": "Chương trình Cử nhân Điều dưỡng tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:11"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:12",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Bác sĩ Y khoa",
+      "flags": [],
+      "query": "Chương trình Bác sĩ Y khoa tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:12"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:13",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "not counted as separate confirmed 2026 admission programs",
+      "flags": [],
+      "query": "VinUni có những chương trình nào không được tính là ngành tuyển sinh riêng?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:6",
+        "vinuni_undergraduate_programs_2026_2027:13"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:14",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "listed tuition > Cử nhân Điều dưỡng",
+      "flags": [],
+      "query": "Học phí VinUni cho Cử nhân Điều dưỡng năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:14"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:15",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "listed tuition > Bác sĩ Y khoa",
+      "flags": [],
+      "query": "Học phí VinUni cho Bác sĩ Y khoa năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:15"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:16",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "listed tuition > Các chương trình cử nhân khác",
+      "flags": [],
+      "query": "Học phí VinUni cho Các chương trình cử nhân khác năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:16",
+        "vinuni_tuition_undergraduate_2026_2027_clean:14",
+        "vinuni_tuition_undergraduate_2026_2027_clean:15"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:17",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "founder educational development grant",
+      "flags": [],
+      "query": "Hỗ trợ tài chính Founder Educational Development Grant của VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:17"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:18",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "tuition includes",
+      "flags": [],
+      "query": "Học phí VinUni bao gồm những gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:18"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:19",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "per credit rate applies when",
+      "flags": [],
+      "query": "Học phí theo tín chỉ tại VinUni được áp dụng khi nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:19"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:20",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "payment",
+      "flags": [],
+      "query": "Cách thanh toán học phí tại VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:20"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:21",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "important exclusions",
+      "flags": [],
+      "query": "Học phí VinUni không bao gồm những gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:21"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:22",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "application rounds > Vòng tuyển sinh sớm",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về Vòng tuyển sinh sớm là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:22",
+        "vinuni_undergraduate_admissions_2026_2027:23"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:23",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "application rounds > Vòng tuyển sinh thường",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về Vòng tuyển sinh thường là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:23",
+        "vinuni_undergraduate_admissions_2026_2027:22"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:24",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "application rounds > Vòng tuyển sinh cuốn chiếu",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về Vòng tuyển sinh cuốn chiếu là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:24",
+        "vinuni_undergraduate_admissions_2026_2027:23"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:25",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "selection model",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về selection model là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:25",
+        "vinuni_undergraduate_admissions_2026_2027:23"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:26",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "application checklist",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về application checklist là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:26",
+        "vinuni_undergraduate_admissions_2026_2027:23"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:27",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "minimum academic thresholds",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về minimum academic thresholds là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:27",
+        "vinuni_undergraduate_admissions_2026_2027:23"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:28",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "english language requirements",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Yêu cầu tiếng Anh đầu vào của VinUni là gì?",
+      "expected": "safe",
+      "status": "handover_suggested",
+      "reason_code": "english_entry_requirement_restricted",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:29",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "medical doctor language requirement for international students",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về medical doctor language requirement for international students là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:29",
+        "vinuni_undergraduate_admissions_2026_2027:23"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:30",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "application fee reference",
+      "flags": [],
+      "query": "Thông tin tuyển sinh VinUni 2026-2027 về application fee reference là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:30",
+        "vinuni_undergraduate_admissions_2026_2027:23"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_admissions_2026_2027:31",
+      "document": "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+      "section": "contact",
+      "flags": [],
+      "query": "Thông tin liên hệ tuyển sinh VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:31"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:32",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "scholarships",
+      "flags": [],
+      "query": "VinUni có những học bổng nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:32"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:33",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "scholarship and aid maintenance",
+      "flags": [],
+      "query": "Thông tin học bổng hoặc chi phí VinUni về scholarship and aid maintenance là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:33",
+        "vinuni_financial_aid_and_fees_2026_2027:37"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:34",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "need based financial aid",
+      "flags": [],
+      "query": "Thông tin học bổng hoặc chi phí VinUni về need based financial aid là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:34",
+        "vinuni_financial_aid_and_fees_2026_2027:33"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:35",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "student loan",
+      "flags": [],
+      "query": "Khoản vay sinh viên VinUni có lãi suất và thời hạn thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:35"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:36",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "discount combination rules",
+      "flags": [],
+      "query": "Ưu đãi gia đình và cựu sinh viên có được cộng với học bổng không?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:36"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:37",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "admissions and enrollment fees",
+      "flags": [],
+      "query": "Thông tin học bổng hoặc chi phí VinUni về admissions and enrollment fees là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:37",
+        "vinuni_financial_aid_and_fees_2026_2027:32"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:38",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "retake and reexamination",
+      "flags": [],
+      "query": "Thông tin học bổng hoặc chi phí VinUni về retake and reexamination là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:38",
+        "vinuni_financial_aid_and_fees_2026_2027:37"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:39",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "dormitory",
+      "flags": [],
+      "query": "Phí ký túc xá VinUni bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:39"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:40",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "health and graduation fees",
+      "flags": [],
+      "query": "Thông tin học bổng hoặc chi phí VinUni về health and graduation fees là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:40",
+        "vinuni_financial_aid_and_fees_2026_2027:37"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:41",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "library fees",
+      "flags": [],
+      "query": "Phí phạt thư viện VinUni được tính như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:41"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_financial_aid_and_fees_2026_2027:42",
+      "document": "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+      "section": "refund policy",
+      "flags": [],
+      "query": "Chính sách hoàn học phí của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:42"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:43",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > reference number",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về reference number là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:43",
+        "vinuni_undergraduate_academic_rules_2026_2027:78"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:44",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > version",
+      "flags": [],
+      "query": "Quy chế học vụ VinUni hiện là phiên bản nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:44"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:45",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > effective or last updated",
+      "flags": [],
+      "query": "Quy chế học vụ VinUni có hiệu lực hoặc được cập nhật ngày nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:45"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:46",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > applies to",
+      "flags": [],
+      "query": "Quy chế học vụ VinUni áp dụng cho những đối tượng nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:46"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:47",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > language of instruction",
+      "flags": [],
+      "query": "Ngôn ngữ giảng dạy chính thức tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:47"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:48",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > credit definition",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về credit definition là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:48",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:49",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > academic year structure",
+      "flags": [],
+      "query": "Một năm học VinUni gồm các học kỳ nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:49"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:50",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > typical class time",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về typical class time là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:50",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:51",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > maximum candidature",
+      "flags": [],
+      "query": "Thời gian học tối đa tại VinUni là bao lâu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:51"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:52",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > course load",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về course load là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:52",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:53",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > add drop withdraw",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về add drop withdraw là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:53",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:54",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > transfer and repeat",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về transfer and repeat là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:54",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:55",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > academic standing > Excellent",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về Excellent là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:55",
+        "vinuni_undergraduate_academic_rules_2026_2027:81"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:56",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > academic standing > Very Good",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về Very Good là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:56",
+        "vinuni_undergraduate_academic_rules_2026_2027:81"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:57",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > academic standing > Good",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về Good là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:57",
+        "vinuni_undergraduate_academic_rules_2026_2027:81"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:58",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > academic standing > Marginal",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về Marginal là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:58",
+        "vinuni_undergraduate_academic_rules_2026_2027:81"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:59",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > academic standing > At Risk",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về At Risk là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:59",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:60",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > academic warning",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về academic warning là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:60"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:61",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > deans list",
+      "flags": [],
+      "query": "Điều kiện để vào Dean’s List là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:61"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:62",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > double degree",
+      "flags": [],
+      "query": "Điều kiện học bằng kép tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:62"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:63",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > program change",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về program change là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:63",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:64",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > assessment and exams",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về assessment and exams là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:64",
+        "vinuni_undergraduate_academic_rules_2026_2027:82"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:65",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 1",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:66",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 2",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:67",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 3",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:68",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 4",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:69",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 5",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:70",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 6",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:71",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 7",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:72",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 8",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:73",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 9",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:74",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 10",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:75",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 11",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:76",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > letter grades > 12",
+      "flags": [],
+      "query": "Thang quy đổi điểm chữ sang GPA của VinUni như thế nào?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:65",
+        "vinuni_undergraduate_academic_rules_2026_2027:66",
+        "vinuni_undergraduate_academic_rules_2026_2027:67",
+        "vinuni_undergraduate_academic_rules_2026_2027:68",
+        "vinuni_undergraduate_academic_rules_2026_2027:69",
+        "vinuni_undergraduate_academic_rules_2026_2027:70",
+        "vinuni_undergraduate_academic_rules_2026_2027:71",
+        "vinuni_undergraduate_academic_rules_2026_2027:72",
+        "vinuni_undergraduate_academic_rules_2026_2027:73",
+        "vinuni_undergraduate_academic_rules_2026_2027:74",
+        "vinuni_undergraduate_academic_rules_2026_2027:75",
+        "vinuni_undergraduate_academic_rules_2026_2027:76"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:77",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic regulations > grading notes",
+      "flags": [],
+      "query": "Quy tắc điểm đỗ và làm tròn GPA của VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:77"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:78",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "grade appeal",
+      "flags": [],
+      "query": "Quy trình phúc khảo điểm tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:78"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:79",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "leave withdrawal and return",
+      "flags": [],
+      "query": "Quy định xin nghỉ học hoặc bảo lưu tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:80",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "leave withdrawal and return > disputed return deadline",
+      "flags": [
+        "conflict"
+      ],
+      "query": "Hạn quay lại sau khi nghỉ học là 1 tuần hay 1 tháng?",
+      "expected": "safe",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:79",
+        "vinuni_undergraduate_academic_rules_2026_2027:80"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:81",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "graduation",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về graduation là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:81",
+        "vinuni_undergraduate_academic_rules_2026_2027:79"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:82",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic integrity and genai",
+      "flags": [],
+      "query": "Quy định học vụ VinUni về academic integrity and genai là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:82",
+        "vinuni_undergraduate_academic_rules_2026_2027:43"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_academic_rules_2026_2027:83",
+      "document": "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+      "section": "academic calendar 2026 2027",
+      "flags": [
+        "draft",
+        "tentative"
+      ],
+      "query": "Lịch học chính thức năm 2026-2027 là gì?",
+      "expected": "safe",
+      "status": "handover_suggested",
+      "reason_code": "academic_calendar_not_final",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:84",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minor count",
+      "flags": [],
+      "query": "VinUni hiện có bao nhiêu chương trình minor?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:84"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:85",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Psychology",
+      "flags": [],
+      "query": "Minor Psychology tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:85",
+        "vinuni_undergraduate_minors_2026_2027:86"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:86",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Psychology for Clinicians",
+      "flags": [],
+      "query": "Minor Psychology for Clinicians tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:86",
+        "vinuni_undergraduate_minors_2026_2027:85"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:87",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Vietnam Studies",
+      "flags": [],
+      "query": "Minor Vietnam Studies tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:87"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:88",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Economics",
+      "flags": [],
+      "query": "Minor Economics tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:88"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:89",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Multimedia Communication",
+      "flags": [],
+      "query": "Minor Multimedia Communication tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:89"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:90",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Hospitality Leadership",
+      "flags": [],
+      "query": "Minor Hospitality Leadership tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:90"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:91",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Business Analytics",
+      "flags": [],
+      "query": "Minor Business Analytics tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:91",
+        "vinuni_undergraduate_minors_2026_2027:95"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:92",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Marketing",
+      "flags": [],
+      "query": "Minor Marketing tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:92"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:93",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Entrepreneurship",
+      "flags": [],
+      "query": "Minor Entrepreneurship tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:93"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:94",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Finance",
+      "flags": [],
+      "query": "Minor Finance tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:94"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:95",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Business Essentials",
+      "flags": [],
+      "query": "Minor Business Essentials tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:95",
+        "vinuni_undergraduate_minors_2026_2027:91"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:96",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Operations and Supply Chain Management",
+      "flags": [],
+      "query": "Minor Operations and Supply Chain Management tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:96",
+        "vinuni_undergraduate_minors_2026_2027:102"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:97",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Artificial Intelligence for BBA Students",
+      "flags": [],
+      "query": "Minor Artificial Intelligence for BBA Students tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:97",
+        "vinuni_undergraduate_minors_2026_2027:99"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:98",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Computer Science for Healthcare Professionals",
+      "flags": [],
+      "query": "Minor Computer Science for Healthcare Professionals tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:6",
+        "vinuni_undergraduate_minors_2026_2027:98"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:99",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Artificial Intelligence for Electrical and Mechanical Engineering",
+      "flags": [],
+      "query": "Minor Artificial Intelligence for Electrical and Mechanical Engineering tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:99",
+        "vinuni_undergraduate_minors_2026_2027:97"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:100",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Robotics for Engineering and Computer Science",
+      "flags": [],
+      "query": "Minor Robotics for Engineering and Computer Science tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:6",
+        "vinuni_undergraduate_minors_2026_2027:100"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:101",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Product Design for Engineering and Computer Science",
+      "flags": [],
+      "query": "Minor Product Design for Engineering and Computer Science tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:101",
+        "vinuni_undergraduate_programs_2026_2027:6"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:102",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Healthcare Management and Innovation",
+      "flags": [],
+      "query": "Minor Healthcare Management and Innovation tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:102",
+        "vinuni_undergraduate_minors_2026_2027:103"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:103",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Healthcare Information for Engineers",
+      "flags": [],
+      "query": "Minor Healthcare Information for Engineers tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:103",
+        "vinuni_undergraduate_minors_2026_2027:104"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:104",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "minors > Healthcare for Psychologists",
+      "flags": [],
+      "query": "Minor Healthcare for Psychologists tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:104",
+        "vinuni_undergraduate_minors_2026_2027:103"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_minors_2026_2027:105",
+      "document": "academics/vinuni_undergraduate_minors_2026_2027.json",
+      "section": "official page data quality note",
+      "flags": [],
+      "query": "Mã học phần của minor có thông tin nào cần xác nhận với Registrar không?",
+      "expected": "safe",
+      "status": "handover_suggested",
+      "reason_code": "minor_course_code_requires_registrar_confirmation",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_life_residential_and_services_2026_2027:106",
+      "document": "student_life/vinuni_student_life_residential_and_services_2026_2027.json",
+      "section": "residential life",
+      "flags": [],
+      "query": "Dịch vụ sinh viên VinUni về residential life là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:106",
+        "vinuni_student_life_residential_and_services_2026_2027:107"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_life_residential_and_services_2026_2027:107",
+      "document": "student_life/vinuni_student_life_residential_and_services_2026_2027.json",
+      "section": "student life",
+      "flags": [],
+      "query": "Dịch vụ sinh viên VinUni về student life là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:107"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_life_residential_and_services_2026_2027:108",
+      "document": "student_life/vinuni_student_life_residential_and_services_2026_2027.json",
+      "section": "health wellbeing and support",
+      "flags": [],
+      "query": "Dịch vụ sinh viên VinUni về health wellbeing and support là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:108",
+        "vinuni_financial_aid_and_fees_2026_2027:40"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_life_residential_and_services_2026_2027:109",
+      "document": "student_life/vinuni_student_life_residential_and_services_2026_2027.json",
+      "section": "academic accommodation",
+      "flags": [],
+      "query": "Chính sách điều chỉnh học tập cho sinh viên có nhu cầu hỗ trợ là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:109",
+        "vinuni_financial_aid_and_fees_2026_2027:37"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_life_residential_and_services_2026_2027:110",
+      "document": "student_life/vinuni_student_life_residential_and_services_2026_2027.json",
+      "section": "fitness to study",
+      "flags": [],
+      "query": "Dịch vụ sinh viên VinUni về fitness to study là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:110",
+        "vinuni_student_life_residential_and_services_2026_2027:108"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_international_and_global_opportunities_2026_2027:111",
+      "document": "international/vinuni_international_and_global_opportunities_2026_2027.json",
+      "section": "study visa for international students",
+      "flags": [],
+      "query": "Thông tin quốc tế VinUni về study visa for international students là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:111"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_international_and_global_opportunities_2026_2027:112",
+      "document": "international/vinuni_international_and_global_opportunities_2026_2027.json",
+      "section": "vietnamese language for international chs students",
+      "flags": [],
+      "query": "Thông tin quốc tế VinUni về vietnamese language for international chs students là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:112",
+        "vinuni_undergraduate_admissions_2026_2027:29"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_international_and_global_opportunities_2026_2027:113",
+      "document": "international/vinuni_international_and_global_opportunities_2026_2027.json",
+      "section": "outbound exchange",
+      "flags": [],
+      "query": "Thông tin quốc tế VinUni về outbound exchange là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:113"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_international_and_global_opportunities_2026_2027:114",
+      "document": "international/vinuni_international_and_global_opportunities_2026_2027.json",
+      "section": "internships",
+      "flags": [],
+      "query": "Quy định thực tập tại VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:114"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_rights_conduct_and_complaints_2026_2027:115",
+      "document": "governance/vinuni_student_rights_conduct_and_complaints_2026_2027.json",
+      "section": "student code of conduct",
+      "flags": [],
+      "query": "Quy tắc ứng xử dành cho sinh viên VinUni là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:115"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_rights_conduct_and_complaints_2026_2027:116",
+      "document": "governance/vinuni_student_rights_conduct_and_complaints_2026_2027.json",
+      "section": "formal student complaints",
+      "flags": [],
+      "query": "Quy định sinh viên VinUni về formal student complaints là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:116"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_rights_conduct_and_complaints_2026_2027:117",
+      "document": "governance/vinuni_student_rights_conduct_and_complaints_2026_2027.json",
+      "section": "financial support for current students",
+      "flags": [],
+      "query": "Quy định sinh viên VinUni về financial support for current students là gì?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:117",
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:118"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_student_rights_conduct_and_complaints_2026_2027:118",
+      "document": "governance/vinuni_student_rights_conduct_and_complaints_2026_2027.json",
+      "section": "public vs internal information",
+      "flags": [],
+      "query": "Những thông tin nào của VinUni chỉ dành cho nội bộ?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:118"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:119",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "coverage summary",
+      "flags": [],
+      "query": "Thông tin VinUni về coverage summary là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:120",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > public policy library inventory",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về public policy library inventory là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:41"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:121",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > university overview and contacts",
+      "flags": [],
+      "query": "Thông tin VinUni về university overview and contacts là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:122",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > undergraduate programs degrees codes duration credits",
+      "flags": [],
+      "query": "Thông tin VinUni về undergraduate programs degrees codes duration credits là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:7",
+        "vinuni_undergraduate_programs_2026_2027:10",
+        "vinuni_undergraduate_programs_2026_2027:6",
+        "vinuni_undergraduate_programs_2026_2027:1",
+        "vinuni_undergraduate_programs_2026_2027:8",
+        "vinuni_undergraduate_programs_2026_2027:12",
+        "vinuni_undergraduate_programs_2026_2027:3",
+        "vinuni_undergraduate_programs_2026_2027:2",
+        "vinuni_undergraduate_programs_2026_2027:11",
+        "vinuni_undergraduate_programs_2026_2027:5",
+        "vinuni_undergraduate_programs_2026_2027:4"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:123",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > concentrations and cohort 2026 curriculum frameworks",
+      "flags": [],
+      "query": "Thông tin VinUni về concentrations and cohort 2026 curriculum frameworks là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:124",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > minors and eligibility",
+      "flags": [],
+      "query": "Thông tin VinUni về minors and eligibility là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:125",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > admissions rounds process criteria documents",
+      "flags": [],
+      "query": "Thông tin VinUni về admissions rounds process criteria documents là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:126",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > english entry and conditional admission",
+      "flags": [],
+      "query": "Thông tin VinUni về english entry and conditional admission là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:127",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > tuition founder support payment refund discounts",
+      "flags": [],
+      "query": "Thông tin VinUni về tuition founder support payment refund discounts là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:20"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:128",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > scholarships financial aid loan maintenance",
+      "flags": [],
+      "query": "Thông tin VinUni về scholarships financial aid loan maintenance là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:33"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:129",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > current student emergency and exchange financial support",
+      "flags": [],
+      "query": "Thông tin VinUni về current student emergency and exchange financial support là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:113"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:130",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > dormitory fees and residential rules",
+      "flags": [],
+      "query": "Thông tin VinUni về dormitory fees and residential rules là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:39"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:131",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > academic calendar",
+      "flags": [
+        "draft"
+      ],
+      "query": "Thông tin VinUni về academic calendar là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "academic_calendar_not_final",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:132",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > credits course load add drop withdraw transfer repeat",
+      "flags": [],
+      "query": "Thông tin VinUni về credits course load add drop withdraw transfer repeat là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:53",
+        "vinuni_undergraduate_academic_rules_2026_2027:54"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:133",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > grading gpa academic warning probation dismissal",
+      "flags": [],
+      "query": "Thông tin VinUni về grading gpa academic warning probation dismissal là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:60"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:134",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > grade appeal leave withdrawal return",
+      "flags": [
+        "conflict"
+      ],
+      "query": "Thông tin VinUni về grade appeal leave withdrawal return là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:135",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > double degree program change graduation",
+      "flags": [],
+      "query": "Thông tin VinUni về double degree program change graduation là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "model_insufficient_evidence",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:136",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > academic integrity and genai",
+      "flags": [],
+      "query": "Thông tin VinUni về academic integrity and genai là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_academic_rules_2026_2027:82"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:137",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > student rights responsibilities conduct discipline",
+      "flags": [],
+      "query": "Thông tin VinUni về student rights responsibilities conduct discipline là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:115",
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:116"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:138",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > formal complaints and routing",
+      "flags": [],
+      "query": "Thông tin VinUni về formal complaints and routing là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:139",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > academic accommodation and fitness to study",
+      "flags": [],
+      "query": "Thông tin VinUni về academic accommodation and fitness to study là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:110"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:140",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > student life clubs health wellbeing services",
+      "flags": [],
+      "query": "Thông tin VinUni về student life clubs health wellbeing services là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:108",
+        "vinuni_student_life_residential_and_services_2026_2027:107"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:141",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > international student visa",
+      "flags": [],
+      "query": "Thông tin VinUni về international student visa là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:111"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:142",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > vietnamese language for international chs",
+      "flags": [],
+      "query": "Thông tin VinUni về vietnamese language for international chs là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:143",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > outbound exchange costs eligibility credit transfer",
+      "flags": [],
+      "query": "Thông tin VinUni về outbound exchange costs eligibility credit transfer là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:113"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:144",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "covered topics > internship management",
+      "flags": [],
+      "query": "Thông tin VinUni về internship management là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:114"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:145",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > program level admission quotas 2026 2027",
+      "flags": [
+        "not_publicly_verified"
+      ],
+      "query": "Thông tin VinUni về program level admission quotas 2026 2027 là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "admission_quota_not_publicly_verified",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:146",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > final academic calendar 2026 2027",
+      "flags": [
+        "draft",
+        "not_publicly_verified"
+      ],
+      "query": "Thông tin VinUni về final academic calendar 2026 2027 là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "academic_calendar_not_final",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:147",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > course schedule exam rooms and live enrollment",
+      "flags": [
+        "dynamic"
+      ],
+      "query": "Thông tin VinUni về course schedule exam rooms and live enrollment là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:148",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > current exchange calls slots partner requirements",
+      "flags": [
+        "dynamic"
+      ],
+      "query": "Thông tin VinUni về current exchange calls slots partner requirements là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:113"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:149",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > exact club roster and event calendar",
+      "flags": [
+        "dynamic"
+      ],
+      "query": "Thông tin VinUni về exact club roster and event calendar là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:150",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > room allocation scoring and internal work study process",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về room allocation scoring and internal work study process là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:151",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > health insurance and health check exact amounts",
+      "flags": [],
+      "query": "Thông tin VinUni về health insurance and health check exact amounts là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:152",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > per credit founder support outside standard curriculum",
+      "flags": [
+        "unresolved"
+      ],
+      "query": "Thông tin VinUni về per credit founder support outside standard curriculum là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:153",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > mechanical engineering program code",
+      "flags": [
+        "conflict"
+      ],
+      "query": "Thông tin VinUni về mechanical engineering program code là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:99",
+        "vinuni_undergraduate_programs_2026_2027:9"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:154",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "known gaps or dynamic topics > personal case decisions",
+      "flags": [],
+      "query": "Thông tin VinUni về personal case decisions là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_chatbot_topic_coverage_2026_09_23:155",
+      "document": "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+      "section": "retrieval and answering rules",
+      "flags": [
+        "draft",
+        "tentative"
+      ],
+      "query": "Thông tin VinUni về retrieval and answering rules là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:156",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Guidelines for Students Representing and Organizing Events under the VinUniversity Name",
+      "flags": [],
+      "query": "Thông tin VinUni về Guidelines for Students Representing and Organizing Events under the VinUniversity Name là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:157",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > VinUni Student Club Operations Guidelines",
+      "flags": [],
+      "query": "Thông tin VinUni về VinUni Student Club Operations Guidelines là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:158",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Guidelines on Student Conduct on Social Media and Digital Platforms",
+      "flags": [],
+      "query": "Thông tin VinUni về Guidelines on Student Conduct on Social Media and Digital Platforms là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:116"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:159",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Guidelines on Student Academic Accommodation",
+      "flags": [],
+      "query": "Thông tin VinUni về Guidelines on Student Academic Accommodation là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:107"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:160",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > VinUni Dormitory Room Allocation Principles",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về VinUni Dormitory Room Allocation Principles là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:161",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Emergency Response Guidelines",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về Emergency Response Guidelines là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:162",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Convocation and Graduation Ceremony Organization",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về Convocation and Graduation Ceremony Organization là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:163",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Financial Regulations and Tariff for Student",
+      "flags": [],
+      "query": "Thông tin VinUni về Financial Regulations and Tariff for Student là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:164",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Guidance for Fitness to Study Procedures",
+      "flags": [],
+      "query": "Thông tin VinUni về Guidance for Fitness to Study Procedures là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_life_residential_and_services_2026_2027:110",
+        "vinuni_financial_aid_and_fees_2026_2027:34"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:165",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Formal Escalation Management Procedure for Students' Complaint",
+      "flags": [],
+      "query": "Thông tin VinUni về Formal Escalation Management Procedure for Students' Complaint là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_minors_2026_2027:97"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:166",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Study Visa Guidelines for International Students",
+      "flags": [],
+      "query": "Thông tin VinUni về Study Visa Guidelines for International Students là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:111"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:167",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Guidelines for Maintaining Entry Scholarship and Financial Aid Support",
+      "flags": [],
+      "query": "Thông tin VinUni về Guidelines for Maintaining Entry Scholarship and Financial Aid Support là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:34",
+        "vinuni_financial_aid_and_fees_2026_2027:33"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:168",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Alumni Policy",
+      "flags": [],
+      "query": "Thông tin VinUni về Alumni Policy là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:169",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Guidelines for Student Financial Aid Support Request",
+      "flags": [],
+      "query": "Thông tin VinUni về Guidelines for Student Financial Aid Support Request là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:117",
+        "vinuni_financial_aid_and_fees_2026_2027:34"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:170",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Internship Management Policy",
+      "flags": [],
+      "query": "Thông tin VinUni về Internship Management Policy là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:114"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:171",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > OASIS Framework",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về OASIS Framework là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:172",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Event Organization Guidelines",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về Event Organization Guidelines là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:173",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Sexual Misconduct and Response",
+      "flags": [],
+      "query": "Thông tin VinUni về Sexual Misconduct and Response là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:174",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Student Self Evaluation and Award Policy",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về Student Self Evaluation and Award Policy là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:175",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Student Service Standards",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về Student Service Standards là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:176",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Student Advising Framework",
+      "flags": [],
+      "query": "Thông tin VinUni về Student Advising Framework là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:177",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Residential Life Guideline",
+      "flags": [],
+      "query": "Thông tin VinUni về Residential Life Guideline là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:178",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Student Work-Study Program Guidelines",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về Student Work-Study Program Guidelines là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:1",
+        "vinuni_undergraduate_programs_2026_2027:12"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:179",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Student Code of Conduct",
+      "flags": [],
+      "query": "Thông tin VinUni về Student Code of Conduct là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_student_rights_conduct_and_complaints_2026_2027:115"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:180",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Student Academic Integrity",
+      "flags": [],
+      "query": "Thông tin VinUni về Student Academic Integrity là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:181",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "student affairs policies > Admitted and Graduating Student Attributes (AACC and EXCEL)",
+      "flags": [],
+      "query": "Thông tin VinUni về Admitted and Graduating Student Attributes (AACC and EXCEL) là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:182",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Procedure for Undergraduate Graduation Review and Degree Conferral",
+      "flags": [],
+      "query": "Thông tin VinUni về Procedure for Undergraduate Graduation Review and Degree Conferral là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:183",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Vietnamese Language Program Guidelines for International Students",
+      "flags": [],
+      "query": "Thông tin VinUni về Vietnamese Language Program Guidelines for International Students là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:1",
+        "vinuni_undergraduate_programs_2026_2027:12"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:184",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Safe and Supported Pregnancy Policy",
+      "flags": [],
+      "query": "Thông tin VinUni về Safe and Supported Pregnancy Policy là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:185",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Guidelines on Student Use of Generative Artificial Intelligence",
+      "flags": [],
+      "query": "Thông tin VinUni về Guidelines on Student Use of Generative Artificial Intelligence là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:186",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > English Language Proficiency Requirements for Graduation",
+      "flags": [],
+      "query": "Thông tin VinUni về English Language Proficiency Requirements for Graduation là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:28"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:187",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Student Grade Appeal Procedure",
+      "flags": [],
+      "query": "Thông tin VinUni về Student Grade Appeal Procedure là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:188",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Procedure for Requesting Leave of Absence, Withdrawal and Return",
+      "flags": [],
+      "query": "Thông tin VinUni về Procedure for Requesting Leave of Absence, Withdrawal and Return là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:189",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Attendance Policy at Medical Doctor Program",
+      "flags": [],
+      "query": "Thông tin VinUni về Attendance Policy at Medical Doctor Program là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:12",
+        "vinuni_undergraduate_programs_2026_2027:9"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:190",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Internship Management Policy",
+      "flags": [],
+      "query": "Thông tin VinUni về Internship Management Policy là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:114"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:191",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Academic Catalogs",
+      "flags": [],
+      "query": "Thông tin VinUni về Academic Catalogs là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:192",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Admissions Regulations for Undergraduate Program",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về Admissions Regulations for Undergraduate Program là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:9",
+        "vinuni_undergraduate_programs_2026_2027:1"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:193",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Library Access and Services Policy",
+      "flags": [],
+      "query": "Thông tin VinUni về Library Access and Services Policy là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_financial_aid_and_fees_2026_2027:41"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:194",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Student Advising Framework",
+      "flags": [],
+      "query": "Thông tin VinUni về Student Advising Framework là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:195",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Procedural Guidelines for Credit Transfer Requests",
+      "flags": [],
+      "query": "Thông tin VinUni về Procedural Guidelines for Credit Transfer Requests là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:196",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Assessment Guideline for Undergraduate Programs at CHS",
+      "flags": [],
+      "query": "Thông tin VinUni về Assessment Guideline for Undergraduate Programs at CHS là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:7",
+        "vinuni_undergraduate_programs_2026_2027:10",
+        "vinuni_undergraduate_programs_2026_2027:6",
+        "vinuni_undergraduate_programs_2026_2027:12",
+        "vinuni_undergraduate_programs_2026_2027:1",
+        "vinuni_undergraduate_programs_2026_2027:8",
+        "vinuni_undergraduate_programs_2026_2027:11",
+        "vinuni_undergraduate_programs_2026_2027:3",
+        "vinuni_undergraduate_programs_2026_2027:2",
+        "vinuni_undergraduate_programs_2026_2027:5",
+        "vinuni_undergraduate_programs_2026_2027:4"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:197",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Declaration of Individually Designed Concentration and Minor",
+      "flags": [],
+      "query": "Thông tin VinUni về Declaration of Individually Designed Concentration and Minor là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:8"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:198",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Guideline for Program Change Request",
+      "flags": [],
+      "query": "Thông tin VinUni về Guideline for Program Change Request là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:9",
+        "vinuni_undergraduate_programs_2026_2027:1"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:199",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Outbound Student Exchange Procedure",
+      "flags": [],
+      "query": "Thông tin VinUni về Outbound Student Exchange Procedure là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:113"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:200",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Academic Regulations for Full-Time Undergraduate Programs",
+      "flags": [],
+      "query": "Thông tin VinUni về Academic Regulations for Full-Time Undergraduate Programs là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "insufficient_retrieval_evidence",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:201",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Course Exchange: Transfer Credit, Proficiency Exam, Honors Course and Individual Study",
+      "flags": [],
+      "query": "Thông tin VinUni về Course Exchange: Transfer Credit, Proficiency Exam, Honors Course and Individual Study là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:113"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:202",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Course Evaluation",
+      "flags": [],
+      "query": "Thông tin VinUni về Course Evaluation là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:203",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Student Academic Integrity",
+      "flags": [],
+      "query": "Thông tin VinUni về Student Academic Integrity là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:204",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > Admitted and Graduating Student Attributes (AACC and EXCEL)",
+      "flags": [],
+      "query": "Thông tin VinUni về Admitted and Graduating Student Attributes (AACC and EXCEL) là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:205",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "undergraduate relevant academic affairs policies > English Language Requirements for Undergraduate Admissions",
+      "flags": [],
+      "query": "Thông tin VinUni về English Language Requirements for Undergraduate Admissions là gì?",
+      "expected": "metadata",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_admissions_2026_2027:28"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:206",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "external affairs relevant policies > Integrated Degree Programs Procedure",
+      "flags": [],
+      "query": "Thông tin VinUni về Integrated Degree Programs Procedure là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:207",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "external affairs relevant policies > Internship Management Policy",
+      "flags": [],
+      "query": "Thông tin VinUni về Internship Management Policy là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:114"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:208",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "external affairs relevant policies > Outbound Student Exchange Procedure",
+      "flags": [],
+      "query": "Thông tin VinUni về Outbound Student Exchange Procedure là gì?",
+      "expected": "metadata",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": false,
+      "draft_evidence_ids": [
+        "vinuni_international_and_global_opportunities_2026_2027:113"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_public_policy_inventory_2026_09_23:209",
+      "document": "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+      "section": "chatbot rule",
+      "flags": [
+        "restricted"
+      ],
+      "query": "Thông tin VinUni về chatbot rule là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:210",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "known conflicts > DQ-001",
+      "flags": [],
+      "query": "Thông tin VinUni về DQ-001 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:211",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "known conflicts > DQ-002",
+      "flags": [],
+      "query": "Thông tin VinUni về DQ-002 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:212",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "known conflicts > DQ-003",
+      "flags": [],
+      "query": "Thông tin VinUni về DQ-003 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:213",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "known conflicts > DQ-004",
+      "flags": [],
+      "query": "Thông tin VinUni về DQ-004 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:214",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "known conflicts > DQ-005",
+      "flags": [
+        "unresolved"
+      ],
+      "query": "Thông tin VinUni về DQ-005 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:215",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "known conflicts > DQ-006",
+      "flags": [
+        "unresolved"
+      ],
+      "query": "Thông tin VinUni về DQ-006 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:216",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "known conflicts > DQ-007",
+      "flags": [],
+      "query": "Thông tin VinUni về DQ-007 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:217",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "additional second audit findings > DQ-008",
+      "flags": [
+        "draft",
+        "tentative"
+      ],
+      "query": "Thông tin VinUni về DQ-008 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:218",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "additional second audit findings > DQ-009",
+      "flags": [],
+      "query": "Thông tin VinUni về DQ-009 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_data_quality_2026_09_22:219",
+      "document": "quality/vinuni_data_quality_2026_09_22.json",
+      "section": "additional second audit findings > DQ-010",
+      "flags": [],
+      "query": "Thông tin VinUni về DQ-010 là gì?",
+      "expected": "metadata",
+      "status": "insufficient_evidence",
+      "reason_code": "out_of_scope_or_unknown_intent",
+      "grounded": false,
+      "retrieved_target": false,
+      "draft_evidence_ids": [],
+      "passed": true
+    }
+  ]
+}

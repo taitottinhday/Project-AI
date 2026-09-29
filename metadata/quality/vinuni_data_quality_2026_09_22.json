@@ -1,0 +1,133 @@
+{
+  "metadata": {
+    "dataset": "vinuni_undergraduate_2026_2027",
+    "audit_date": "2026-09-23",
+    "original_audit_date": "2026-09-22",
+    "expanded_audit_date": "2026-09-23",
+    "status": "verified_with_documented_conflicts",
+    "official_sources_only": true
+  },
+  "source_priority_order": [
+    "official_dated_policy_or_regulation",
+    "official_cohort_2026_curriculum_framework",
+    "current_official_program_page",
+    "current_official_admissions_page",
+    "official_dated_announcement",
+    "official_faq"
+  ],
+  "validation_rules": [
+    "Không lấy dữ liệu từ blog, báo chí, diễn đàn, trang tổng hợp hoặc snippet tìm kiếm.",
+    "Không suy đoán giá trị chưa được công bố; dùng null và ghi lý do.",
+    "Phép tính từ dữ liệu nguồn phải có derived=true và công thức.",
+    "Mỗi nhóm dữ liệu phải có source_ids ánh xạ tới sổ nguồn.",
+    "Khi hai nguồn chính thức xung đột, không xóa dấu vết; áp dụng thứ tự ưu tiên và ghi xung đột tại đây.",
+    "Ngày truy cập không đồng nghĩa ngày hiệu lực; ưu tiên effective_date/published_or_updated khi có."
+  ],
+  "known_conflicts": [
+    {
+      "id": "DQ-001",
+      "topic": "dormitory_price",
+      "lower_priority_claim": "FAQ ký túc xá nêu mức 3.200.000 VND/tháng.",
+      "higher_priority_claim": "Quy định tài chính ngày 22/07/2026 nêu bốn mức chuẩn 3.500.000, 3.700.000, 4.400.000 và 5.000.000 VND/người/tháng, cùng mức ưu đãi người ở lại.",
+      "resolution": "Dùng biểu phí 22/07/2026; không dùng giá trong FAQ cũ.",
+      "source_ids": ["SRC-DORM-FAQ", "SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+    },
+    {
+      "id": "DQ-002",
+      "topic": "english_conditional_admission",
+      "lower_priority_claim": "FAQ tuyển sinh diễn đạt chung rằng ứng viên phải có IELTS 6.5 và không có Pathway.",
+      "higher_priority_claim": "Chính sách GDL-ADM-002-V4.1 ngày 15/04/2026 cho phép nhập học có điều kiện từ năm 2026–2027 theo hai cấu hình điểm; không áp dụng cho MD.",
+      "resolution": "Dùng chính sách tiếng Anh V4.1; FAQ chỉ dùng cho thông tin không mâu thuẫn.",
+      "source_ids": ["SRC-ADMISSIONS-FAQ", "SRC-ENGLISH-POLICY"]
+    },
+    {
+      "id": "DQ-003",
+      "topic": "new_finance_and_banking_program",
+      "lower_priority_claim": "Bài học bổng/tuyển sinh công bố ngày 22/11/2025 chưa liệt kê chương trình Tài chính và Ngân hàng.",
+      "higher_priority_claim": "Catalog hiện hành, trang chương trình và khung chương trình Cohort 2026 xác nhận chương trình mã 7340201.",
+      "resolution": "Bao gồm Tài chính và Ngân hàng trong danh sách 2026–2027 vì các nguồn xác nhận mới hơn và chuyên biệt hơn.",
+      "source_ids": ["SRC-SCHOLARSHIP-2026-ARTICLE", "SRC-ACADEMIC-CATALOGS", "SRC-CF-FINANCE-BANKING-2026", "SRC-BFB-PROGRAM"]
+    },
+    {
+      "id": "DQ-004",
+      "topic": "electrical_engineering_concentrations",
+      "lower_priority_claim": "Trang catalog tổng hợp chỉ liệt kê ba chuyên ngành của Electrical Engineering.",
+      "higher_priority_claim": "Khung chương trình Cohort 2026 liệt kê bốn chuyên ngành, có thêm Computer Engineering.",
+      "resolution": "Dùng bốn chuyên ngành từ khung chương trình khóa 2026.",
+      "source_ids": ["SRC-ACADEMIC-CATALOGS", "SRC-CF-EE-2026"]
+    },
+    {
+      "id": "DQ-005",
+      "topic": "mechanical_engineering_program_code",
+      "claims": [
+        {"value": "7520203", "source_id": "SRC-CF-ME-2026"},
+        {"value": "7520103", "source_id": "SRC-ME-PROGRAM"}
+      ],
+      "source_ids": ["SRC-CF-ME-2026", "SRC-ME-PROGRAM"],
+      "resolution": "Dùng 7520203 vì được in trong khung chương trình Cohort 2026 có quyết định ngày 21/08/2026, đồng thời gắn trạng thái conflict. Cần VinUni xác nhận nếu mã được dùng cho tích hợp hệ thống quan trọng.",
+      "unresolved": true
+    },
+    {
+      "id": "DQ-006",
+      "topic": "hospitality_management_as_independent_program",
+      "claims": [
+        "Catalog có tiêu đề Bachelor of Science in Hospitality Management nhưng không có liên kết khung chương trình Cohort 2026.",
+        "Trang catalog và thông tin tuyển sinh hiện hành mô tả Hospitality Leadership là chuyên ngành thuộc BBA."
+      ],
+      "resolution": "Không tính Hospitality Management là chương trình tuyển sinh độc lập đã xác nhận cho 2026–2027; giữ Hospitality Leadership dưới BBA.",
+      "source_ids": ["SRC-ACADEMIC-CATALOGS"],
+      "unresolved": true
+    },
+    {
+      "id": "DQ-007",
+      "topic": "per_credit_founder_support",
+      "claims": [
+        "Hỗ trợ 35% được mô tả cho học phí niêm yết trong toàn bộ thời gian chuẩn.",
+        "Đơn giá tín chỉ chủ yếu áp dụng cho học vượt, chương trình thứ hai, trao đổi, học lại hoặc bổ sung ngoài khung chuẩn."
+      ],
+      "resolution": "Không tự tính đơn giá tín chỉ sau hỗ trợ 35%; để null cho đến khi có xác nhận riêng của VinUni.",
+      "source_ids": ["SRC-TUITION-UG-2026", "SRC-FINREG-2026-WEB"]
+    }
+  ],
+  "additional_second_audit_findings": [
+    {
+      "id": "DQ-008",
+      "topic": "academic_calendar_2026_2027",
+      "finding": "Trang Academic Calendar chính thức đang trỏ tới tệp AY26-27 nhưng tên tệp và nội dung ghi DRAFT, version 25/05/2026; một số mốc ghi tentative.",
+      "resolution": "Chỉ lưu với status=draft_not_final và luôn cảnh báo người dùng kiểm tra lại.",
+      "source_ids": ["SRC-ACADEMIC-CALENDAR-2026-DRAFT"]
+    },
+    {
+      "id": "DQ-009",
+      "topic": "return_from_leave_deadline",
+      "finding": "Academic Regulations nêu ít nhất 1 tuần trước học kỳ, trong khi trang thủ tục LOA/return nêu ít nhất 1 tháng.",
+      "resolution": "Dùng mốc an toàn ít nhất 1 tháng và yêu cầu xác nhận Registrar; không che giấu xung đột.",
+      "source_ids": ["SRC-ACADEMIC-REG-UG", "SRC-LOA-WITHDRAWAL"]
+    },
+    {
+      "id": "DQ-010",
+      "topic": "public_vs_internal_rules",
+      "finding": "Một số trang policy công khai chỉ cung cấp metadata hoặc dẫn tới SharePoint/SIS cần tài khoản.",
+      "resolution": "Không suy đoán chi tiết nội bộ; hướng dẫn Student Gateway và đơn vị phụ trách.",
+      "source_ids": ["SRC-STUDENT-GATEWAY", "SRC-WORK-STUDY"]
+    }
+  ],
+  "excluded_sources": [
+    {
+      "url": "https://vinuni.edu.vn/wp-content/uploads/2020/07/De-An-Tuyen-Sinh.pdf",
+      "reason": "Tên tệp chung nhưng kiểm tra trực quan cho thấy nội dung là Đề án tuyển sinh năm 2024; không dùng cho 2026–2027."
+    },
+    {
+      "url": "https://admissions.vinuni.edu.vn/vi/truong-dai-hoc-vinuni-chinh-thuc-cong-bo-de-an-tuyen-sinh-nam-2026-2027/",
+      "reason": "Trang có tiêu đề công bố đề án 2026–2027 nhưng tại thời điểm kiểm tra không có tệp hoặc bảng chi tiết truy cập được; không suy ra chỉ tiêu."
+    }
+  ],
+  "unpublished_or_not_reliably_verified": [
+    "chỉ tiêu tuyển sinh 2026–2027 theo từng chương trình",
+    "số tiền bảo hiểm y tế 2026–2027 vì phụ thuộc mức cơ quan bảo hiểm/nhà cung cấp",
+    "phí khám sức khỏe cụ thể vì là khoản thu hộ theo chi phí thực tế",
+    "tỷ lệ cố định của Học bổng Gia đình Vingroup",
+    "mức hỗ trợ 35% cho từng loại tín chỉ phát sinh ngoài khung chuẩn"
+  ],
+  "accuracy_statement": "Bộ dữ liệu phản ánh tốt nhất các nguồn chính thức truy cập được và có hiệu lực tại ngày kiểm chứng. Không thể cam kết dữ liệu sẽ đúng vĩnh viễn nếu VinUni cập nhật chính sách sau ngày này; vì vậy mọi câu trả lời production cần kèm ngày kiểm chứng và nguồn."
+}

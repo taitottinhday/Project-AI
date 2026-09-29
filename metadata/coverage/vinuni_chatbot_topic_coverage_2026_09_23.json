@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "dataset": "vinuni_undergraduate_2026_2027",
+    "audit_date": "2026-09-23",
+    "purpose": "Kiểm soát phạm vi câu hỏi cho chatbot/RAG và ngăn mô hình bịa khi nguồn chưa công bố.",
+    "official_sources_only": true
+  },
+  "coverage_summary": {
+    "status": "broad_coverage_with_explicit_gaps",
+    "important_limit": "Không thể cam kết đúng 100% cho mọi câu hỏi trong tương lai. Dataset chỉ có thể đúng theo các nguồn công khai đã kiểm chứng tại audit_date; VinUni có thể cập nhật chính sách sau đó hoặc giữ một số quy định trong hệ thống nội bộ.",
+    "recommended_answer_scope": "Trả lời dữ liệu 2026-2027 trước. Chỉ dùng dữ liệu năm cũ cho quy chế thường trực còn hiệu lực hoặc để so sánh khi người dùng hỏi rõ, và luôn nêu năm/phiên bản."
+  },
+  "covered_topics": [
+    {"topic": "public_policy_library_inventory", "status": "covered_with_extracted_indexed_restricted_labels"},
+    {"topic": "university_overview_and_contacts", "status": "covered"},
+    {"topic": "undergraduate_programs_degrees_codes_duration_credits", "status": "covered", "confirmed_program_count": 11},
+    {"topic": "concentrations_and_cohort_2026_curriculum_frameworks", "status": "covered"},
+    {"topic": "minors_and_eligibility", "status": "covered", "minor_count": 20},
+    {"topic": "admissions_rounds_process_criteria_documents", "status": "covered"},
+    {"topic": "english_entry_and_conditional_admission", "status": "covered"},
+    {"topic": "tuition_founder_support_payment_refund_discounts", "status": "covered"},
+    {"topic": "scholarships_financial_aid_loan_maintenance", "status": "covered"},
+    {"topic": "current_student_emergency_and_exchange_financial_support", "status": "covered"},
+    {"topic": "dormitory_fees_and_residential_rules", "status": "covered_with_source_priority_warning"},
+    {"topic": "academic_calendar", "status": "draft_only", "warning": "Tệp AY26-27 công khai đang mang nhãn DRAFT."},
+    {"topic": "credits_course_load_add_drop_withdraw_transfer_repeat", "status": "covered"},
+    {"topic": "grading_gpa_academic_warning_probation_dismissal", "status": "covered"},
+    {"topic": "grade_appeal_leave_withdrawal_return", "status": "covered_with_deadline_conflict"},
+    {"topic": "double_degree_program_change_graduation", "status": "covered"},
+    {"topic": "academic_integrity_and_genai", "status": "covered"},
+    {"topic": "student_rights_responsibilities_conduct_discipline", "status": "covered"},
+    {"topic": "formal_complaints_and_routing", "status": "covered"},
+    {"topic": "academic_accommodation_and_fitness_to_study", "status": "covered"},
+    {"topic": "student_life_clubs_health_wellbeing_services", "status": "covered_at_public_summary_level"},
+    {"topic": "international_student_visa", "status": "covered"},
+    {"topic": "vietnamese_language_for_international_chs", "status": "covered"},
+    {"topic": "outbound_exchange_costs_eligibility_credit_transfer", "status": "covered"},
+    {"topic": "internship_management", "status": "covered_at_policy_level"}
+  ],
+  "known_gaps_or_dynamic_topics": [
+    {"topic": "program_level_admission_quotas_2026_2027", "status": "not_publicly_verified", "answer_policy": "Nói chưa thấy chỉ tiêu chính thức truy cập công khai; không suy đoán."},
+    {"topic": "final_academic_calendar_2026_2027", "status": "not_publicly_final", "answer_policy": "Chỉ nêu lịch draft kèm cảnh báo và đường dẫn nguồn."},
+    {"topic": "course_schedule_exam_rooms_and_live_enrollment", "status": "authenticated_dynamic", "answer_policy": "Hướng dẫn dùng SIS/SharePoint; không lưu dữ liệu tĩnh."},
+    {"topic": "current_exchange_calls_slots_partner_requirements", "status": "dynamic", "answer_policy": "Dùng Global Exchange portal/call mới nhất; không lấy đợt Spring 2026 đã đóng làm đợt hiện hành."},
+    {"topic": "exact_club_roster_and_event_calendar", "status": "dynamic", "answer_policy": "Dẫn trang Student Life/Clubs hiện hành."},
+    {"topic": "room_allocation_scoring_and_internal_work_study_process", "status": "internal_or_restricted", "answer_policy": "Không tự suy ra; hướng dẫn đăng nhập Student Gateway hoặc liên hệ SAM."},
+    {"topic": "health_insurance_and_health_check_exact_amounts", "status": "variable_not_fixed", "answer_policy": "Nêu là khoản theo cơ quan bảo hiểm/nhà cung cấp và xác nhận theo thông báo năm học."},
+    {"topic": "per_credit_founder_support_outside_standard_curriculum", "status": "unresolved", "answer_policy": "Không tự áp 35%; nêu đơn giá niêm yết và yêu cầu Finance xác nhận."},
+    {"topic": "mechanical_engineering_program_code", "status": "official_source_conflict", "answer_policy": "Ưu tiên curriculum framework Cohort 2026 nhưng phải nêu xung đột nếu dùng cho tích hợp quan trọng."},
+    {"topic": "personal_case_decisions", "status": "requires_human_review", "answer_policy": "Không hứa kết quả; chuyển đúng Admissions, Registrar, Finance, SAM, College hoặc Global Exchange."
+    }
+  ],
+  "retrieval_and_answering_rules": [
+    "Luôn lọc theo academic_year/effective_date trước khi truy xuất.",
+    "Ưu tiên policy/PDF có ngày và phiên bản hơn FAQ hoặc phụ lục cũ.",
+    "Mỗi câu trả lời có số tiền, deadline, điều kiện hoặc chế tài phải trả lại source URL và verified_as_of.",
+    "Nếu nguồn mang nhãn draft/tentative/subject to change, phải giữ nguyên cảnh báo đó trong câu trả lời.",
+    "Không dùng dữ liệu năm cũ như dữ liệu hiện hành nếu có tài liệu mới hơn; vẫn có thể dùng quy chế cũ nếu trang chính thức còn công bố và không có bản thay thế.",
+    "Nếu hai nguồn chính thức xung đột, không hòa trộn; dùng nguồn ưu tiên và nói rõ mâu thuẫn.",
+    "Nếu câu hỏi vượt dữ liệu, trả lời 'chưa có nguồn công khai đã kiểm chứng' và hướng dẫn đơn vị chính thức; không tạo câu trả lời từ kiến thức nền của LLM."
+  ],
+  "source_ids": ["SRC-STUDENT-GATEWAY", "SRC-ACADEMIC-CATALOGS", "SRC-ACADEMIC-AFFAIRS-INDEX", "SRC-STUDENT-AFFAIRS-INDEX"]
+}

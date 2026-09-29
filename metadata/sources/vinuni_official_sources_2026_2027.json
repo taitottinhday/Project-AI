@@ -1,0 +1,598 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year": "2026-2027",
+    "verified_as_of": "2026-09-22",
+    "official_sources_only": true,
+    "allowed_domains": [
+      "vinuni.edu.vn",
+      "admissions.vinuni.edu.vn",
+      "policy.vinuni.edu.vn",
+      "cas.vinuni.edu.vn",
+      "cbm.vinuni.edu.vn",
+      "cecs.vinuni.edu.vn",
+      "chs.vinuni.edu.vn"
+    ]
+  },
+  "sources": [
+    {
+      "id": "SRC-TUITION-UG-2026",
+      "title": "Học phí chương trình cử nhân năm học 2026–2027",
+      "url": "https://admissions.vinuni.edu.vn/vi/hoc-phi/cu-nhan/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "published_or_updated": "2026-07",
+      "accessed_at": "2026-09-22",
+      "covers": ["tuition", "founder_support", "per_credit_rules"]
+    },
+    {
+      "id": "SRC-FINREG-2026-WEB",
+      "title": "Financial Regulations and Tariff (for student)",
+      "url": "https://policy.vinuni.edu.vn/all-policies/financial-regulations-and-tariff-for-student-2/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "published_or_updated": "2026-07-22",
+      "accessed_at": "2026-09-22",
+      "covers": ["tuition", "fees", "dormitory", "discounts", "refunds", "payment"]
+    },
+    {
+      "id": "SRC-FINREG-2026-PDF",
+      "title": "Quy định tài chính và Biểu phí năm học 2026–2027",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/VU_TS03.VN_Quy-dinh-tai-chinh-va-Bieu-phi_AY26-27_22.7.2026_Student.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_pdf",
+      "published_or_updated": "2026-07-22",
+      "accessed_at": "2026-09-22",
+      "covers": ["tuition", "fees", "dormitory", "discounts", "refunds", "payment"]
+    },
+    {
+      "id": "SRC-ACADEMIC-CATALOGS",
+      "title": "Academic Catalogs",
+      "url": "https://policy.vinuni.edu.vn/publication/academic-catalogs/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_catalog_index",
+      "accessed_at": "2026-09-22",
+      "covers": ["program_list", "concentrations", "minors", "curriculum_links"]
+    },
+    {
+      "id": "SRC-CF-MULTIMEDIA-2026",
+      "title": "Curriculum Framework Bachelor of Arts in Multimedia Communication, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/1.1-260825_BAC_Cohort-26-30_Curriculum-Framework.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-25",
+      "decision": "1011/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-ECONOMICS-2026",
+      "title": "Curriculum Framework Bachelor of Arts in Economics, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/1.1-260708_BAE_Cohort-26-30_Curriculum-Framework.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-25",
+      "decision": "1010/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-PSYCHOLOGY-2026",
+      "title": "Curriculum Framework Bachelor of Arts in Psychology, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/1.1-260825_BAP_26-30_Curriculum-Framework.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-25",
+      "decision": "1012/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-BBA-2026",
+      "title": "Curriculum Framework Bachelor of Business Administration, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/vF_260825_BBA_26-30_Curriculum-Framework.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-25",
+      "decision": "1013/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-FINANCE-BANKING-2026",
+      "title": "Curriculum Framework Bachelor of Finance and Banking, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/vF_260825_BFB_26-30_Curriculum-Framework.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-21",
+      "decision": "57/2026/QĐ-VUNI; 983/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-CS-2026",
+      "title": "Curriculum Framework Bachelor of Science in Computer Science, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/20260825_FRM7_Curriculum-Framework_BSCS_V2026-2026-2030.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-21",
+      "decision": "984/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-EE-2026",
+      "title": "Curriculum Framework Bachelor of Science in Electrical Engineering, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/20260825_FRM7_Curriculum-Framework_BSEE_V2026-2026-2030.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-21",
+      "decision": "986/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-ME-2026",
+      "title": "Curriculum Framework Bachelor of Science in Mechanical Engineering, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/20260825_FRM7_Curriculum-Framework_BSME_V2026-2026-2030.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-21",
+      "decision": "985/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-DS-2026",
+      "title": "Curriculum Framework Bachelor of Science in Data Science, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/20260825_FRM7_Curriculum-Framework_BSDS_V2026-2026-2030.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-21",
+      "decision": "987/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-NURSING-2026",
+      "title": "Curriculum Framework Bachelor of Nursing, Cohort 2026–2030",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/260824_BN-Curriculum-Framwork-26-30.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-25",
+      "decision": "1019/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CF-MD-2026",
+      "title": "Curriculum Framework Medical Doctor Program, Cohort 2026–2032",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/08/MD_CurriculumFramework_Cohort2026_AY2627_Clean_260815-1.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_curriculum_pdf",
+      "effective_date": "2026-08-25",
+      "decision": "1018/2026/QĐ-VUNI",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-BFB-PROGRAM",
+      "title": "Cử nhân Tài chính và Ngân hàng",
+      "url": "https://cbm.vinuni.edu.vn/vi/giao-duc-dai-hoc/cu-nhan-tai-chinh-ngan-hang/",
+      "publisher": "VinUni College of Business and Management",
+      "source_type": "official_program_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-ME-PROGRAM",
+      "title": "Chương trình Cử nhân Kỹ thuật Cơ khí",
+      "url": "https://cecs.vinuni.edu.vn/vi/bac-dai-hoc/chuong-trinh-cu-nhan-ky-thuat-co-khi/",
+      "publisher": "VinUni College of Engineering and Computer Science",
+      "source_type": "official_program_webpage",
+      "accessed_at": "2026-09-22",
+      "warning": "Mã chương trình trên trang này khác mã in trong Curriculum Framework Cohort 2026."
+    },
+    {
+      "id": "SRC-BFB-PROPOSAL",
+      "title": "Đề án mở ngành đào tạo đại học Tài chính và Ngân hàng",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2026/01/De-an-mo-nganh-dao-tao-Dai-hoc-Tai-chinh-ngan-hang.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_proposal_pdf",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-SCHOLARSHIP-CURRENT",
+      "title": "Học bổng chương trình đại học",
+      "url": "https://admissions.vinuni.edu.vn/vi/hoc-bong-va-ho-tro-tai-chinh/cu-nhan/hoc-bong/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-SCHOLARSHIP-2026-ARTICLE",
+      "title": "VinUni học bổng năm học 2026–2027",
+      "url": "https://admissions.vinuni.edu.vn/vi/vinuni-hoc-bong-nam-hoc-2026-2027/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_dated_announcement",
+      "published_or_updated": "2025-11-22",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-FINANCIAL-AID",
+      "title": "Hỗ trợ tài chính chương trình cử nhân",
+      "url": "https://admissions.vinuni.edu.vn/vi/hoc-bong-va-ho-tro-tai-chinh/cu-nhan/ho-tro-tai-chinh/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-FINANCIAL-AID-GUIDE",
+      "title": "Hướng dẫn đăng ký hỗ trợ tài chính",
+      "url": "https://admissions.vinuni.edu.vn/vi/hoc-bong-va-ho-tro-tai-chinh/huong-dan-dang-ki/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-FINANCIAL-AID-DOCS",
+      "title": "Danh mục tài liệu làm hồ sơ hỗ trợ tài chính",
+      "url": "https://admissions.vinuni.edu.vn/wp-content/uploads/sites/6/2025/04/Danh-muc-tai-lieu-lam-HTTC.pdf",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_pdf",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-STUDENT-LOAN",
+      "title": "Khoản vay sinh viên",
+      "url": "https://admissions.vinuni.edu.vn/vi/hoc-bong-va-ho-tro-tai-chinh/cu-nhan/khoan-vay-sinh-vien/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-ADMISSIONS-DEADLINES",
+      "title": "Những mốc quan trọng tuyển sinh đại học",
+      "url": "https://admissions.vinuni.edu.vn/vi/dai-hoc/nhung-moc-quan-trong/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-ADMISSIONS-PROCESS",
+      "title": "Quy trình ứng tuyển ứng viên năm nhất",
+      "url": "https://admissions.vinuni.edu.vn/vi/dai-hoc/ung-tuyen-vao-vinuni/ung-vien-nam-nhat/quy-trinh-ung-tuyen/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-APPLICATION-CHECKLIST",
+      "title": "Danh mục hồ sơ ứng tuyển ứng viên năm nhất",
+      "url": "https://admissions.vinuni.edu.vn/vi/dai-hoc/ung-tuyen-vao-vinuni/ung-vien-nam-nhat/danh-muc-ho-so-ung-tuyen/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-ADMISSION-CRITERIA",
+      "title": "Tiêu chí tuyển sinh",
+      "url": "https://admissions.vinuni.edu.vn/vi/dai-hoc/ung-tuyen-vao-vinuni/ung-vien-nam-nhat/tieu-chi-tuyen-sinh/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-ADMISSIONS-FAQ",
+      "title": "Câu hỏi thường gặp về tuyển sinh",
+      "url": "https://admissions.vinuni.edu.vn/vi/dai-hoc/cau-hoi-thuong-gap/tuyen-sinh/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_faq",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-ENGLISH-POLICY",
+      "title": "English Language Requirements for Undergraduate Admissions",
+      "url": "https://policy.vinuni.edu.vn/academic-affairs/english-language-requirements-for-undergraduate-admissions/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "reference_number": "GDL-ADM-002-V4.1",
+      "effective_date": "2026-04-15",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-AWARD-MAINTENANCE",
+      "title": "Criteria to Maintain the Entry Scholarship and Financial Aid Support",
+      "url": "https://policy.vinuni.edu.vn/all-policies/criteria-to-maintain-the-entry-scholarship-and-financial-aid-support/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "reference_number": "GDL-SAM-004-V2.1",
+      "effective_date": "2025-09-04",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-DORM-FAQ",
+      "title": "Câu hỏi thường gặp về cuộc sống tại ký túc xá",
+      "url": "https://admissions.vinuni.edu.vn/vi/dai-hoc/cau-hoi-thuong-gap/cuoc-song-tai-ky-tuc-xa/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_faq",
+      "accessed_at": "2026-09-22",
+      "warning": "Giá phòng trên FAQ cũ không được dùng cho 2026–2027; ưu tiên Quy định tài chính ngày 22/07/2026."
+    },
+    {
+      "id": "SRC-CONTACT-UNIVERSITY",
+      "title": "Liên hệ VinUni",
+      "url": "https://vinuni.edu.vn/vi/lien-he-vinuni/",
+      "publisher": "VinUniversity",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-CONTACT-ADMISSIONS",
+      "title": "Thông tin liên hệ tuyển sinh",
+      "url": "https://admissions.vinuni.edu.vn/vi/dai-hoc/thong-tin-lien-he/",
+      "publisher": "VinUni Admissions",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-OVERVIEW",
+      "title": "Về VinUni",
+      "url": "https://vinuni.edu.vn/vi/ve-vinuni-2/",
+      "publisher": "VinUniversity",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-22"
+    },
+    {
+      "id": "SRC-STUDENT-GATEWAY",
+      "title": "Student Gateway",
+      "url": "https://vinuni.edu.vn/student-gateway/",
+      "publisher": "VinUniversity",
+      "source_type": "official_service_index",
+      "accessed_at": "2026-09-23",
+      "covers": ["academic_resources", "student_services", "international_students", "exchange", "career", "finance", "IT"]
+    },
+    {
+      "id": "SRC-ACADEMIC-AFFAIRS-INDEX",
+      "title": "Academic Affairs policy index",
+      "url": "https://policy.vinuni.edu.vn/academic-affairs/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_index",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-STUDENT-AFFAIRS-INDEX",
+      "title": "Student Affairs policy index",
+      "url": "https://policy.vinuni.edu.vn/student-affairs/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_index",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-ACADEMIC-REG-UG",
+      "title": "Academic Regulations for Full-Time Undergraduate Programs",
+      "url": "https://policy.vinuni.edu.vn/all-policies/academic-regulations-for-full-time-undergraduate-programs/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "reference_number": "VU_HT03",
+      "version": "V8.1",
+      "published_or_updated": "2024-10-30",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-MINORS",
+      "title": "Minor Fields Information",
+      "url": "https://policy.vinuni.edu.vn/all-policies/minor-fields-information/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_academic_webpage",
+      "accessed_at": "2026-09-23",
+      "warning": "Một số mã học phần trên trang có dấu hiệu lặp; không tự sửa mã nguồn."
+    },
+    {
+      "id": "SRC-ACADEMIC-CALENDAR-2026-DRAFT",
+      "title": "2026-2027 Academic Calendar",
+      "url": "https://policy.vinuni.edu.vn/vinuni-academic-calendar",
+      "publisher": "VinUni Policy",
+      "source_type": "official_linked_pdf",
+      "document_version": "2026-05-25",
+      "accessed_at": "2026-09-23",
+      "status": "draft",
+      "warning": "Tên tệp và nội dung công khai đều ghi DRAFT; các ngày tentative không phải cam kết cuối cùng."
+    },
+    {
+      "id": "SRC-ENGLISH-GRADUATION",
+      "title": "English Language Proficiency Requirements for Graduation at VinUniversity",
+      "url": "https://policy.vinuni.edu.vn/all-policies/english-language-proficiency-requirements-for-graduation-at-vinuniversity/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "reference_number": "VUNI.78",
+      "published_or_updated": "2024-08-03",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-GRADUATION-REVIEW",
+      "title": "Procedure for Undergraduate Graduation Review and Degree Conferral",
+      "url": "https://policy.vinuni.edu.vn/all-policies/procedure-for-undergraduate-graduation-review-and-degree-conferral/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_procedure_webpage",
+      "reference_number": "VUNI.90",
+      "published_or_updated": "2024-11-12",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-GRADE-APPEAL",
+      "title": "Student Grade Appeal Procedure",
+      "url": "https://policy.vinuni.edu.vn/all-policies/student-grade-appeal-procedure/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_procedure_webpage",
+      "reference_number": "PRC-AQA-002-V2.0",
+      "published_or_updated": "2026-01-21",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-LOA-WITHDRAWAL",
+      "title": "Procedure for Requesting a Leave of Absence, Withdrawal and Return from a Leave of Absence",
+      "url": "https://policy.vinuni.edu.vn/all-policies/procedure-for-requesting-a-leave-of-absence-withdrawal-and-return-from-a-leave-of-absence/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_procedure_webpage",
+      "reference_number": "VUNI.54",
+      "published_or_updated": "2024-05-03",
+      "accessed_at": "2026-09-23",
+      "warning": "Trang công khai nhưng Security Classification ghi Internal; biểu mẫu/chi tiết triển khai có thể cần tài khoản VinUni."
+    },
+    {
+      "id": "SRC-ACADEMIC-INTEGRITY",
+      "title": "Student Academic Integrity",
+      "url": "https://policy.vinuni.edu.vn/all-policies/student-academic-integrity/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "reference_number": "VUNI.14",
+      "published_or_updated": "2022-09-30",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-GENAI-STUDENT",
+      "title": "Guidelines on Student Use of Generative Artificial Intelligence",
+      "url": "https://policy.vinuni.edu.vn/all-policies/guidelines-on-student-use-of-generative-artificial-intelligence/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_webpage",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-ACADEMIC-ACCOMMODATION",
+      "title": "Guidelines on Student Academic Accommodation",
+      "url": "https://policy.vinuni.edu.vn/all-policies/guidelines-on-student-academic-accomodation/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_webpage",
+      "reference_number": "GDL-SAM-010-V1.0",
+      "published_or_updated": "2026-07-22",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-RESIDENTIAL-LIFE",
+      "title": "Residential Life Guideline",
+      "url": "https://policy.vinuni.edu.vn/all-policies/residential-life-guideline/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_webpage",
+      "reference_number": "GDL-SAM-008-V5.0",
+      "published_or_updated": "2025-06-20",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-RESIDENTIAL-ONCAMPUS-APPENDIX",
+      "title": "Appendix I - On-Campus Residential Policy",
+      "url": "https://policy.vinuni.edu.vn/wp-content/uploads/2025/06/Appendix-I_On-Campus-Residential-Policy.pdf",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_appendix_pdf",
+      "accessed_at": "2026-09-23",
+      "warning": "Không dùng mức giá/định mức điện cũ trong phụ lục cho AY26-27; ưu tiên Financial Regulations ngày 22/07/2026."
+    },
+    {
+      "id": "SRC-STUDENT-LIFE",
+      "title": "Student Life",
+      "url": "https://vinuni.edu.vn/student_life/home/",
+      "publisher": "VinUniversity",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-STUDENT-CLUBS",
+      "title": "Student Clubs and Associations",
+      "url": "https://vinuni.edu.vn/student_life/student-clubs-associations/",
+      "publisher": "VinUniversity",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-23",
+      "warning": "Danh sách câu lạc bộ là dữ liệu động."
+    },
+    {
+      "id": "SRC-FITNESS-STUDY",
+      "title": "Guidance for Fitness to Study Procedures",
+      "url": "https://policy.vinuni.edu.vn/all-policies/guidance-for-fitness-to-study-procedures/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_webpage",
+      "reference_number": "GDL-SAM-003-V2.0",
+      "published_or_updated": "2025-05-29",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-STUDENT-CODE",
+      "title": "Student Code of Conduct",
+      "url": "https://policy.vinuni.edu.vn/all-policies/student-affairs-regulations-code-of-conduct/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "reference_number": "VU_CTSV02.EN",
+      "version": "V6.0",
+      "published_or_updated": "2026-08-05",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-STUDENT-COMPLAINT",
+      "title": "Formal Escalation Management Procedure for Students' Complaint",
+      "url": "https://policy.vinuni.edu.vn/all-policies/formal-escalation-management-procedure-for-students/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_procedure_webpage",
+      "reference_number": "GDL-SAM-007-V2.0",
+      "published_or_updated": "2025-12-24",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-WORK-STUDY",
+      "title": "Student Work-Study Program Guidelines",
+      "url": "https://policy.vinuni.edu.vn/all-policies/work-study-program-guidelines/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_landing_page",
+      "reference_number": "GDL-SAM-005-V3.0",
+      "published_or_updated": "2024-12-31",
+      "accessed_at": "2026-09-23",
+      "warning": "Nội dung chi tiết ở SharePoint nội bộ; không suy đoán quy trình hoặc mức trả."
+    },
+    {
+      "id": "SRC-STUDY-VISA",
+      "title": "Study Visa Guidelines for International Students",
+      "url": "https://policy.vinuni.edu.vn/all-policies/study-visa-guidelines-for-international-students/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_webpage",
+      "reference_number": "GDL-SAM-006-V1.0",
+      "published_or_updated": "2024-11-22",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-VIETNAMESE-INTERNATIONAL",
+      "title": "Vietnamese Language Program Guidelines for International Students",
+      "url": "https://policy.vinuni.edu.vn/all-policies/vietnamese-language-program-guidelines-for-international-students/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_webpage",
+      "reference_number": "GDL-CHS-005-V2.0",
+      "published_or_updated": "2026-05-04",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-OUTBOUND-EXCHANGE",
+      "title": "Outbound Student Exchange Procedure",
+      "url": "https://policy.vinuni.edu.vn/all-policies/outbound-student-exchange-procedure/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_procedure_webpage",
+      "reference_number": "VUNI.35",
+      "published_or_updated": "2024-12-12",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-GLOBAL-EXCHANGE",
+      "title": "Global Exchange",
+      "url": "https://vinuni.edu.vn/global_exchange/home/",
+      "publisher": "VinUniversity",
+      "source_type": "official_webpage",
+      "accessed_at": "2026-09-23",
+      "warning": "Đối tác, suất, hạn và mức hỗ trợ thay đổi theo từng call for applications."
+    },
+    {
+      "id": "SRC-INTERNSHIP",
+      "title": "Internship Management Policy",
+      "url": "https://policy.vinuni.edu.vn/all-policies/internship-management-policy/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_policy_webpage",
+      "reference_number": "POL-CAID-001-V2.0",
+      "published_or_updated": "2025-10-15",
+      "accessed_at": "2026-09-23"
+    },
+    {
+      "id": "SRC-FINANCIAL-SUPPORT-CURRENT",
+      "title": "Guidelines for Student Financial Aid Support Request",
+      "url": "https://policy.vinuni.edu.vn/all-policies/guidelines-for-student-financial-support-request/",
+      "publisher": "VinUni Policy",
+      "source_type": "official_guideline_webpage",
+      "reference_number": "GDL-FAO-001-V2.0",
+      "published_or_updated": "2025-04-22",
+      "accessed_at": "2026-09-23",
+      "warning": "Mốc thường trực phải được kiểm tra lại với portal/thông báo hiện hành khi nộp."
+    }
+  ]
+}

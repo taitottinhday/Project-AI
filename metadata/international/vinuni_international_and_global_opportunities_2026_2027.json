@@ -1,0 +1,101 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year_context": "2026-2027",
+    "verified_as_of": "2026-09-23",
+    "official_sources_only": true,
+    "warning": "Thời hạn, chỉ tiêu, trường đối tác và hỗ trợ tiền của từng đợt trao đổi thay đổi theo thông báo. Dữ liệu nền dưới đây không thay cho call for applications."
+  },
+  "study_visa_for_international_students": {
+    "applies_to": "Sinh viên quốc tế toàn thời gian cần VinUni bảo lãnh visa DH.",
+    "before_arrival": [
+      "phải có visa DH trước khi đến Việt Nam và không đi trước ngày visa bắt đầu",
+      "nộp yêu cầu nhập cảnh ít nhất 1 tháng trước ngày bắt đầu chương trình",
+      "hồ sơ điển hình gồm thư nhập học, quyết định tiếp nhận, bản scan hộ chiếu, ảnh ID và ngày đến",
+      "thời gian xử lý cơ quan xuất nhập cảnh thường 2-4 tuần; sinh viên chịu phí"
+    ],
+    "renewal": [
+      "bắt đầu yêu cầu trước ngày hết hạn 35-45 ngày",
+      "thường cần NA5 có chữ ký, xác nhận tình trạng, hộ chiếu còn ít nhất 6 tháng, visa hiện tại, chứng minh nơi ở và cam kết trách nhiệm",
+      "không nên rời Hà Nội trong thời gian gia hạn vì hộ chiếu có thể được cơ quan chức năng giữ"
+    ],
+    "graduation_and_leave": [
+      "sau tốt nghiệp visa DH không còn giá trị và VinUni không thể tiếp tục bảo lãnh/gia hạn",
+      "nghỉ học nhưng ở Việt Nam có thể chỉ được giữ visa nếu hoàn thành cam kết; rời Việt Nam trong thời gian nghỉ có thể dẫn tới hủy/báo visa"
+    ],
+    "reference_number": "GDL-SAM-006-V1.0",
+    "issued_date": "2024-11-22",
+    "source_ids": ["SRC-STUDY-VISA", "SRC-STUDENT-GATEWAY"]
+  },
+  "vietnamese_language_for_international_chs_students": {
+    "scope": "Sinh viên quốc tế toàn thời gian MD và Bachelor of Nursing từ khóa 2025-2026; sinh viên khác có thể tự nguyện học.",
+    "components": ["General Communication", "Medical Vietnamese"],
+    "levels": [
+      {"level": "A1", "general_hours": 60, "medical_hours": 0, "total_hours": 60, "credits": 4},
+      {"level": "A2", "general_hours": 60, "medical_hours": 30, "total_hours": 90, "credits": 6},
+      {"level": "B1", "general_hours": 60, "medical_hours": 60, "total_hours": 120, "credits": 8},
+      {"level": "B2.1", "general_hours": 75, "medical_hours": 37.5, "total_hours": 112.5, "credits": 7.5},
+      {"level": "B2.2", "general_hours": 75, "medical_hours": 52.5, "total_hours": 127.5, "credits": 7.5}
+    ],
+    "progression_requirements": {
+      "MD": "trước năm 4: nói/nghe tương đương B2 và đọc/viết tương đương B1; MD quốc tế phải thể hiện A2 khi nhập học",
+      "Bachelor_of_Nursing": "trước năm 3: A2 ở cả bốn kỹ năng; không yêu cầu trình độ tiếng Việt tại đầu vào"
+    },
+    "consequence": "Không đạt chuẩn có thể không được lên năm học lâm sàng tiếp theo dù các môn khác đạt; Program Director và Dean có quyền xử lý ngoại lệ theo văn bản.",
+    "reference_number": "GDL-CHS-005-V2.0",
+    "issued_date": "2026-05-04",
+    "source_ids": ["SRC-VIETNAMESE-INTERNATIONAL"]
+  },
+  "outbound_exchange": {
+    "formats": [
+      "trao đổi đối ứng 1-2 học kỳ chính: không đóng học phí cho trường đối tác, tiếp tục đóng học phí VinUni và tự chi trả các chi phí khác",
+      "trao đổi tự sắp xếp hoặc được tài trợ bên ngoài: sinh viên tự nộp hồ sơ, cần VinUni phê duyệt trước và tuân thủ quy định nghỉ học/chuyển đổi tín chỉ"
+    ],
+    "eligibility": [
+      "đang là sinh viên VinUni toàn thời gian và active",
+      "CGPA tối thiểu 2.50 và đạt yêu cầu của trường đối tác",
+      "không có kỷ luật nghiêm trọng Level 3 trở lên",
+      "đã hoàn thành ít nhất 2 học kỳ tại VinUni",
+      "sau trao đổi còn ít nhất 1 học kỳ tại VinUni trước tốt nghiệp",
+      "tình trạng tài chính tốt",
+      "đạt yêu cầu ngôn ngữ và điều kiện riêng của nơi đến"
+    ],
+    "typical_application_windows": {
+      "spring": "July",
+      "fall": "February-March",
+      "summer": "February-May",
+      "warning": "chỉ là timeline dự kiến trong quy trình; xem thông báo từng đợt"
+    },
+    "study_load": "tổng học phần tại trường nhà và trường đối tác phải tương đương ít nhất 12 tín chỉ VinUni mỗi học kỳ chính",
+    "credit_transfer": [
+      "phải có kế hoạch học tập/chuyển đổi tín chỉ được phê duyệt trước khi đi",
+      "chốt môn và xin phê duyệt cuối cùng trước hết 4 tuần đầu tại trường đối tác",
+      "nộp yêu cầu chuyển tín chỉ trong 1 tháng sau khi kết thúc trao đổi",
+      "không có chuyển đổi tự động; cần bảng điểm chính thức và có thể phải nộp syllabus/tài liệu"
+    ],
+    "common_credit_conversion": [
+      {"system": "ECTS", "multiplier": 0.606, "example": "1.65 ECTS = 1 VinUni credit"},
+      {"system": "Credit Points", "multiplier": 0.625, "example": "1.6 points = 1 VinUni credit"},
+      {"system": "US Credits", "multiplier": 1.0, "example": "1 credit = 1 VinUni credit"},
+      {"system": "Units", "multiplier": 0.25, "example": "4 units = 1 VinUni credit"},
+      {"system": "Contact Hours", "multiplier": 0.067, "example": "15 hours = 1 VinUni credit"}
+    ],
+    "costs": "Trao đổi đối ứng vẫn trả học phí VinUni; sinh viên thường tự trả chỗ ở, vé máy bay/đi lại, bảo hiểm, sinh hoạt, visa, sách và phí cơ sở vật chất. Hỗ trợ GESA hoặc nguồn khác có thể được mở theo từng đợt.",
+    "reference_number": "VUNI.35",
+    "issued_date": "2024-12-12",
+    "source_ids": ["SRC-OUTBOUND-EXCHANGE", "SRC-GLOBAL-EXCHANGE", "SRC-FINANCIAL-SUPPORT-CURRENT"]
+  },
+  "internships": {
+    "scope": "Tất cả sinh viên toàn thời gian và các đơn vị/nhân sự tham gia quản lý internship.",
+    "principles": [
+      "internship phải hỗ trợ chuẩn đầu ra, kinh nghiệm làm việc và năng lực nghề nghiệp",
+      "sinh viên có trách nhiệm đáp ứng yêu cầu",
+      "College phải phê duyệt và quản lý để bảo đảm chất lượng, tính phù hợp và an toàn",
+      "có giám sát từ VinUni với chuyên môn/nền tảng phù hợp",
+      "đào tạo lâm sàng có thêm yêu cầu kiểm tra sức khỏe và tiêm chủng theo phiên bản 2.0"
+    ],
+    "reference_number": "POL-CAID-001-V2.0",
+    "issued_date": "2025-10-15",
+    "source_ids": ["SRC-INTERNSHIP", "SRC-STUDENT-GATEWAY"]
+  }
+}

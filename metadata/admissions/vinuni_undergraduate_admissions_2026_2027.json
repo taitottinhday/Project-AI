@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year": "2026-2027",
+    "category": "undergraduate_admissions",
+    "verified_as_of": "2026-09-22",
+    "official_sources_only": true
+  },
+  "application_rounds": [
+    {
+      "round": "early",
+      "name_vi": "Vòng tuyển sinh sớm",
+      "opens": "2025-10-15",
+      "closes": "2026-01-15"
+    },
+    {
+      "round": "regular",
+      "name_vi": "Vòng tuyển sinh thường",
+      "opens": "2026-02-15",
+      "closes": "2026-05-15"
+    },
+    {
+      "round": "rolling",
+      "name_vi": "Vòng tuyển sinh cuốn chiếu",
+      "opens": "2026-06-15",
+      "closes": "2026-08-15"
+    }
+  ],
+  "application_rounds_source_ids": ["SRC-ADMISSIONS-DEADLINES", "SRC-SCHOLARSHIP-2026-ARTICLE"],
+  "selection_model": {
+    "type": "holistic",
+    "criteria_frameworks": {
+      "AACC": ["Outstanding Ability", "Aspiration", "Creativity", "Commitment"],
+      "EXCEL": ["Empathy", "Exceptional Capability", "Creativity", "Entrepreneurial Mindset", "Leadership"]
+    },
+    "stages": [
+      "sàng lọc điều kiện ban đầu",
+      "vòng 1: đánh giá hồ sơ trực tuyến",
+      "vòng 2: phỏng vấn cá nhân và/hoặc thử thách tình huống",
+      "thông báo kết quả/đề nghị nhập học",
+      "nộp hồ sơ chính thức có chứng thực khi nhập học"
+    ],
+    "automatic_merit_scholarship_consideration": true,
+    "source_ids": ["SRC-ADMISSIONS-PROCESS", "SRC-ADMISSION-CRITERIA"]
+  },
+  "application_checklist": {
+    "items": [
+      "thông tin cá nhân",
+      "CV một trang",
+      "bài luận ngắn theo đề của cổng ứng tuyển",
+      "kết quả học tập lớp 10, 11 và 12 hiện có",
+      "giải thưởng/chứng chỉ học thuật nếu có",
+      "hoạt động và thành tích ngoài học thuật",
+      "thông tin của hai giáo viên giới thiệu",
+      "minh chứng năng lực tiếng Anh theo chính sách hiện hành"
+    ],
+    "source_ids": ["SRC-APPLICATION-CHECKLIST", "SRC-ENGLISH-POLICY"]
+  },
+  "minimum_academic_thresholds": {
+    "general_vietnamese_high_school_applicants": {
+      "minimum_total_for_three_moet_exam_subjects": 15,
+      "scale": 30,
+      "note": "Ngưỡng tối thiểu theo FAQ tuyển sinh; các trường hợp bằng quốc tế/tuyển thẳng thực hiện theo diện tương ứng. Đây không phải điểm đảm bảo trúng tuyển."
+    },
+    "medical_doctor": {
+      "grade_12_conduct_or_academic_classification": "Tốt/Giỏi trở lên theo cách diễn đạt của nguồn",
+      "and_one_of": [
+        {"three_moet_exam_subjects_minimum": 20, "scale": 30},
+        {"high_school_graduation_score_minimum": 8.5, "scale": 10}
+      ],
+      "high_school_science_prerequisites": ["Biology", "Chemistry", "Math or Physics"]
+    },
+    "nursing": {
+      "grade_12_classification": "Khá trở lên",
+      "and_one_of": [
+        {"three_moet_exam_subjects_minimum": 16.5, "scale": 30},
+        {"high_school_graduation_score_minimum": 6.5, "scale": 10}
+      ]
+    },
+    "source_ids": ["SRC-ADMISSIONS-FAQ"]
+  },
+  "english_language_requirements": {
+    "policy_reference": "GDL-ADM-002-V4.1",
+    "policy_effective_date": "2026-04-15",
+    "evidence_deadline": "2026-08-30",
+    "test_validity_rule": {
+      "must_be_obtained_on_or_after": "2024-05-15",
+      "cutoff_explanation": "Kết quả phải nằm trong hai năm trước ngày 15/05 của năm tuyển sinh."
+    },
+    "accepted_tests": [
+      {
+        "test": "IELTS Academic",
+        "overall_minimum": 6.5,
+        "minimum_each_skill": 6.0,
+        "one_skill_retake_accepted": true,
+        "IELTS_General_accepted": false
+      },
+      {
+        "test": "TOEFL iBT",
+        "test_date_before": "2026-01-01",
+        "overall_minimum": 79,
+        "minimum_each_skill": 15,
+        "institution_code": "0506"
+      },
+      {
+        "test": "TOEFL iBT",
+        "test_date_on_or_after": "2026-01-01",
+        "overall_minimum": 4.5,
+        "scale": 6,
+        "minimum_each_skill": 3.5,
+        "institution_code": "0506"
+      },
+      {
+        "test": "PTE Academic",
+        "overall_minimum": 58,
+        "minimum_each_communicative_skill": 50
+      },
+      {
+        "test": "Cambridge English Scale",
+        "overall_minimum": 176,
+        "minimum_each_component": 169,
+        "accepted_exams": ["C1 Advanced", "C2 Proficiency", "Linguaskill enhanced from April 2025 at a recognized test center"]
+      },
+      {
+        "test": "VSTEP",
+        "minimum": "Level 5 / C1"
+      }
+    ],
+    "normally_not_accepted": [
+      "IELTS Indicator",
+      "IELTS Online",
+      "TOEFL iBT Home Edition",
+      "Duolingo English Test",
+      "TOEFL PBT",
+      "TOEFL ITP"
+    ],
+    "possible_test_exemptions": [
+      "công dân hoặc thường trú nhân của quốc gia đa số nói tiếng Anh và đã học bằng tiếng Anh tại cơ sở được công nhận",
+      "hoàn thành ít nhất hai năm học toàn thời gian bậc THPT hoặc đại học trong bốn năm gần nhất, với tiếng Anh là ngôn ngữ giảng dạy duy nhất/chính tại quốc gia nói tiếng Anh hoặc trường quốc tế được công nhận"
+    ],
+    "conditional_admission_from_2026_2027": {
+      "available": true,
+      "not_available_for_programs": ["VINUNI-UG-7720101"],
+      "eligible_profiles": [
+        "IELTS overall 6.0 và không kỹ năng nào dưới 6.0, hoặc tương đương",
+        "IELTS overall từ 6.5 nhưng chỉ một kỹ năng dưới 6.0, hoặc tương đương"
+      ],
+      "course_registration_restricted": true,
+      "must_meet_full_requirement_by": "end_of_first_semester",
+      "one_time_extension_possible_to": "end_of_second_semester",
+      "extension_is_case_by_case": true,
+      "pathway_english_advanced_discontinued": true
+    },
+    "source_ids": ["SRC-ENGLISH-POLICY"]
+  },
+  "medical_doctor_language_requirement_for_international_students": {
+    "vietnamese_on_entry": "A2",
+    "by_clinical_stage_year_4": {
+      "listening": "B2",
+      "speaking": "B2",
+      "reading": "B1",
+      "writing": "B1"
+    },
+    "note": "Theo FAQ tuyển sinh; sinh viên được kiểm tra trước học kỳ lâm sàng.",
+    "source_ids": ["SRC-ADMISSIONS-FAQ"]
+  },
+  "application_fee_reference": {
+    "amount": 2000000,
+    "currency": "VND",
+    "applies_when": "ứng viên được chấp nhận vào vòng phỏng vấn",
+    "waivers_exist": true,
+    "details_file": "../financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+    "source_ids": ["SRC-FINREG-2026-WEB", "SRC-ADMISSIONS-DEADLINES"]
+  },
+  "published_quota_2026_2027": {
+    "value": null,
+    "status": "not_reliably_published_in_accessible_current_official_source",
+    "note": "Trang công bố đề án 2026–2027 không cung cấp tệp/chi tiết có thể kiểm chứng tại thời điểm thu thập; PDF De-An-Tuyen-Sinh.pdf tên chung là đề án năm 2024 nên bị loại."
+  },
+  "contact": {
+    "admissions_hotlines": ["18008189", "+84-24-7108-9779"],
+    "email": "admission@vinuni.edu.vn",
+    "address": "KĐT Vinhomes Ocean Park, Xã Gia Lâm, Hà Nội, Việt Nam",
+    "working_hours": "Thứ Hai–Thứ Bảy, 08:30–17:30 GMT+7",
+    "source_ids": ["SRC-CONTACT-UNIVERSITY", "SRC-CONTACT-ADMISSIONS"]
+  }
+}

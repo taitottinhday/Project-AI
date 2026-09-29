@@ -1,28 +1,29 @@
 from langgraph.graph import END, StateGraph
 
-from src.agents.nodes.example_node import analyze_node, respond_node
+from src.agents.nodes.rag_nodes import classify_node, generate_node, retrieve_node, validate_node
 from src.agents.state import AgentState
 
 
-def should_continue(state: AgentState) -> str:
-    """Route based on whether an error occurred during analysis."""
-    if state.get("error"):
-        return END
-    return "respond"
+def after_classification(state: AgentState) -> str:
+    return "end" if state.get("short_circuit") else "retrieve"
 
 
-def build_graph() -> StateGraph:
+def after_retrieval(state: AgentState) -> str:
+    return "end" if state.get("short_circuit") else "generate"
+
+
+def build_graph():
     graph = StateGraph(AgentState)
+    graph.add_node("classify", classify_node)
+    graph.add_node("retrieve", retrieve_node)
+    graph.add_node("generate", generate_node)
+    graph.add_node("validate", validate_node)
 
-    # Add nodes
-    graph.add_node("analyze", analyze_node)
-    graph.add_node("respond", respond_node)
-
-    # Add edges
-    graph.set_entry_point("analyze")
-    graph.add_conditional_edges("analyze", should_continue)
-    graph.add_edge("respond", END)
-
+    graph.set_entry_point("classify")
+    graph.add_conditional_edges("classify", after_classification, {"end": END, "retrieve": "retrieve"})
+    graph.add_conditional_edges("retrieve", after_retrieval, {"end": END, "generate": "generate"})
+    graph.add_edge("generate", "validate")
+    graph.add_edge("validate", END)
     return graph.compile()
 
 

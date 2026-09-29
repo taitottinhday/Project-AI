@@ -1,0 +1,320 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year": "2026-2027",
+    "category": "scholarships_financial_aid_and_other_fees",
+    "currency": "VND",
+    "verified_as_of": "2026-09-22",
+    "primary_financial_policy_date": "2026-07-22"
+  },
+  "scholarships": {
+    "founder_educational_development_grant": {
+      "tuition_percentage": 35,
+      "automatic": true,
+      "eligible_intakes": "2025-2030",
+      "duration": "toàn bộ thời gian chuẩn của chương trình",
+      "included_in_merit_scholarship_percentage": true
+    },
+    "merit_scholarships": [
+      {
+        "name_vi": "Học bổng Chủ tịch Trường",
+        "coverage": "full_scholarship",
+        "tuition_percentage": 100,
+        "also_covers": ["toàn bộ chi phí sinh hoạt", "chi phí chỗ ở theo chính sách trao học bổng"]
+      },
+      {
+        "name_vi": "Học bổng Hiệu trưởng",
+        "tuition_percentage": 100
+      },
+      {
+        "name_vi": "Học bổng Viện trưởng",
+        "tuition_percentage_options": [80, 90]
+      },
+      {
+        "name_vi": "Học bổng Tài năng Chuyên ngành",
+        "tuition_percentage_options": [50, 60, 70]
+      }
+    ],
+    "stackable_incentive_scholarships": [
+      {
+        "name_vi": "Học bổng đặc thù ngành",
+        "tuition_percentage": 5,
+        "eligibility": "ngành học đặc thù theo quyết định của VinUni"
+      },
+      {
+        "name_vi": "Women in Tech (WIT)",
+        "tuition_percentage": 5,
+        "eligibility": "ứng viên nữ theo đuổi lĩnh vực khoa học công nghệ"
+      },
+      {
+        "name_vi": "Học bổng liên thông Vinschool–VinUni",
+        "tuition_percentage": 5,
+        "eligibility": "học sinh tốt nghiệp Vinschool trúng tuyển VinUni"
+      },
+      {
+        "name_vi": "Học bổng Gia đình Vingroup",
+        "tuition_percentage": null,
+        "eligibility": "con của cán bộ nhân viên/cán bộ lãnh đạo Tập đoàn Vingroup",
+        "note": "Trang công bố hiện hành không nêu tỷ lệ cố định."
+      }
+    ],
+    "special_donor_scholarships": [
+      {
+        "name": "Dean Choi Grant by Soosan",
+        "tuition_percentage": 10,
+        "eligible_colleges": ["CBM", "CECS"],
+        "target": "ứng viên/sinh viên xuất sắc theo tiêu chí nhà tài trợ"
+      },
+      {
+        "name_vi": "Nhà Lãnh Đạo Tương Lai",
+        "coverage": "phần học phí còn lại 10%–20%",
+        "target": "người đã nhận học bổng 80%–90% nhưng còn rào cản tài chính"
+      }
+    ],
+    "general_rules": {
+      "merit_award_percentage_includes_founder_35_percent": true,
+      "maximum_combined_tuition_coverage_percentage": 100,
+      "duration": "toàn bộ thời gian chuẩn nếu duy trì điều kiện",
+      "selection": "Hội đồng Tuyển sinh đánh giá",
+      "source_ids": ["SRC-SCHOLARSHIP-CURRENT", "SRC-FINREG-2026-WEB"]
+    }
+  },
+  "scholarship_and_aid_maintenance": {
+    "full_or_100_percent_merit": {
+      "annual_gpa_minimum": 3.2,
+      "other_conditions": ["kỷ luật tốt", "đạt đánh giá EXCEL/cố vấn theo quy định"],
+      "if_annual_gpa_2_5_to_3_19": "duy trì có điều kiện thêm một học kỳ",
+      "if_annual_gpa_below_2_5": "tự động giảm một mức học bổng"
+    },
+    "merit_50_to_90_percent": {
+      "annual_gpa_minimum": 2.5,
+      "other_conditions": ["kỷ luật tốt", "đạt đánh giá EXCEL/cố vấn theo quy định"],
+      "if_below_minimum": "tự động giảm một mức học bổng"
+    },
+    "need_based_financial_aid_50_percent_or_more": {
+      "annual_cumulative_gpa_minimum": 2.0,
+      "other_conditions": ["đạt đánh giá EXCEL/cố vấn theo quy định"]
+    },
+    "awards_without_separate_academic_maintenance_requirement": [
+      "Vinschool–VinUni 5%",
+      "Học bổng Gia đình Vingroup theo chính sách hiện hành",
+      "Học bổng đặc thù ngành 5%",
+      "Hỗ trợ Phát triển Giáo dục 35%"
+    ],
+    "women_in_tech_rule": "duy trì tự động nếu học bổng chính được duy trì",
+    "source_ids": ["SRC-AWARD-MAINTENANCE"]
+  },
+  "need_based_financial_aid": {
+    "available_for": ["Vietnamese students", "international students"],
+    "maximum_tuition_coverage_percentage": 100,
+    "assessment_basis": "nhu cầu tài chính dựa trên hồ sơ tài chính gia đình đã được xác minh",
+    "prerequisite": "đã có kết quả trúng tuyển chính thức và kết quả học bổng",
+    "application_deadline_rule": "trước 23:59 ngày 15 của tháng trước kỳ công bố",
+    "result_day_each_month": 15,
+    "required_submission": [
+      "đơn trực tuyến",
+      "hồ sơ minh chứng tài chính ở định dạng PDF",
+      "minh chứng thu nhập của cha mẹ/người bảo trợ",
+      "sao kê toàn bộ tài khoản ngân hàng trong sáu tháng",
+      "tài sản gia đình, tiết kiệm, đầu tư và tài sản khác",
+      "các khoản nợ",
+      "người phụ thuộc và chi phí giáo dục",
+      "chi phí y tế đáng kể nếu có",
+      "giấy tờ hoàn cảnh khó khăn/hộ nghèo nếu có",
+      "tình trạng hôn nhân và giấy tờ liên quan nếu áp dụng"
+    ],
+    "current_student_hardship_reviews": ["July", "November"],
+    "other_support_channels": ["work-study", "research assistant", "donor funds", "student loans"],
+    "contact": {"email": "fao@vinuni.edu.vn", "office": "I113"},
+    "source_ids": ["SRC-FINANCIAL-AID", "SRC-FINANCIAL-AID-GUIDE", "SRC-FINANCIAL-AID-DOCS"]
+  },
+  "student_loan": {
+    "maximum_tuition_financing_percentage": 100,
+    "standard_fixed_interest_rate_percent_first_four_years": 8,
+    "possible_subsidized_rate_percent_first_four_years": 4,
+    "subsidized_rate_note": "chỉ một số trường hợp đặc biệt được VinUni hỗ trợ",
+    "maximum_term_years": 10,
+    "collateral_required": false,
+    "repayment_after_graduation_possible": true,
+    "source_ids": ["SRC-STUDENT-LOAN"]
+  },
+  "special_tuition_assistance_and_payment_discounts": [
+    {
+      "name": "Family Tuition Assistance",
+      "percentage_of_listed_tuition": 5,
+      "applies_from": "second eligible family member",
+      "eligible_relationships": ["sibling", "parent", "spouse", "legal child"]
+    },
+    {
+      "name": "Alumni Tuition Assistance",
+      "percentage_of_listed_tuition": 10,
+      "eligibility": "VinUni alumnus pursuing a second undergraduate degree or a graduate program"
+    },
+    {
+      "name": "Annual Payment Discount",
+      "percentage_of_amount_payable": 5,
+      "eligibility": "pay full academic-year tuition and dormitory fees by the announced deadline"
+    }
+  ],
+  "discount_combination_rules": {
+    "family_and_alumni_can_be_combined": false,
+    "may_be_combined_with_scholarship": true,
+    "effective_from": "Fall 2025",
+    "source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+  },
+  "admissions_and_enrollment_fees": {
+    "application_fee": {
+      "amount": 2000000,
+      "unit": "per_application_per_applicant",
+      "applies_to": "applicants accepted to join the interview",
+      "payment_timing": "before interview",
+      "refundable": false,
+      "transferable": false,
+      "waiver_conditions": [
+        "tham gia sự kiện tuyển sinh do VinUni hoặc viện tổ chức",
+        "tham gia cuộc thi học thuật/ngoại khóa do VinUni hoặc viện tổ chức",
+        "có tên trong danh sách đề cử của hiệu trưởng trường THPT",
+        "trường hợp đặc biệt theo chiến dịch tuyển sinh"
+      ]
+    },
+    "retention_confirmation_fee": {
+      "amount": 20000000,
+      "unit": "per_time_per_student",
+      "purpose": "xác nhận quyền nhận học bổng/ưu đãi học phí/hỗ trợ tài chính",
+      "normally_refundable": false,
+      "normally_transferable": false,
+      "deducted_from_amounts_due_at_enrollment": true,
+      "refund_exceptions": [
+        "không nhập học vì không đạt điều kiện ghi trong thư mời có điều kiện",
+        "VinUni hủy tuyển sinh chương trình đã chọn"
+      ],
+      "full_scholarship_reconciliation": "sau năm học đầu tiên"
+    },
+    "source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+  },
+  "academic_administrative_fees": [
+    {"service": "student_id_replacement", "amount": 200000, "unit": "card"},
+    {"service": "certified_document", "amount": 50000, "unit": "copy"},
+    {"service": "tuition_deferment_or_refund_processing", "amount": 2000000, "unit": "request"},
+    {"service": "program_transfer_processing", "amount": 2000000, "unit": "request"},
+    {"service": "concurrent_enrollment_two_programs_processing", "amount": 2000000, "unit": "request"},
+    {"service": "credit_transfer_evaluation", "amount": 2000000, "unit": "requested_subject"},
+    {"service": "exam_score_review", "amount": 1000000, "unit": "request_per_subject"}
+  ],
+  "retake_and_reexamination": {
+    "course_retake_tuition_percentage_of_standard_per_credit": 50,
+    "theory_reexamination": 1500000,
+    "practical_reexamination": 2500000,
+    "nbme_reexamination": 2000000,
+    "unit": "per_student_per_attempt",
+    "eligible_for_discount_or_scholarship": false,
+    "applies_fully_to_cohort_2025_and_later": true,
+    "source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+  },
+  "dormitory": {
+    "rates_per_person_per_month": [
+      {"buildings": ["JA", "JB"], "persons_per_room": 8, "standard_rate": 3500000, "returning_resident_rate": 3000000},
+      {"buildings": ["JA", "JB", "T"], "persons_per_room": 4, "standard_rate": 3700000, "returning_resident_rate": 3150000},
+      {"buildings": ["JA", "JB"], "persons_per_room": 2, "standard_rate": 4400000, "returning_resident_rate": 3750000},
+      {"buildings": ["T"], "persons_per_room": 2, "standard_rate": 5000000, "returning_resident_rate": 4250000}
+    ],
+    "daily_rate_basis_days": 30,
+    "vat_included": true,
+    "deposit_months": 1,
+    "returning_resident_eligibility": {
+      "minimum_previous_academic_year_residence_months": 9,
+      "minimum_new_registration": "one_academic_semester"
+    },
+    "included": [
+      "phòng ở và cơ sở vật chất",
+      "internet",
+      "vệ sinh khu vực chung",
+      "phí kỹ thuật",
+      "chỗ đỗ một phương tiện; ô tô cần đăng ký và tùy khả năng",
+      "120 kWh điện/người/tháng",
+      "4 m3 nước/người/tháng"
+    ],
+    "excess_utilities_charged": true,
+    "first_year_residence_policy": {
+      "normally_required": true,
+      "possible_exemptions": ["health", "religion", "force_majeure"],
+      "source_quality": "official_faq_not_dated",
+      "source_ids": ["SRC-DORM-FAQ"]
+    },
+    "rate_source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"],
+    "warning": "Không dùng mức 3.200.000 VND/tháng trong FAQ cũ; biểu phí ngày 22/07/2026 là nguồn ưu tiên."
+  },
+  "health_and_graduation_fees": {
+    "compulsory_health_insurance": {
+      "amount": null,
+      "pricing": "actual official social-insurance rate or selected insurer rate",
+      "frequency": "annual",
+      "pass_through_no_markup": true
+    },
+    "general_health_examination": {
+      "amount": null,
+      "pricing": "actual hospital charge",
+      "frequency": "annual",
+      "pass_through_no_markup": true
+    },
+    "graduation_package": {
+      "amount": 2000000,
+      "unit": "graduating_student",
+      "non_refundable": true,
+      "includes": ["gown, cap and hood", "professional individual photo shoot", "ceremony logistics"]
+    },
+    "source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+  },
+  "library_fees": {
+    "overdue_normal_material_per_day_per_document": 10000,
+    "overdue_course_reserve_per_hour_per_document": 10000,
+    "overdue_equipment_per_day_per_item": 10000,
+    "slight_damage_repair_per_item": 200000,
+    "lost_reorderable_document": "new purchase price plus 200000 administrative fee",
+    "lost_unavailable_document": "five times original price",
+    "lost_equipment": "new equivalent purchase price plus 200000 administrative fee",
+    "source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+  },
+  "property_loss_or_damage_compensation": [
+    {"item": "ceremony_stole", "amount": 300000},
+    {"item": "graduation_gown_set", "amount": 1500000},
+    {"item": "glass_water_bottle", "amount": 140000},
+    {"item": "glass_cup", "amount": 65000},
+    {"item": "plastic_tray", "amount": 90000},
+    {"item": "broom_and_dustpan_set", "amount": 110000},
+    {"item": "clothes_hanger", "amount": 15000},
+    {"item": "hair_dryer", "amount": 400000},
+    {"item": "electric_kettle", "amount": 800000},
+    {"item": "plastic_slippers_pair", "amount": 45000},
+    {"item": "housekeeping_sign", "amount": 70000},
+    {"item": "double_bed_sheet", "amount": 600000},
+    {"item": "single_bed_sheet", "amount": 400000},
+    {"item": "double_duvet_cover", "amount": 850000},
+    {"item": "single_duvet_cover", "amount": 600000},
+    {"item": "double_duvet_insert", "amount": 700000},
+    {"item": "single_duvet_insert", "amount": 600000},
+    {"item": "pillowcase", "amount": 95000},
+    {"item": "pillow_insert", "amount": 105000},
+    {"item": "bath_towel", "amount": 155000},
+    {"item": "face_towel", "amount": 50000},
+    {"item": "floor_mat", "amount": 130000},
+    {"item": "spring_mattress_1_6m_x_2m", "amount": 6000000},
+    {"item": "foam_mattress_1_2m_x_2m", "amount": 1500000},
+    {"item": "large_trash_bin_30l", "amount": 1700000},
+    {"item": "bathroom_trash_bin", "amount": 450000},
+    {"item": "air_conditioner_remote", "amount": 150000},
+    {"item": "microwave_oven", "amount": 3700000},
+    {"item": "soiling_of_provided_property", "amount": 300000}
+  ],
+  "property_other_loss_rule": "new equivalent purchase price or repair cost plus 200000 VND administrative fee per incident",
+  "property_fee_source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"],
+  "refund_policy": {
+    "full_refund": "VinUni closes or completely suspends learning without an alternative because of disaster, war, terrorism or similarly serious crisis",
+    "withdraw_before_official_start_percentage": 80,
+    "withdraw_within_first_two_weeks_percentage": 50,
+    "withdraw_after_first_two_weeks_percentage": 0,
+    "each_semester_considered_separately": true,
+    "processing_fee_may_apply": 2000000,
+    "source_ids": ["SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+  }
+}

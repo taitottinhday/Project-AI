@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year_context": "2026-2027",
+    "verified_as_of": "2026-09-23",
+    "official_sources_only": true
+  },
+  "residential_life": {
+    "first_year_requirement": "Tất cả sinh viên năm nhất phải ở ký túc xá VinUni, trừ trường hợp được trường phê duyệt theo quy định áp dụng.",
+    "scope": "Nhà ở trong khuôn viên và nhà ở ngoài khuôn viên do VinUni bố trí.",
+    "quiet_hours": {
+      "sunday_to_thursday": "22:00-07:00",
+      "friday_and_saturday": "00:00-07:00"
+    },
+    "on_campus_curfew": "Sau 23:00; sinh viên về muộn có thể không được vào khu lưu trú theo hướng dẫn.",
+    "absence_notice": "Sinh viên nội trú trong khuôn viên phải xin phép/đăng ký khi ngủ ngoài; sinh viên ở cơ sở ngoài khuôn viên phải thông báo nếu vắng quá một đêm.",
+    "guest_rules_summary": {
+      "registration_and_host": "Khách phải đăng ký, được người ở cùng đi kèm; chủ nhà chịu trách nhiệm về khách.",
+      "day_guest_departure": "22:00",
+      "residential_visit_arrival_window": "không đến trước 07:00 hoặc sau 21:00",
+      "maximum_guests": 3,
+      "form_deadline": "trước 3 ngày làm việc đối với khách ban ngày; trước 5 ngày làm việc đối với khách qua đêm"
+    },
+    "room_change": "Không tự ý đổi phòng; thực hiện theo quy trình hòa giải/đánh giá qua RA, Faculty in Residence và Residential Office.",
+    "check_in": ["xuất trình ID/hộ chiếu và visa khi phù hợp", "hoàn thành biểu mẫu và bàn giao phòng", "đăng ký tạm trú", "kiểm tra và báo hư hỏng trong 1 ngày"],
+    "check_out": ["đăng ký ngày chuyển ra trước 1 tuần", "dọn phòng", "kiểm tra hiện trạng", "trả chìa khóa"],
+    "inspection": "Trường có thể kiểm tra vì bảo trì, khẩn cấp, an toàn hoặc nghi ngờ vi phạm theo quy định.",
+    "fees": {
+      "authoritative_source": "Quy định tài chính và biểu phí ngày 22/07/2026",
+      "do_not_use": "Mức 3,2 triệu/tháng hoặc 4 triệu/tháng và định mức điện 175 kWh trong FAQ/phụ lục cư trú cũ",
+      "current_fee_data_location": "../financial_aid/vinuni_financial_aid_and_fees_2026_2027.json"
+    },
+    "reference_number": "GDL-SAM-008-V5.0",
+    "issued_date": "2025-06-20",
+    "source_ids": ["SRC-RESIDENTIAL-LIFE", "SRC-RESIDENTIAL-ONCAMPUS-APPENDIX", "SRC-FINREG-2026-WEB", "SRC-FINREG-2026-PDF"]
+  },
+  "student_life": {
+    "activities": "VinUni có hoạt động thường niên và khuyến khích mô hình sự kiện do sinh viên chủ trì.",
+    "clubs": "Có các câu lạc bộ/tổ chức do sinh viên vận hành thuộc thể thao, công nghệ, dữ liệu/AI, nghệ thuật, văn hóa, xuất bản, cộng đồng, bền vững và các nhóm sở thích khác; danh sách có thể thay đổi.",
+    "international_community": "Trang Student Life có khu vực dành cho sinh viên quốc tế và cộng đồng hỗ trợ hội nhập.",
+    "source_ids": ["SRC-STUDENT-LIFE", "SRC-STUDENT-CLUBS"]
+  },
+  "health_wellbeing_and_support": {
+    "services": [
+      "phòng khám trong khuôn viên với dịch vụ bảo mật",
+      "tham vấn sức khỏe tinh thần/well-being",
+      "thư viện, không gian học tập và tài nguyên học thuật",
+      "Registry cho đăng ký học, hồ sơ và biểu mẫu",
+      "hỗ trợ nhà ở, khiếu nại sinh viên và IT",
+      "Career Services, cơ hội thực tập, nghiên cứu và khởi nghiệp"
+    ],
+    "student_gateway_role": "Student Gateway là trang định tuyến chính thức hiện hành tới các dịch vụ và quy định; một số biểu mẫu chỉ truy cập được bằng tài khoản VinUni.",
+    "source_ids": ["SRC-STUDENT-GATEWAY", "SRC-STUDENT-LIFE"]
+  },
+  "academic_accommodation": {
+    "eligible_categories": ["khuyết tật hoặc tình trạng dài hạn", "sức khỏe tinh thần", "tình trạng y tế tạm thời", "hoàn cảnh đặc biệt hoặc nhân đạo"],
+    "principle": "Điều chỉnh nhằm bảo đảm tiếp cận công bằng, không hạ chuẩn học thuật, không thay đổi kết quả học tập cốt lõi hoặc yêu cầu tín chỉ.",
+    "examples": [
+      "thêm tối đa 25% thời gian thi",
+      "phòng thi riêng/yên tĩnh hoặc nghỉ có lịch trong kỳ thi",
+      "sắp xếp chỗ ngồi dễ tiếp cận và tài liệu trước nếu khả thi",
+      "linh hoạt điểm danh tối đa 20% tổng số buổi",
+      "gia hạn bài tập hợp lý tối đa 7 ngày mỗi yêu cầu",
+      "điều chỉnh hợp lý đối với internship, laboratory hoặc field trip"
+    ],
+    "validity": {
+      "interim": "tối đa 2 tuần trong trường hợp khẩn cấp y tế, trong lúc bổ sung hồ sơ",
+      "periodic": "theo học kỳ và phải nộp lại hồ sơ cập nhật",
+      "permanent": "trong toàn bộ thời gian học, trừ khi cần xem xét vì thay đổi tình trạng/chương trình"
+    },
+    "process_summary": "Nộp yêu cầu và chứng từ cho SAM; SAM thường đánh giá ban đầu trong 5 ngày làm việc; quyết định học thuật thường trong 3 ngày làm việc từ khi đủ hồ sơ; Registrar thông báo và các đơn vị thực hiện trên cơ sở need-to-know.",
+    "reference_number": "GDL-SAM-010-V1.0",
+    "issued_date": "2026-07-22",
+    "source_ids": ["SRC-ACADEMIC-ACCOMMODATION"]
+  },
+  "fitness_to_study": {
+    "triggers": ["vắng mặt hoặc mất kết nối kéo dài", "học lực giảm đáng kể do sức khỏe", "tình trạng thể chất/tinh thần ảnh hưởng sinh hoạt", "lo ngại do giảng viên/cố vấn/bạn học nêu", "nguy cơ cho bản thân hoặc người khác"],
+    "process": "Có thể tự đề nghị hoặc được nhân sự giới thiệu; SAM phối hợp Registrar và College, có thể họp không chính thức và sau đó Hội đồng Fitness to Study đánh giá.",
+    "return": "Có thể cần giấy tờ y khoa/chuyên môn xác nhận sẵn sàng, họp với Hội đồng và kế hoạch tái hòa nhập kèm theo dõi.",
+    "rights": "Bảo mật, được thông tin và trình bày ý kiến; có quyền kháng nghị theo quy trình của trường.",
+    "reference_number": "GDL-SAM-003-V2.0",
+    "issued_date": "2025-05-29",
+    "source_ids": ["SRC-FITNESS-STUDY"]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "audit_date": "2026-09-23",
+    "scope": "Public Academic Affairs and Student Affairs policy libraries relevant to undergraduate students and applicants",
+    "status_legend": {
+      "extracted": "Nội dung chính đã được chuẩn hóa trong dataset chủ đề.",
+      "indexed": "Đã ghi nhận trên chỉ mục chính thức; chưa trích toàn văn vì là quy trình chuyên biệt/ít liên quan chatbot tuyển sinh.",
+      "restricted": "Trang có dấu (*) hoặc nội dung đầy đủ yêu cầu hệ thống nội bộ; chatbot không được suy đoán."
+    }
+  },
+  "student_affairs_policies": [
+    {"title": "Guidelines for Students Representing and Organizing Events under the VinUniversity Name", "code": "GDL-SAM-013-V1.0", "date": "2026-08-27", "status": "indexed"},
+    {"title": "VinUni Student Club Operations Guidelines", "code": "GDL-SAM-012-V1.0", "date": "2026-09-10", "status": "indexed"},
+    {"title": "Guidelines on Student Conduct on Social Media and Digital Platforms", "code": "GDL-SAM-011-V1.0", "date": "2026-08-05", "status": "indexed"},
+    {"title": "Guidelines on Student Academic Accommodation", "code": "GDL-SAM-010-V1.0", "date": "2026-07-22", "status": "extracted"},
+    {"title": "VinUni Dormitory Room Allocation Principles", "code": "GDL-SAM-009-V1.0", "date": "2025-08-07", "status": "restricted"},
+    {"title": "Emergency Response Guidelines", "code": "GDL-SAM-002-V1.0", "date": "2025-05-14", "status": "restricted"},
+    {"title": "Convocation and Graduation Ceremony Organization", "code": "GDL_SAM_001_V1.0", "date": "2025-05-07", "status": "restricted"},
+    {"title": "Financial Regulations and Tariff for Student", "code": "VUNI_TS03_Student", "date": "2026-07-22", "status": "extracted", "note": "Dùng bản AY26-27 mới hơn ngày hiển thị trên index."},
+    {"title": "Guidance for Fitness to Study Procedures", "code": "GDL-SAM-003-V2.0", "date": "2025-05-29", "status": "extracted"},
+    {"title": "Formal Escalation Management Procedure for Students' Complaint", "code": "GDL-SAM-007-V2.0", "date": "2025-12-24", "status": "extracted"},
+    {"title": "Study Visa Guidelines for International Students", "code": "GDL-SAM-006-V1.0", "date": "2024-11-22", "status": "extracted"},
+    {"title": "Guidelines for Maintaining Entry Scholarship and Financial Aid Support", "code": "GDL-SAM-004-V2.1", "date": "2025-09-04", "status": "extracted"},
+    {"title": "Alumni Policy", "code": "POL-CAID-003-V1.0", "date": "2024-11-21", "status": "indexed"},
+    {"title": "Guidelines for Student Financial Aid Support Request", "code": "GDL-FAO-001-V2.0", "date": "2025-04-22", "status": "extracted"},
+    {"title": "Internship Management Policy", "code": "POL-CAID-001-V2.0", "date": "2025-10-15", "status": "extracted"},
+    {"title": "OASIS Framework", "code": "FW-SAM-002-V3.0", "date": "2025-09-03", "status": "restricted"},
+    {"title": "Event Organization Guidelines", "code": "VUNI.41", "date": "2024-12-13", "status": "restricted"},
+    {"title": "Sexual Misconduct and Response", "code": "GDL-VINO-003-V1.0", "date": "2023-06-19", "status": "indexed", "note": "Complaint dataset routes cases to this policy; do not handle as ordinary service complaint."},
+    {"title": "Student Self Evaluation and Award Policy", "code": "POL-SAM-001-V3.0", "date": "2025-01-08", "status": "restricted"},
+    {"title": "Student Service Standards", "code": "VU_ĐBCL01.EN", "date": "2025-03-01", "status": "restricted"},
+    {"title": "Student Advising Framework", "code": "FW-SAM-001-V2.0", "date": "2025-09-03", "status": "indexed"},
+    {"title": "Residential Life Guideline", "code": "GDL-SAM-008-V5.0", "date": "2025-06-20", "status": "extracted"},
+    {"title": "Student Work-Study Program Guidelines", "code": "GDL-SAM-005-V3.0", "date": "2024-12-31", "status": "restricted"},
+    {"title": "Student Code of Conduct", "code": "VU_CTSV02.EN", "date": "2026-08-05", "status": "extracted"},
+    {"title": "Student Academic Integrity", "code": "VUNI.14", "date": "2022-09-30", "status": "extracted"},
+    {"title": "Admitted and Graduating Student Attributes (AACC and EXCEL)", "code": "GDL-VINO-005-V2.0", "date": "2024-11-26", "status": "indexed"}
+  ],
+  "undergraduate_relevant_academic_affairs_policies": [
+    {"title": "Procedure for Undergraduate Graduation Review and Degree Conferral", "code": "VUNI.90", "date": "2024-11-12", "status": "extracted"},
+    {"title": "Vietnamese Language Program Guidelines for International Students", "code": "GDL-CHS-005-V2.0", "date": "2026-05-04", "status": "extracted"},
+    {"title": "Safe and Supported Pregnancy Policy", "code": "GDL-CHS-003-V1.0", "date": "2025-02-14", "status": "indexed"},
+    {"title": "Guidelines on Student Use of Generative Artificial Intelligence", "code": "GDL-CEM-001-V1.0", "date": "2024-09-05", "status": "extracted"},
+    {"title": "English Language Proficiency Requirements for Graduation", "code": "VUNI.78", "date": "2024-08-03", "status": "extracted"},
+    {"title": "Student Grade Appeal Procedure", "code": "PRC-AQA-002-V2.0", "date": "2026-01-21", "status": "extracted"},
+    {"title": "Procedure for Requesting Leave of Absence, Withdrawal and Return", "code": "VUNI.54", "date": "2024-05-03", "status": "extracted"},
+    {"title": "Attendance Policy at Medical Doctor Program", "code": "POL-CHS-001-V2.0", "date": "2025-09-15", "status": "indexed"},
+    {"title": "Internship Management Policy", "code": "POL-CAID-001-V2.0", "date": "2025-10-15", "status": "extracted"},
+    {"title": "Academic Catalogs", "code": null, "date": null, "status": "extracted"},
+    {"title": "Admissions Regulations for Undergraduate Program", "code": "VU_TS02", "date": "2025-02-14", "status": "restricted", "note": "Trang chỉ mục ghi dấu *; dùng các trang Admissions công khai và GDL-ADM-002-V4.1 cho câu trả lời hiện hành."},
+    {"title": "Library Access and Services Policy", "code": "POL-LLR-001-V4.0", "date": "2025-07-09", "status": "indexed"},
+    {"title": "Student Advising Framework", "code": "FW-SAM-001-V2.0", "date": "2025-09-03", "status": "indexed"},
+    {"title": "Procedural Guidelines for Credit Transfer Requests", "code": "VUNI.13", "date": "2023-02-10", "status": "indexed", "note": "Quy tắc nền đã được tóm tắt từ Academic Regulations và Outbound Exchange Procedure."},
+    {"title": "Assessment Guideline for Undergraduate Programs at CHS", "code": "GDL-CHS-002-V2.0", "date": "2024-06-12", "status": "indexed"},
+    {"title": "Declaration of Individually Designed Concentration and Minor", "code": "VUNI.32", "date": "2021-11-30", "status": "indexed"},
+    {"title": "Guideline for Program Change Request", "code": "VUNI.27", "date": "2021-07-26", "status": "indexed", "note": "Điều kiện nền đã được tóm tắt từ Academic Regulations."},
+    {"title": "Outbound Student Exchange Procedure", "code": "VUNI.35", "date": "2024-12-12", "status": "extracted"},
+    {"title": "Academic Regulations for Full-Time Undergraduate Programs", "code": "VU_HT03", "date": "2024-10-30", "status": "extracted"},
+    {"title": "Course Exchange: Transfer Credit, Proficiency Exam, Honors Course and Individual Study", "code": "VUNI.18", "date": "2020-11-05", "status": "indexed"},
+    {"title": "Course Evaluation", "code": "POL-AQA-001-V4.0", "date": "2025-12-26", "status": "indexed"},
+    {"title": "Student Academic Integrity", "code": "VUNI.14", "date": "2022-09-30", "status": "extracted"},
+    {"title": "Admitted and Graduating Student Attributes (AACC and EXCEL)", "code": "GDL-VINO-005-V2.0", "date": "2024-11-26", "status": "indexed"},
+    {"title": "English Language Requirements for Undergraduate Admissions", "code": "GDL-ADM-002-V4.1", "date": "2026-04-15", "status": "extracted"}
+  ],
+  "external_affairs_relevant_policies": [
+    {"title": "Integrated Degree Programs Procedure", "code": "VUNI.58", "date": "2024-01-17", "status": "indexed"},
+    {"title": "Internship Management Policy", "code": "POL-CAID-001-V2.0", "date": "2025-10-15", "status": "extracted"},
+    {"title": "Outbound Student Exchange Procedure", "code": "VUNI.35", "date": "2024-12-12", "status": "extracted"}
+  ],
+  "chatbot_rule": "Có mặt trong inventory không đồng nghĩa chatbot được phép khẳng định toàn bộ chi tiết. Chỉ các mục status=extracted mới có dữ liệu chuẩn hóa; indexed cần mở nguồn khi câu hỏi phát sinh; restricted phải chuyển người dùng tới kênh VinUni.",
+  "source_ids": ["SRC-ACADEMIC-AFFAIRS-INDEX", "SRC-STUDENT-AFFAIRS-INDEX"]
+}

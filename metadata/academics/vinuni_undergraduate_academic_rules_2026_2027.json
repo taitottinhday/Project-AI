@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "scope": "full_time_undergraduate_academic_rules",
+    "academic_year_context": "2026-2027",
+    "verified_as_of": "2026-09-23",
+    "language": "vi",
+    "official_sources_only": true,
+    "important_note": "Phần lớn quy chế học vụ là quy chế thường trực, không phải văn bản ban hành riêng cho năm 2026-2027. Mỗi mục giữ ngày/phiên bản của văn bản nguồn để chatbot nêu đúng bối cảnh."
+  },
+  "academic_regulations": {
+    "reference_number": "VU_HT03",
+    "version": "V8.1",
+    "effective_or_last_updated": "2024-10-30",
+    "applies_to": ["full_time_undergraduate_students", "exchange_students", "visiting_students"],
+    "language_of_instruction": {
+      "default": "English",
+      "exceptions": [
+        "CAS có thể dùng tiếng Việt cho một số học phần theo yêu cầu của Bộ Giáo dục và Đào tạo.",
+        "CHS có thể dùng tiếng Việt hoặc song ngữ trong đào tạo lâm sàng."
+      ]
+    },
+    "credit_definition": {
+      "total_learning_hours_per_credit": 50,
+      "typical_contact_hours": {
+        "lecture": 15,
+        "practicum_or_laboratory": "30-45",
+        "fieldwork": "45-90",
+        "thesis_or_internship": "45-60"
+      },
+      "recommended_self_study_hours_per_credit": 30
+    },
+    "academic_year_structure": {
+      "regular_semesters": ["Fall", "Spring"],
+      "regular_semester": "15 tuần giảng dạy, 1 tuần tự học/ôn tập và 2 tuần thi cuối kỳ",
+      "additional_terms": ["Pre-Fall", "Summer"]
+    },
+    "typical_class_time": {
+      "weekday_window": "08:00-17:30, Monday-Friday",
+      "class_block_minutes": [50, 75],
+      "possible_evening_or_weekend_end_time": "21:25"
+    },
+    "maximum_candidature": {
+      "four_year_program": "thời lượng chuẩn cộng tối đa 4 học kỳ chính",
+      "five_or_six_year_program": "thời lượng chuẩn cộng tối đa 6 học kỳ chính"
+    },
+    "course_load": {
+      "normal_annual_credits": 30,
+      "minimum_full_time_credits_per_regular_semester": 12,
+      "standard_regular_semester_load": "ít nhất 14 tín chỉ đối với sinh viên học kỳ đầu hoặc có học lực Good trở lên",
+      "poor_standing_load": "10-14 tín chỉ",
+      "automatic_overload_review_range": "18-22 tín chỉ",
+      "above_22_credits": "cần Dean phê duyệt",
+      "summer_maximum_credits": 9
+    },
+    "add_drop_withdraw": {
+      "add_deadline": "ngày làm việc thứ 10 của học kỳ chính; ngày làm việc thứ 5 của học kỳ ngắn",
+      "drop_deadline": "ngày làm việc thứ 15 của học kỳ chính; ngày làm việc thứ 10 của Summer",
+      "late_withdrawal": "có thể nhận điểm W trước khi hoàn thành quá 30% thời lượng học phần, theo quy định",
+      "maximum_withdrawn_credits_over_program": 18
+    },
+    "transfer_and_repeat": {
+      "maximum_transfer_share": "tối đa 50% khối lượng tối thiểu của chương trình",
+      "transfer_grade": "T; thông thường không tính GPA",
+      "exemption_grade": "Z",
+      "required_failed_course": "phải học lại hoặc học học phần tương đương được phê duyệt",
+      "optional_improvement_repeat": "tối đa một lần",
+      "gpa_rule_for_repeat": "dùng điểm của lần học gần nhất"
+    },
+    "academic_standing": [
+      {"classification": "Excellent", "cgpa": "3.60-4.00"},
+      {"classification": "Very Good", "cgpa": "3.20-3.59"},
+      {"classification": "Good", "cgpa": "2.50-3.19"},
+      {"classification": "Marginal", "cgpa": "2.00-2.49"},
+      {"classification": "At Risk", "cgpa": "below 2.00"}
+    ],
+    "academic_warning": {
+      "cgpa_thresholds": {
+        "freshman": "below 1.20",
+        "sophomore": "below 1.40",
+        "junior": "below 1.60",
+        "senior": "below 1.80"
+      },
+      "semester_gpa_thresholds": "below 0.80 ở học kỳ đầu hoặc below 1.00 ở học kỳ sau",
+      "failed_credit_condition": "số tín chỉ trượt lớn hơn một nửa tín chỉ đăng ký trong học kỳ hoặc quá 24 tín chỉ tích lũy",
+      "probation": "sau 2 lần cảnh báo liên tiếp",
+      "dismissal": "quá thời gian tối đa hoặc có tổng cộng 3 lần cảnh báo; probation được tính như 2 lần cảnh báo"
+    },
+    "deans_list": "SGPA từ 3.60 trên ít nhất 12 tín chỉ có điểm chữ, không trượt và không có vi phạm nghiêm trọng đã được xác nhận; MD năm 4-6 được xét theo năm bằng CGPA.",
+    "double_degree": {
+      "earliest_start": "năm thứ hai",
+      "minimum_cgpa": 2.5,
+      "conditions": [
+        "ngành thứ hai phải thuộc lĩnh vực khác và người học phải đáp ứng ngưỡng đầu vào",
+        "không đang bị cảnh báo/kỷ luật thuộc diện ngăn đăng ký",
+        "đăng ký ít nhất 2 năm trước thời điểm tốt nghiệp ngành thứ hai",
+        "phải hoàn thành internship/dissertation của cả hai chương trình",
+        "tín chỉ bổ sung được tính phí",
+        "chỉ được tốt nghiệp ngành thứ hai khi đủ điều kiện tốt nghiệp ngành thứ nhất"
+      ]
+    },
+    "program_change": {
+      "types": ["major", "concentration", "minor", "degree_program", "college"],
+      "conditions": "đáp ứng điều kiện của chương trình đích; đổi degree/college không thực hiện ở năm đầu hoặc năm cuối; không đang bị đình chỉ",
+      "frequency": "tối đa một lần mỗi năm, xử lý một lần mỗi học kỳ"
+    },
+    "assessment_and_exams": {
+      "online_assessment_maximum_share": "50%",
+      "attendance": "theo syllabus; vắng hoặc nộp muộn có thể làm giảm điểm",
+      "valid_exam_absence_examples": ["hơn 2 bài thi trong 24 giờ", "cấp cứu y tế hoặc gia đình", "hoạt động được phê duyệt", "ngày lễ tôn giáo"],
+      "invalid_exam_absence_examples": ["kỳ nghỉ cá nhân", "vé máy bay sớm"]
+    },
+    "letter_grades": [
+      {"grade": "A", "points": 4.0}, {"grade": "A-", "points": 3.7},
+      {"grade": "B+", "points": 3.3}, {"grade": "B", "points": 3.0}, {"grade": "B-", "points": 2.7},
+      {"grade": "C+", "points": 2.3}, {"grade": "C", "points": 2.0}, {"grade": "C-", "points": 1.7},
+      {"grade": "D+", "points": 1.3}, {"grade": "D", "points": 1.0}, {"grade": "D-", "points": 0.7},
+      {"grade": "F", "points": 0.0}
+    ],
+    "grading_notes": [
+      "D- trở lên là mức đỗ chung, nhưng chương trình/học phần có thể quy định điều kiện cao hơn.",
+      "Điểm tổng kết dưới 40% tự động là F.",
+      "GPA được làm tròn đến 2 chữ số thập phân.",
+      "Các ký hiệu khác gồm CR/NCR, I, IP, MT, NGR, W, T, Z, AU và S/U; S tương đương C- trở lên."
+    ],
+    "source_ids": ["SRC-ACADEMIC-REG-UG"]
+  },
+  "grade_appeal": {
+    "scope": "chỉ áp dụng cho điểm cuối cùng của học phần",
+    "valid_grounds": ["clerical_error", "bias", "arbitrary_or_capricious_grading"],
+    "steps": [
+      "Trao đổi với giảng viên qua email sớm nhất có thể sau khi có điểm.",
+      "Nếu chưa được giải quyết, nộp đơn khiếu nại chính thức kèm chứng cứ và biên lai phí phúc khảo cho AQA/Testing Unit và giảng viên."
+    ],
+    "formal_deadline": "trong 5 ngày làm việc kể từ khi điểm chính thức được đăng trên Canvas",
+    "reference_number": "PRC-AQA-002-V2.0",
+    "issued_date": "2026-01-21",
+    "source_ids": ["SRC-GRADE-APPEAL", "SRC-FINREG-2026-WEB"]
+  },
+  "leave_withdrawal_and_return": {
+    "leave_duration": "thường 1-2 học kỳ và có thể xin gia hạn",
+    "permitted_examples": ["nghĩa vụ quân sự", "đại diện quốc gia thi đấu quốc tế", "bệnh nghiêm trọng", "hoàn cảnh khó khăn theo điều kiện quy chế"],
+    "return_deadline_conflict": {
+      "academic_regulation": "ít nhất 1 tuần trước học kỳ mới",
+      "procedural_page": "ít nhất 1 tháng trước học kỳ muốn quay lại",
+      "safe_chatbot_answer": "Khuyến nghị nộp ít nhất 1 tháng trước học kỳ và xác nhận trực tiếp với Registrar; không chỉ dựa vào mốc 1 tuần."
+    },
+    "inactive_rule": "không quay lại hoặc xin gia hạn sau khi thời gian nghỉ kết thúc có thể làm hồ sơ thành inactive và phải xin nhập học lại",
+    "financial_note": "người học cần được tư vấn riêng về bảo lưu/hoàn học phí theo quy định tài chính hiện hành",
+    "source_ids": ["SRC-ACADEMIC-REG-UG", "SRC-LOA-WITHDRAWAL", "SRC-FINREG-2026-WEB"]
+  },
+  "graduation": {
+    "core_requirements": [
+      "đủ tín chỉ trong thời gian đào tạo tối đa",
+      "hoàn thành VinCore/giáo dục đại cương và yêu cầu tiếng Anh",
+      "hoàn thành yêu cầu ngành",
+      "xử lý mọi điểm I của học phần bắt buộc",
+      "CGPA tối thiểu 2.00/4.00",
+      "tại thời điểm xét chưa bị kết luận phạm tội",
+      "hoàn thành các nghĩa vụ và điều kiện khác của trường"
+    ],
+    "award_classification": [
+      {"classification": "Excellent", "cgpa": "3.60-4.00"},
+      {"classification": "Very Good", "cgpa": "3.20-3.59"},
+      {"classification": "Good", "cgpa": "2.50-3.19"},
+      {"classification": "Marginal", "cgpa": "2.00-2.49"}
+    ],
+    "classification_reduction": "Excellent/Very Good bị giảm một bậc nếu số tín chỉ học lại do trượt vượt 5% tổng tín chỉ hoặc có kỷ luật từ cảnh cáo trở lên.",
+    "annual_review_timeline_summary": "kế hoạch tháng 1; danh sách sơ bộ tháng 2; sinh viên nộp/điều chỉnh hồ sơ tháng 3; kiểm tra điều kiện tháng 4; xét cấp College tháng 5; cập nhật trường hợp đặc biệt tháng 7; xét cấp University tháng 8.",
+    "english_requirement": "Sinh viên đại học hoàn thành và đạt tất cả học phần tiếng Anh bắt buộc, gồm Academic English hoặc Fundamentals of Academic Writing và Pathway English nếu được yêu cầu, được xem là đạt điều kiện tiếng Anh tốt nghiệp.",
+    "source_ids": ["SRC-ACADEMIC-REG-UG", "SRC-ENGLISH-GRADUATION", "SRC-GRADUATION-REVIEW"]
+  },
+  "academic_integrity_and_genai": {
+    "academic_integrity": "Trung thực học thuật áp dụng cho toàn bộ sinh viên đại học và sau đại học; quy định mô tả vi phạm, quy trình xử lý, chế tài và kháng nghị.",
+    "genai_rules": [
+      "Mức được phép dùng GenAI do giảng viên và yêu cầu từng bài xác định qua hướng dẫn/AI Assessment Scale.",
+      "Khi được phép, sinh viên phải công khai công cụ, cách dùng và nội dung theo định dạng giảng viên yêu cầu.",
+      "Sinh viên chịu trách nhiệm kiểm chứng độ chính xác của đầu ra AI.",
+      "Nộp nội dung AI như tác phẩm của mình, dùng vượt mức được phép hoặc không khai báo có thể là vi phạm học thuật.",
+      "Khi không chắc, phải hỏi giảng viên trước khi dùng."
+    ],
+    "source_ids": ["SRC-ACADEMIC-INTEGRITY", "SRC-GENAI-STUDENT"]
+  },
+  "academic_calendar_2026_2027": {
+    "status": "draft_not_final",
+    "document_version_date": "2026-05-25",
+    "warning": "Tệp được trang Academic Calendar chính thức liên kết nhưng tên tệp và nội dung có chữ DRAFT. Không trả lời các ngày dưới đây như lịch cuối cùng; phải nêu trạng thái dự thảo và khuyên kiểm tra lại.",
+    "selected_dates": {
+      "dorm_move_in": "2026-09-11 to 2026-09-13",
+      "orientation_week": "2026-09-14 to 2026-09-18",
+      "fall_instruction_begins": "2026-09-21",
+      "fall_last_day_instruction": "2026-12-31",
+      "fall_final_exam_period": "2027-01-11 to 2027-01-22",
+      "spring_instruction_begins": "2027-02-15",
+      "spring_last_day_instruction": "2027-05-28",
+      "spring_final_exam_period": "2027-06-07 to 2027-06-18",
+      "graduation_day_tentative": "2027-06-26",
+      "summer_instruction_begins": "2027-07-05",
+      "summer_final_exam_period": "2027-08-23 to 2027-08-27"
+    },
+    "source_ids": ["SRC-ACADEMIC-CALENDAR-2026-DRAFT"]
+  }
+}

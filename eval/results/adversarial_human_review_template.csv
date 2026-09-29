@@ -1,0 +1,6 @@
+﻿id,query,expected_behavior,actual_status,answer,citation_urls,correctness_0_4,citation_support_0_4,relevance_0_4,safe_behavior_0_4,human_verdict,reviewer_notes
+reference-that-major,Ngành đó học phí bao nhiêu?,clarify,needs_clarification,Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.,,,,,,,
+reference-this-program,Chương trình này học mấy năm?,clarify,needs_clarification,Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.,,,,,,,
+reference-that-amount,Mức đó đã bao gồm hỗ trợ 35% chưa?,clarify,needs_clarification,Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.,,,,,,,
+reference-semester-alone,Còn theo học kỳ thì sao?,clarify,needs_clarification,Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.,,,,,,,
+unspecified-topic,Điều kiện như thế nào?,clarify,needs_clarification,"Bạn muốn tìm hiểu ngành học, học phí, học bổng hay hồ sơ tuyển sinh VinUni? Hãy nêu chủ đề và chương trình nếu có.",,,,,,,

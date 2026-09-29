@@ -1,4 +1,63 @@
-# AI20K Agent Template
+# VinUni Admissions Assistant — Accuracy-First RAG
+
+Ứng dụng web hai vai trò cho trợ lý tuyển sinh VinUni, ưu tiên độ chính xác:
+chỉ trả lời khi có evidence trong bộ dữ liệu chính thức, hiển thị citation,
+chặn số liệu không được chứng minh và chuyển cán bộ khi nguồn thiếu, mâu thuẫn
+hoặc không công khai.
+
+- Ứng viên: chat nhiều lượt, xem nguồn/cảnh báo, đánh giá câu trả lời, tạo handover có consent và theo dõi phản hồi.
+- Cán bộ: đăng nhập bằng staff token, xem metric 30 ngày, lọc hàng chờ, nhận, phản hồi và đóng ticket.
+- Trang chủ: kiểm tra trực tiếp trạng thái, năm học và quy mô kho dữ liệu từ backend.
+- Guardrail: chặn cam kết hồ sơ, số liệu thiếu nguồn, prompt injection và dữ liệu cá nhân phổ biến.
+- Cache: chỉ lưu câu đầu phiên đã grounded, có TTL và namespace theo version dataset.
+- Web: <http://localhost:3000> · Chat: <http://localhost:3000/chat> · Staff: <http://localhost:3000/staff>
+- Swagger: <http://localhost:8000/docs>
+- Chạy test: `python -m pytest -q`
+- Chạy golden eval: `python scripts/evaluate.py`
+- Chạy adversarial safety eval: `python scripts/evaluate.py --dataset eval/adversarial_questions.json`
+- Chạy canonical coverage gate (toàn bộ chunk, strict): `python scripts/evaluate_canonical_coverage.py --strict`
+- Kiểm tra thay đổi URL nguồn chính thức (không tự cập nhật fact): `python scripts/check_sources.py`
+- Chạy quality pipeline: `python scripts/evaluate_quality.py`; thêm `--judge` khi đã cấu hình API key.
+- Tài liệu vận hành: [`docs/accuracy_first_backend.md`](docs/accuracy_first_backend.md)
+- Kiến trúc: [`ARCHITECTURE.md`](ARCHITECTURE.md)
+
+## Chạy nhanh trên Windows
+
+Terminal 1 — backend:
+
+```powershell
+Set-Location "D:\project AI\P-051"
+Copy-Item .env.example .env
+# Dataset canonical đã nằm tại .\metadata trong repository. Chỉ đổi KNOWLEDGE_BASE_DIR
+# khi dùng một bản dữ liệu khác đã được duyệt.
+# Đặt STAFF_API_TOKEN trong .env nếu cần dùng màn hình cán bộ.
+python -m pip install -r requirements.txt
+python -m uvicorn src.main:app --reload --port 8000
+```
+
+Terminal 2 — frontend:
+
+```powershell
+Set-Location "D:\project AI\P-051\frontend"
+Copy-Item .env.example .env.local
+npm install
+npm run dev
+```
+
+Token nhập tại `/staff` phải trùng với `STAFF_API_TOKEN` trong file `.env` của
+backend. Frontend chỉ giữ token trong `sessionStorage` của tab hiện tại.
+
+Hoặc chạy cả hai dịch vụ bằng Docker:
+
+```powershell
+docker compose up --build
+```
+
+Docker mount canonical dataset ở chế độ chỉ đọc. Backend chỉ được đánh dấu healthy khi
+`GET /ready` xác nhận dữ liệu còn trong hạn kiểm chứng; không dùng `/health` như một
+cam kết dữ liệu đã sẵn sàng.
+
+## Nền tảng ban đầu
 
 Template chính thức cho học viên VinUni AI20K Build Phase: cấu trúc dự án, code
 mẫu và hướng dẫn kỹ thuật để xây dựng một AI Agent hoàn chỉnh — từ kiến trúc,
@@ -24,6 +83,7 @@ Technical Guidebook: <https://phoenix.note.transformerlabs.ai/technical-book>
 ## Yêu cầu
 
 - Python 3.11 (phiên bản CI đang dùng)
+- Node.js 20.9 trở lên và npm (nếu chạy frontend không qua Docker)
 - Git
 - Docker — tuỳ chọn, chỉ cần nếu chạy `docker compose`
 
@@ -50,6 +110,9 @@ của đội thì báo BTC — repo tự tạo nằm ngoài org sẽ không đư
 python3.11 -m venv .venv
 source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+cd frontend
+npm install
+cd ..
 ```
 
 ### 3. Cấu hình biến môi trường
@@ -74,14 +137,22 @@ Chạy một lần sau khi clone. Hook ghi lại prompt khi bạn dùng Claude C
 Codex CLI, Gemini CLI, Antigravity hoặc GitHub Copilot, và cài pre-push hook để
 đẩy log lên server.
 
-### 5. Chạy server
+### 5. Chạy ứng dụng
 
 ```bash
-uvicorn src.main:app --reload --port 8000
+python -m uvicorn src.main:app --reload --port 8000
 ```
 
-Swagger UI ở <http://localhost:8000/docs>. Hoặc dùng `make run`, `make test`,
-`make lint` — xem `Makefile`.
+Mở terminal thứ hai:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Giao diện ở <http://localhost:3000>; Swagger UI ở
+<http://localhost:8000/docs>. Hoặc dùng `make run`, `make test`, `make lint` —
+xem `Makefile`.
 
 ## Cấu trúc thư mục
 
@@ -97,6 +168,10 @@ src/
   services/llm.py    LLM client
   config.py          Pydantic Settings
   main.py            App entry point
+frontend/             Next.js App Router
+  app/                Trang chủ, chat và staff
+  components/         UI và luồng tương tác
+  lib/api.ts          API client có timeout/error handling
 tests/               pytest suite
 scripts/             Hook ghi log AI + installer
 docs/
@@ -107,8 +182,9 @@ presentation/        Slide và video Demo Day
 .claude/ .codex/ .cursor/ .gemini/ .agents/ .github/hooks/
                      Config hook cho từng công cụ
 .github/workflows/   CI
-Dockerfile           Multi-stage build
-docker-compose.yml   Chạy backend bằng Docker
+Dockerfile           Multi-stage build backend
+frontend/Dockerfile  Multi-stage build frontend
+docker-compose.yml   Chạy frontend và backend bằng Docker
 README_boilerplate.md  Khung README cho dự án của đội
 ```
 
@@ -154,7 +230,7 @@ bằng bất kỳ markdown viewer nào.
 | Agent | LangGraph + LangChain 0.3 |
 | Backend | FastAPI 0.115 + Uvicorn |
 | LLM | OpenAI, mặc định `gpt-4o-mini` (đổi trong `src/config.py`) |
-| Giao diện | Next.js hoặc Streamlit (đội tự chọn, hướng dẫn ở chương 6) |
+| Giao diện | Next.js App Router + React + TypeScript |
 | Lint / test | ruff + pytest 8 |
 | DevOps | Docker + GitHub Actions |
 

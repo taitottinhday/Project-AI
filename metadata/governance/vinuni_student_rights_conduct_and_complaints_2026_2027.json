@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year_context": "2026-2027",
+    "verified_as_of": "2026-09-23",
+    "official_sources_only": true
+  },
+  "student_code_of_conduct": {
+    "reference_number": "VU_CTSV02.EN",
+    "version": "V6.0",
+    "issued_date": "2026-08-05",
+    "scope": "Mọi người học trong thời gian còn trạng thái sinh viên, kể cả thời gian nghỉ; áp dụng tại campus, sự kiện ngoài campus, internship, study abroad, môi trường số và hành vi ngoài campus ảnh hưởng tới trường/cộng đồng.",
+    "rights_summary": [
+      "được học tập, sử dụng tài nguyên, phòng lab và cơ sở vật chất",
+      "được tôn trọng và tiếp cận chính sách minh bạch",
+      "được tham gia nghiên cứu, cuộc thi, trao đổi, câu lạc bộ và phát triển nghề nghiệp",
+      "được tiếp cận y tế, tham vấn sức khỏe tinh thần và hỗ trợ hoàn cảnh đặc biệt",
+      "được xin nghỉ, gia hạn, chuyển chương trình, học nhanh hoặc bằng kép theo quy định",
+      "được ứng tuyển học bổng/hỗ trợ đủ điều kiện, phản hồi, khiếu nại và yêu cầu academic accommodation",
+      "được nhận hồ sơ/văn bằng khi hoàn thành điều kiện"
+    ],
+    "responsibilities_summary": [
+      "tuân thủ pháp luật và quy định VinUni; duy trì trung thực học thuật",
+      "tôn trọng người khác và sử dụng kênh nội bộ phù hợp để giải quyết vấn đề",
+      "bảo vệ tài sản, giữ an toàn và thực hiện khám sức khỏe khi được yêu cầu",
+      "hoàn thành học phí, bảo hiểm, khoản vay và bồi thường thiệt hại",
+      "cập nhật thông tin cá nhân, bảo vệ uy tín trường và thực hiện nghĩa vụ học bổng/quốc phòng khi áp dụng",
+      "báo cáo vi phạm trong vòng 48 giờ kể từ khi biết theo quy định"
+    ],
+    "prohibited_examples": [
+      "gian lận học thuật",
+      "đại diện hoặc sử dụng tên/logo/quan hệ VinUni trong ấn phẩm, sự kiện, truyền thông hoặc cam kết công khai khi chưa được chấp thuận bằng văn bản",
+      "hút thuốc, dùng rượu không đúng quy định hoặc vào lớp trong tình trạng say",
+      "hoạt động bất hợp pháp hoặc hành vi gây nguy hiểm/ảnh hưởng cộng đồng"
+    ],
+    "discipline_levels": ["expression_of_disapproval", "warning", "temporary_suspension", "dismissal_or_expulsion"],
+    "appeal_deadline": "10 ngày làm việc",
+    "record_expiry": {
+      "expression_of_disapproval": "3 tháng nếu không tái phạm",
+      "warning": "6 tháng",
+      "suspension_return": "có thể cần xác nhận hạnh kiểm tốt tại địa phương"
+    },
+    "source_ids": ["SRC-STUDENT-CODE"]
+  },
+  "formal_student_complaints": {
+    "covered": ["nội dung/nguồn lực/cơ sở vật chất/thông tin học thuật", "chất lượng dịch vụ của trường hoặc bên thứ ba thay mặt trường", "tổ chức và vận hành sự kiện/hoạt động được trường hỗ trợ"],
+    "not_covered_and_route_elsewhere": {
+      "another_students_behavior": "Student Code of Conduct",
+      "sexual_misconduct": "Sexual Misconduct and Response policy",
+      "academic_misconduct": "Academic Integrity policy",
+      "admissions_application_or_interview": "Undergraduate Admissions Regulations",
+      "grade_or_assessment_decision": "Grade Appeal / Academic Regulations"
+    },
+    "principles": ["good_faith", "respectful_and_constructive", "confidentiality", "data_protection", "non_retaliation"],
+    "anonymous_complaints": "thông thường không được xem xét trừ khi trường nhận thấy có lý do thuyết phục",
+    "overall_target": "trường cố gắng xử lý đủ 3 giai đoạn trong 40 ngày từ khi nhận đơn hoàn chỉnh",
+    "stages": [
+      {"stage": "informal_resolution", "timeline": "trong 10 ngày làm việc", "summary": "trao đổi trực tiếp; nếu không phù hợp hoặc không thành công, SAM hỗ trợ"},
+      {"stage": "formal_resolution", "timeline": "nộp trong 5 ngày làm việc sau kết quả informal; xác nhận/sàng lọc trong 48 giờ; điều tra thường trong 10 ngày làm việc", "summary": "nộp Student Formal Complaints Form cho SAM"},
+      {"stage": "review_and_escalation", "timeline": "xin review trong 3 ngày làm việc; xác nhận trong 48 giờ; SAC xem xét trong 10 ngày", "summary": "có thể giữ nguyên, thay quyết định/biện pháp hoặc trả lại Stage 2 cho người xử lý mới"}
+    ],
+    "reference_number": "GDL-SAM-007-V2.0",
+    "issued_date": "2025-12-24",
+    "source_ids": ["SRC-STUDENT-COMPLAINT"]
+  },
+  "financial_support_for_current_students": {
+    "programs": [
+      {"name": "Need-Based Financial Aid", "coverage": "tuition fees"},
+      {"name": "Global Exchange Student Ambassador Grant", "coverage": "non-tuition exchange costs such as travel, visa, housing and insurance"},
+      {"name": "Student Support Assistance", "coverage": "emergency support such as on-campus housing subsidy, travel, meals or tuition in special cases"}
+    ],
+    "eligibility": ["full-time enrollment", "demonstrated financial need", "not in At-Risk academic standing", "no Level 3 or higher disciplinary action", "complete application and evidence"],
+    "regular_windows": [
+      {"application": "20 June-10 July", "processing_deadline": "2 August", "effective_semester": "Fall"},
+      {"application": "10 October-10 November", "processing_deadline": "10 December", "effective_semester": "Spring"}
+    ],
+    "warning": "Đây là lịch thường trực trong guideline 2025; cần kiểm tra portal/thông báo mới tại thời điểm nộp. GESA theo lịch đề cử exchange.",
+    "reference_number": "GDL-FAO-001-V2.0",
+    "issued_date": "2025-04-22",
+    "source_ids": ["SRC-FINANCIAL-SUPPORT-CURRENT", "SRC-AWARD-MAINTENANCE"]
+  },
+  "public_vs_internal_information": {
+    "rule": "Chỉ cung cấp chi tiết có thể kiểm chứng trên trang/PDF công khai. Khi nguồn chỉ nêu tiêu đề hoặc dẫn SharePoint/SIS yêu cầu tài khoản, chatbot phải nói rõ nội dung chi tiết dành cho sinh viên nội bộ và hướng dẫn liên hệ đơn vị phụ trách.",
+    "examples": ["work-study detailed process", "room allocation scoring", "course schedule and examination navigation", "some application forms", "current exchange slots and partner-specific requirements"],
+    "source_ids": ["SRC-STUDENT-GATEWAY", "SRC-WORK-STUDY"]
+  }
+}

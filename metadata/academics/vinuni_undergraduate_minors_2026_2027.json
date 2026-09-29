@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year_context": "2026-2027",
+    "verified_as_of": "2026-09-23",
+    "official_sources_only": true,
+    "note": "Danh sách lấy từ trang Minor Fields Information đang được Student Gateway liên kết. Điều kiện học phần tiên quyết và lịch mở lớp phải kiểm tra trên SIS/catalog tại thời điểm đăng ký."
+  },
+  "minor_count": 20,
+  "minors": [
+    {"name": "Psychology", "offered_by": "CAS", "credits": 15, "eligible_for": "all VinUni students"},
+    {"name": "Psychology for Clinicians", "offered_by": "CAS", "credits": 15, "eligible_for": "MD and Bachelor of Nursing students"},
+    {"name": "Vietnam Studies", "offered_by": "CAS", "credits": 15, "eligible_for": "all VinUni students"},
+    {"name": "Economics", "offered_by": "CAS", "credits": 15, "eligible_for": "all VinUni students"},
+    {"name": "Multimedia Communication", "offered_by": "CAS", "credits": 15, "eligible_for": "all VinUni students; curriculum noted for AY2025-2026 onward"},
+    {"name": "Hospitality Leadership", "offered_by": "CBM", "credits": 15, "eligible_for": "Cohort 2025-2029, excluding BBA students"},
+    {"name": "Business Analytics", "offered_by": "CBM", "credits": 15, "eligible_for": "Cohort 2025-2029, excluding BBA students"},
+    {"name": "Marketing", "offered_by": "CBM", "credits": 15, "eligible_for": "Cohort 2025-2029, excluding BBA students"},
+    {"name": "Entrepreneurship", "offered_by": "CBM", "credits": 15, "eligible_for": "Cohort 2025-2029, excluding BBA students"},
+    {"name": "Finance", "offered_by": "CBM", "credits": 15, "eligible_for": "Cohort 2025-2029, excluding BBA students"},
+    {"name": "Business Essentials", "offered_by": "CBM", "credits": 15, "eligible_for": "Cohort 2025-2029, excluding BBA students"},
+    {"name": "Operations and Supply Chain Management", "offered_by": "CBM", "credits": 15, "eligible_for": "Cohort 2025-2029, excluding BBA students"},
+    {"name": "Artificial Intelligence for BBA Students", "offered_by": "CECS", "credits": 15, "eligible_for": "BBA students"},
+    {"name": "Computer Science for Healthcare Professionals", "offered_by": "CECS", "credits": 15, "eligible_for": "Bachelor of Nursing students"},
+    {"name": "Artificial Intelligence for Electrical and Mechanical Engineering", "offered_by": "CECS", "credits": 15, "eligible_for": "Electrical Engineering and Mechanical Engineering students"},
+    {"name": "Robotics for Engineering and Computer Science", "offered_by": "CECS", "credits": 15, "eligible_for": "engineering and Computer Science students"},
+    {"name": "Product Design for Engineering and Computer Science", "offered_by": "CECS", "credits": 15, "eligible_for": "engineering and Computer Science students"},
+    {"name": "Healthcare Management and Innovation", "offered_by": "CHS", "credits": 15, "eligible_for": "CBM and CECS students"},
+    {"name": "Healthcare Information for Engineers", "offered_by": "CHS", "credits": 15, "eligible_for": "CECS students"},
+    {"name": "Healthcare for Psychologists", "offered_by": "CHS", "credits": 15, "eligible_for": "Bachelor of Arts in Psychology students"}
+  ],
+  "official_page_data_quality_note": "Một số mã học phần trên trang nguồn có vẻ lặp hoặc không nhất quán. Dataset không tự sửa mã học phần; khi cần trả lời theo từng môn, chatbot phải dẫn người dùng tới trang nguồn/SIS và cảnh báo xác nhận với Registrar/College.",
+  "source_ids": ["SRC-MINORS", "SRC-STUDENT-GATEWAY"]
+}

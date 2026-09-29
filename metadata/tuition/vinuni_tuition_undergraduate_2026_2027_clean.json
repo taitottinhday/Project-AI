@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "category": "undergraduate_tuition",
+    "academic_year": "2026-2027",
+    "cohort": "2026",
+    "currency": "VND",
+    "verified_as_of": "2026-09-22",
+    "official_source_updated": "2026-07",
+    "source_ids": [
+      "SRC-TUITION-UG-2026",
+      "SRC-FINREG-2026-WEB",
+      "SRC-FINREG-2026-PDF"
+    ]
+  },
+  "listed_tuition": [
+    {
+      "tuition_group_id": "nursing",
+      "programs": [
+        "VINUNI-UG-7720301"
+      ],
+      "label_vi": "Cử nhân Điều dưỡng",
+      "standard_duration_years": 4,
+      "per_academic_year": 349650000,
+      "per_semester": 174825000,
+      "per_credit": 9780000,
+      "standard_duration_listed_total": 1398600000,
+      "standard_duration_listed_total_derived": true,
+      "after_35_percent_founder_support": {
+        "per_academic_year": 227272500,
+        "per_semester": 113636250,
+        "standard_duration_total": 909090000,
+        "per_credit": null,
+        "derived": true,
+        "formula": "listed_amount * 0.65",
+        "per_credit_note": "Không tính tự động vì học phí theo tín chỉ chủ yếu dùng cho tín chỉ ngoài khung chuẩn; nguồn không xác nhận rõ hỗ trợ 35% cho từng trường hợp này."
+      }
+    },
+    {
+      "tuition_group_id": "medical_doctor",
+      "programs": [
+        "VINUNI-UG-7720101"
+      ],
+      "label_vi": "Bác sĩ Y khoa",
+      "standard_duration_years": 6,
+      "per_academic_year": 815850000,
+      "per_semester": 407925000,
+      "per_credit": 27195000,
+      "standard_duration_listed_total": 4895100000,
+      "standard_duration_listed_total_derived": true,
+      "after_35_percent_founder_support": {
+        "per_academic_year": 530302500,
+        "per_semester": 265151250,
+        "standard_duration_total": 3181815000,
+        "per_credit": null,
+        "derived": true,
+        "formula": "listed_amount * 0.65",
+        "per_credit_note": "Không tính tự động vì học phí theo tín chỉ chủ yếu dùng cho tín chỉ ngoài khung chuẩn; nguồn không xác nhận rõ hỗ trợ 35% cho từng trường hợp này."
+      }
+    },
+    {
+      "tuition_group_id": "other_bachelors",
+      "programs": [
+        "VINUNI-UG-7320104",
+        "VINUNI-UG-7310101",
+        "VINUNI-UG-7310401",
+        "VINUNI-UG-7340101",
+        "VINUNI-UG-7340201",
+        "VINUNI-UG-7480101",
+        "VINUNI-UG-7520201",
+        "VINUNI-UG-7520203",
+        "VINUNI-UG-7460108"
+      ],
+      "label_vi": "Các chương trình cử nhân khác",
+      "standard_duration_years": 4,
+      "per_academic_year": 815850000,
+      "per_semester": 407925000,
+      "per_credit": 27195000,
+      "standard_duration_listed_total": 3263400000,
+      "standard_duration_listed_total_derived": true,
+      "after_35_percent_founder_support": {
+        "per_academic_year": 530302500,
+        "per_semester": 265151250,
+        "standard_duration_total": 2121210000,
+        "per_credit": null,
+        "derived": true,
+        "formula": "listed_amount * 0.65",
+        "per_credit_note": "Không tính tự động vì học phí theo tín chỉ chủ yếu dùng cho tín chỉ ngoài khung chuẩn; nguồn không xác nhận rõ hỗ trợ 35% cho từng trường hợp này."
+      }
+    }
+  ],
+  "founder_educational_development_grant": {
+    "percentage_of_listed_tuition": 35,
+    "automatic_for_eligible_enrolled_students": true,
+    "eligible_intakes": "2025 through 2030",
+    "applies_to_nationalities": [
+      "Vietnamese",
+      "international"
+    ],
+    "duration": "entire_official_standard_program_duration",
+    "included_inside_merit_scholarship_percentages": true,
+    "maximum_combined_tuition_coverage_percent": 100,
+    "source_ids": [
+      "SRC-TUITION-UG-2026",
+      "SRC-SCHOLARSHIP-CURRENT",
+      "SRC-FINREG-2026-WEB"
+    ]
+  },
+  "tuition_includes": [
+    "đào tạo và thực hành theo chương trình",
+    "cơ sở vật chất",
+    "hệ thống CNTT hỗ trợ",
+    "định hướng sinh viên",
+    "dịch vụ y tế và tư vấn tâm lý học đường",
+    "cố vấn học tập và nghề nghiệp",
+    "hội sinh viên, câu lạc bộ, sự kiện thể thao và văn hóa",
+    "hoạt động trao đổi quốc tế và trải nghiệm doanh nghiệp theo quy định"
+  ],
+  "per_credit_rate_applies_when": [
+    "học thêm tín chỉ cho hai chương trình đồng thời tại VinUni",
+    "học vượt khung chuẩn gồm một ngành chính và tối đa một ngành phụ",
+    "học thêm tín chỉ trong chương trình trao đổi tích hợp hoặc là visiting student",
+    "học trao đổi ngắn hạn hay chương trình khác tính phí theo tín chỉ",
+    "học lại môn; mức thu theo Quy định tài chính 2026–2027 là 50% đơn giá tín chỉ chuẩn",
+    "chuyển đổi tín chỉ có điều kiện cần học bổ sung, áp dụng từ khóa nhập học 2024–2025"
+  ],
+  "payment": {
+    "installments_per_academic_year": 2,
+    "timing": "đầu hai học kỳ chính theo thông báo hằng năm",
+    "same_rate_for_vietnamese_and_international_students": true,
+    "online_offline_hybrid_same_rate": true,
+    "tuition_fixed_for_student_program_duration_including_retention_period": true,
+    "other_fees_may_change": true,
+    "source_ids": [
+      "SRC-FINREG-2026-WEB",
+      "SRC-FINREG-2026-PDF"
+    ]
+  },
+  "important_exclusions": [
+    "ký túc xá",
+    "bảo hiểm y tế bắt buộc",
+    "khám sức khỏe định kỳ",
+    "lệ phí tốt nghiệp",
+    "các phí hành chính hoặc thi lại/học lại phát sinh",
+    "sinh hoạt cá nhân"
+  ]
+}

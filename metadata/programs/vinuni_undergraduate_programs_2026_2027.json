@@ -1,0 +1,251 @@
+{
+  "metadata": {
+    "university": "VinUniversity",
+    "academic_year": "2026-2027",
+    "cohort": "2026",
+    "verified_as_of": "2026-09-22",
+    "confirmed_program_count": 11,
+    "scope_note": "Chỉ gồm chương trình có khung chương trình khóa 2026 hoặc trang chương trình hiện hành xác nhận. Không tính ngành phụ là chương trình tuyển sinh độc lập."
+  },
+  "programs": [
+    {
+      "id": "VINUNI-UG-7320104",
+      "college_code": "CAS",
+      "college_name_vi": "Viện Khoa học Xã hội và Khoa học Tự nhiên",
+      "name_vi": "Cử nhân Truyền thông Đa phương tiện",
+      "degree_name_en": "Bachelor of Arts in Multimedia Communication",
+      "program_code": "7320104",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"without_minor": 120, "with_minor": 135},
+      "focus_areas": ["Digital Communication", "Public Relations"],
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-MULTIMEDIA-2026", "SRC-ACADEMIC-CATALOGS"]
+    },
+    {
+      "id": "VINUNI-UG-7310101",
+      "college_code": "CAS",
+      "college_name_vi": "Viện Khoa học Xã hội và Khoa học Tự nhiên",
+      "name_vi": "Cử nhân Kinh tế",
+      "degree_name_en": "Bachelor of Arts in Economics",
+      "program_code": "7310101",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"without_minor": 120, "with_minor": 135},
+      "focus_areas": [
+        "Innovation Economics",
+        "Enterprise, Market and Institutional Economics"
+      ],
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-ECONOMICS-2026", "SRC-ACADEMIC-CATALOGS"]
+    },
+    {
+      "id": "VINUNI-UG-7310401",
+      "college_code": "CAS",
+      "college_name_vi": "Viện Khoa học Xã hội và Khoa học Tự nhiên",
+      "name_vi": "Cử nhân Tâm lý học",
+      "degree_name_en": "Bachelor of Arts in Psychology",
+      "program_code": "7310401",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"without_minor": 120, "with_minor": 135},
+      "focus_areas": [
+        "Educational/Counseling Psychology",
+        "Business/Organizational Psychology"
+      ],
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-PSYCHOLOGY-2026", "SRC-ACADEMIC-CATALOGS"]
+    },
+    {
+      "id": "VINUNI-UG-7340101",
+      "college_code": "CBM",
+      "college_name_vi": "Viện Kinh doanh Quản trị",
+      "name_vi": "Cử nhân Quản trị Kinh doanh",
+      "degree_name_en": "Bachelor of Business Administration",
+      "program_code": "7340101",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"minimum": 120, "with_minor": null},
+      "concentrations": [
+        "Hospitality Leadership",
+        "Business Analytics",
+        "Marketing",
+        "Entrepreneurship",
+        "Finance",
+        "Operations and Supply Chain Management"
+      ],
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-BBA-2026", "SRC-ACADEMIC-CATALOGS"]
+    },
+    {
+      "id": "VINUNI-UG-7340201",
+      "college_code": "CBM",
+      "college_name_vi": "Viện Kinh doanh Quản trị",
+      "name_vi": "Cử nhân Tài chính và Ngân hàng",
+      "degree_name_en": "Bachelor of Finance and Banking",
+      "program_code": "7340201",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"minimum": 122},
+      "concentrations": [
+        "Digital Banking",
+        "Financial Investment Innovation"
+      ],
+      "self_designed_concentration_allowed": true,
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current_new_program",
+      "source_ids": [
+        "SRC-CF-FINANCE-BANKING-2026",
+        "SRC-BFB-PROGRAM",
+        "SRC-BFB-PROPOSAL",
+        "SRC-ACADEMIC-CATALOGS"
+      ]
+    },
+    {
+      "id": "VINUNI-UG-7480101",
+      "college_code": "CECS",
+      "college_name_vi": "Viện Kỹ thuật và Khoa học Máy tính",
+      "name_vi": "Cử nhân Khoa học Máy tính",
+      "degree_name_en": "Bachelor of Science in Computer Science",
+      "program_code": "7480101",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"single_major": 120, "major_plus_minor": 135},
+      "concentrations": ["Artificial Intelligence", "Data Analytics", "Cybersecurity"],
+      "self_designed_concentration_allowed": true,
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-CS-2026", "SRC-ACADEMIC-CATALOGS"]
+    },
+    {
+      "id": "VINUNI-UG-7520201",
+      "college_code": "CECS",
+      "college_name_vi": "Viện Kỹ thuật và Khoa học Máy tính",
+      "name_vi": "Cử nhân Kỹ thuật Điện",
+      "program_name_vi": "Kỹ thuật Điện và Máy tính",
+      "degree_name_en": "Bachelor of Science in Electrical Engineering",
+      "program_name_en": "Electrical and Computer Engineering",
+      "program_code": "7520201",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"single_major": 124, "major_plus_minor": 139},
+      "concentrations": [
+        "Communications and Signal Processing",
+        "Control and Automation",
+        "Power and Clean Energy",
+        "Computer Engineering"
+      ],
+      "self_designed_concentration_allowed": true,
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-EE-2026", "SRC-ACADEMIC-CATALOGS"],
+      "data_note": "Khung chương trình 2026 liệt kê 4 chuyên ngành; trang catalog tổng hợp hiện bỏ sót Computer Engineering."
+    },
+    {
+      "id": "VINUNI-UG-7520203",
+      "college_code": "CECS",
+      "college_name_vi": "Viện Kỹ thuật và Khoa học Máy tính",
+      "name_vi": "Cử nhân Kỹ thuật Cơ khí",
+      "degree_name_en": "Bachelor of Science in Mechanical Engineering",
+      "program_code": "7520203",
+      "program_code_status": "as_printed_in_cohort_2026_curriculum",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"single_major": 122, "major_plus_minor": 137},
+      "concentrations": [
+        "Automotive Engineering",
+        "Systems and Manufacturing",
+        "Energy and Sustainability",
+        "Mechatronics"
+      ],
+      "self_designed_concentration_allowed": true,
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current_with_code_conflict",
+      "source_ids": ["SRC-CF-ME-2026", "SRC-ACADEMIC-CATALOGS"],
+      "data_note": "Khung chương trình khóa 2026 ghi 7520203; một trang chương trình chính thức từng ghi 7520103. Không tự sửa cho đến khi VinUni đính chính."
+    },
+    {
+      "id": "VINUNI-UG-7460108",
+      "college_code": "CECS",
+      "college_name_vi": "Viện Kỹ thuật và Khoa học Máy tính",
+      "name_vi": "Cử nhân Khoa học Dữ liệu",
+      "degree_name_en": "Bachelor of Science in Data Science",
+      "program_code": "7460108",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"single_major": 120, "major_plus_minor": 135},
+      "concentrations": [],
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-DS-2026", "SRC-ACADEMIC-CATALOGS"]
+    },
+    {
+      "id": "VINUNI-UG-7720301",
+      "college_code": "CHS",
+      "college_name_vi": "Viện Khoa học Sức khỏe",
+      "name_vi": "Cử nhân Điều dưỡng",
+      "degree_name_en": "Bachelor of Nursing",
+      "program_code": "7720301",
+      "qualification_framework_level": 6,
+      "duration_years": 4,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {
+        "without_minor_and_extended_clinical_immersion": 135,
+        "with_minor": 150,
+        "optional_extended_clinical_immersion_additional": 24,
+        "optional_extended_clinical_immersion_hours": 1080
+      },
+      "curriculum_applies_to": "Cohort 2026–2030",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-NURSING-2026", "SRC-ACADEMIC-CATALOGS"]
+    },
+    {
+      "id": "VINUNI-UG-7720101",
+      "college_code": "CHS",
+      "college_name_vi": "Viện Khoa học Sức khỏe",
+      "name_vi": "Bác sĩ Y khoa",
+      "degree_name_en": "Medical Doctor",
+      "program_name_en": "Medical Doctor Program",
+      "program_code": "7720101",
+      "qualification_framework_level": null,
+      "duration_years": 6,
+      "study_mode": "full_time",
+      "language_of_delivery": "English",
+      "credits": {"total": 228},
+      "curriculum_applies_to": "Cohort 2026–2032",
+      "status": "confirmed_current",
+      "source_ids": ["SRC-CF-MD-2026", "SRC-ACADEMIC-CATALOGS"]
+    }
+  ],
+  "not_counted_as_separate_confirmed_2026_admission_programs": [
+    {
+      "name": "Bachelor of Science in Hospitality Management",
+      "reason": "Catalog có tiêu đề nhưng không có khung chương trình khóa 2026; trang tuyển sinh hiện mô tả Hospitality Leadership là một chuyên ngành của BBA.",
+      "status": "not_confirmed_for_independent_2026_intake",
+      "source_ids": ["SRC-ACADEMIC-CATALOGS"]
+    }
+  ]
+}

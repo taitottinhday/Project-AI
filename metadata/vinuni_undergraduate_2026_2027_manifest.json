@@ -1,0 +1,48 @@
+{
+  "dataset_id": "vinuni_undergraduate_2026_2027",
+  "university": {
+    "name_vi": "Trường Đại học VinUni",
+    "name_en": "VinUniversity",
+    "type": "private_nonprofit_university",
+    "founded_by": "Vingroup",
+    "establishment_decision": "1824/QĐ-TTg ngày 17/12/2019"
+  },
+  "scope": "undergraduate_admissions_programs_costs_academic_rules_student_life_and_support",
+  "academic_year": "2026-2027",
+  "verified_as_of": "2026-09-23",
+  "language": "vi",
+  "official_sources_only": true,
+  "files": [
+    "sources/vinuni_official_sources_2026_2027.json",
+    "programs/vinuni_undergraduate_programs_2026_2027.json",
+    "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+    "admissions/vinuni_undergraduate_admissions_2026_2027.json",
+    "financial_aid/vinuni_financial_aid_and_fees_2026_2027.json",
+    "academics/vinuni_undergraduate_academic_rules_2026_2027.json",
+    "academics/vinuni_undergraduate_minors_2026_2027.json",
+    "student_life/vinuni_student_life_residential_and_services_2026_2027.json",
+    "international/vinuni_international_and_global_opportunities_2026_2027.json",
+    "governance/vinuni_student_rights_conduct_and_complaints_2026_2027.json",
+    "coverage/vinuni_chatbot_topic_coverage_2026_09_23.json",
+    "coverage/vinuni_public_policy_inventory_2026_09_23.json",
+    "quality/vinuni_data_quality_2026_09_22.json"
+  ],
+  "confirmed_program_count": 11,
+  "confirmed_minor_count": 20,
+  "currency": "VND",
+  "data_policy": {
+    "unknown_values": "null_or_not_published",
+    "derived_values_are_labeled": true,
+    "conflicts_are_not_silently_resolved": true,
+    "drafts_are_never_presented_as_final": true,
+    "source_registry_required": true,
+    "dynamic_or_authenticated_data": "do_not_cache_as_authoritative_static_fact"
+  },
+  "source_ids": [
+    "SRC-OVERVIEW",
+    "SRC-ACADEMIC-CATALOGS",
+    "SRC-STUDENT-GATEWAY",
+    "SRC-ACADEMIC-AFFAIRS-INDEX",
+    "SRC-STUDENT-AFFAIRS-INDEX"
+  ]
+}
