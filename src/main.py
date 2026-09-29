@@ -33,9 +33,13 @@ app.add_middleware(
     allow_origins=[origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()],
     # Vercel creates a distinct URL for each deployment. Keep preview links
     # usable without weakening CORS to every arbitrary origin.
-    # Covers production, branch and preview hostnames generated for this
-    # Vercel project while remaining scoped to the team's Vercel suffix.
-    allow_origin_regex=r"^https://[a-z0-9-]*taitottinhdays-projects\.vercel\.app$",
+    # Covers production, branch and preview hostnames generated for the
+    # deployed Vercel projects. The current production project is
+    # ``project-ai-peach.vercel.app``; the older team-generated URLs are kept
+    # for existing deployments and previews.
+    allow_origin_regex=(
+        r"^https://(?:project-ai-peach|[a-z0-9-]*taitottinhdays-projects)\.vercel\.app$"
+    ),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
