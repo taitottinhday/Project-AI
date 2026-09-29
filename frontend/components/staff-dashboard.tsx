@@ -14,7 +14,8 @@ import {
 
 const STAFF_TOKEN_KEY = "vinuni-staff-token";
 const STAFF_ID_KEY = "vinuni-staff-id";
-const STAFF_POLL_INTERVAL_MS = 5_000;
+const STAFF_QUEUE_POLL_INTERVAL_MS = 3_000;
+const STAFF_ANALYTICS_POLL_INTERVAL_MS = 30_000;
 
 const statusLabels: Record<TicketStatus, string> = {
   waiting: "Đang chờ",
@@ -65,16 +66,12 @@ export function StaffDashboard() {
     setLoading(true);
     setError("");
     try {
-      const [data, metricData] = await Promise.all([
-        apiRequest<Ticket[]>("/api/v1/staff/tickets", {
-          headers: authHeaders(activeToken),
-        }, 10_000),
-        apiRequest<AnalyticsSummary>("/api/v1/staff/analytics?days=30", {
-          headers: authHeaders(activeToken),
-        }, 10_000),
-      ]);
+      // Ticket delivery is critical. Do not make it depend on the slower
+      // metrics query completing successfully.
+      const data = await apiRequest<Ticket[]>("/api/v1/staff/tickets", {
+        headers: authHeaders(activeToken),
+      }, 10_000);
       setTickets(data);
-      setAnalytics(metricData);
       setLoggedIn(true);
       setSelectedId((currentSelected) => {
         if (!data.length) return null;
@@ -91,11 +88,33 @@ export function StaffDashboard() {
     }
   }, [token]);
 
+  const loadAnalytics = useCallback(async (activeToken = token) => {
+    if (!activeToken) return;
+    try {
+      const data = await apiRequest<AnalyticsSummary>("/api/v1/staff/analytics?days=30", {
+        headers: authHeaders(activeToken),
+      }, 10_000);
+      setAnalytics(data);
+    } catch {
+      // Metrics are non-critical; the ticket queue keeps refreshing.
+    }
+  }, [token]);
+
   useEffect(() => {
     if (!loggedIn || !token) return;
-    const interval = window.setInterval(() => void loadTickets(token), STAFF_POLL_INTERVAL_MS);
+    const interval = window.setInterval(() => void loadTickets(token), STAFF_QUEUE_POLL_INTERVAL_MS);
     return () => window.clearInterval(interval);
   }, [loadTickets, loggedIn, token]);
+
+  useEffect(() => {
+    if (!loggedIn || !token) return;
+    const initialRefresh = window.setTimeout(() => void loadAnalytics(token), 0);
+    const interval = window.setInterval(() => void loadAnalytics(token), STAFF_ANALYTICS_POLL_INTERVAL_MS);
+    return () => {
+      window.clearTimeout(initialRefresh);
+      window.clearInterval(interval);
+    };
+  }, [loadAnalytics, loggedIn, token]);
 
   async function login(event: FormEvent) {
     event.preventDefault();
