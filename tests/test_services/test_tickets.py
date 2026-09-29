@@ -1,3 +1,5 @@
+import sqlite3
+
 import pytest
 
 from src.models.schemas import TicketStatus
@@ -35,6 +37,21 @@ def test_ticket_cannot_resolve_without_reply(tmp_path):
 
     with pytest.raises(ValueError, match="phản hồi"):
         store.resolve(ticket.ticket_id, "staff-1")
+
+
+def test_legacy_replied_ticket_is_backfilled_to_resolved(tmp_path):
+    path = tmp_path / "tickets.db"
+    store = TicketStore(path)
+    ticket = store.create("session-owner-1234", "Question", "Reason", None)
+    store.claim(ticket.ticket_id, "staff-1")
+    with sqlite3.connect(path) as connection:
+        connection.execute(
+            "UPDATE handover_tickets SET staff_reply = ? WHERE ticket_id = ?",
+            ("Legacy reply", ticket.ticket_id),
+        )
+
+    migrated_store = TicketStore(path)
+    assert migrated_store.get_for_staff(ticket.ticket_id).status == TicketStatus.RESOLVED
 
 
 def test_anonymous_session_identifier_survives_process_restart():

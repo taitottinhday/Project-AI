@@ -47,6 +47,12 @@ class TicketStore:
             connection.execute(
                 "CREATE INDEX IF NOT EXISTS idx_ticket_status_created ON handover_tickets(status, created_at)"
             )
+            # Backfill tickets replied to by an earlier release, where staff
+            # response and explicit closing were separate actions.
+            connection.execute(
+                "UPDATE handover_tickets SET status = 'resolved' "
+                "WHERE status = 'in_progress' AND staff_reply IS NOT NULL"
+            )
 
     def create(self, session_id: str, question: str, reason: str, contact: str | None) -> TicketResponse:
         ticket_id = f"VU-{uuid.uuid4().hex[:12].upper()}"
