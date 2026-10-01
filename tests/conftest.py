@@ -20,7 +20,7 @@ from src.main import app
 def isolated_runtime(tmp_path, monkeypatch):
     from src.agents.nodes import rag_nodes
     from src.config import get_settings
-    from src.services import analytics, tickets
+    from src.services import analytics, auth, tickets
     from src.services.rate_limit import limiter
     from src.services.response_cache import response_cache
     from src.services.session import session_store
@@ -32,6 +32,7 @@ def isolated_runtime(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, "rate_limit_per_minute", 600)
     monkeypatch.setattr(settings, "database_url", f"sqlite:///{tmp_path / 'test.db'}")
     monkeypatch.setattr(analytics, "_analytics_store", analytics.AnalyticsStore(tmp_path / "test.db"))
+    monkeypatch.setattr(auth, "_auth_store", auth.AuthStore(tmp_path / "test.db"))
     monkeypatch.setattr(tickets, "_ticket_store", tickets.TicketStore(tmp_path / "test.db"))
     response_cache.clear()
     session_store._sessions.clear()

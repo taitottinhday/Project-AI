@@ -53,6 +53,18 @@ export type AnalyticsSummary = {
   top_reason_codes: MetricBreakdown[];
 };
 
+export type KnowledgeGapStatus = "open" | "in_review" | "resolved";
+
+export type KnowledgeGapItem = {
+  gap_id: string;
+  ticket_id: string;
+  category: TicketCategory;
+  description: string;
+  status: KnowledgeGapStatus;
+  created_by: string;
+  created_at: string;
+};
+
 export type TicketStatus = "new" | "assigned" | "in_progress" | "waiting_for_user" | "resolved" | "closed";
 export type TicketCategory = "admissions" | "tuition" | "scholarship" | "program" | "application" | "technical" | "other";
 export type TicketPriority = "low" | "medium" | "high" | "urgent";
@@ -141,6 +153,7 @@ export type StaffTicket = Ticket & {
 export type StaffTicketMetrics = {
   open_count: number;
   unassigned_count: number;
+  team_queue_count: number;
   overdue_count: number;
   resolved_today: number;
   average_first_response_minutes?: number | null;

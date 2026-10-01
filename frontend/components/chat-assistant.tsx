@@ -52,6 +52,12 @@ const suggestions = [
   "Quy trình nộp hồ sơ như thế nào?",
 ];
 
+const followUpSuggestions = [
+  "Còn điều kiện hoặc hồ sơ nào cần biết?",
+  "Học phí và học bổng liên quan thế nào?",
+  "Cho tôi quy trình nộp hồ sơ",
+];
+
 const statusMeta: Record<AnswerStatus, { label: string; className: string }> = {
   answered: { label: "Đã kiểm chứng nguồn", className: "status-grounded" },
   needs_clarification: { label: "Cần làm rõ", className: "status-clarify" },
@@ -92,7 +98,17 @@ function CitationCard({ citation, index }: { citation: Citation; index: number }
   );
 }
 
-function AssistantMessage({ message, onHandover }: { message: ConversationMessage; onHandover: () => void }) {
+function AssistantMessage({
+  message,
+  isLatest,
+  onAskFollowUp,
+  onHandover,
+}: {
+  message: ConversationMessage;
+  isLatest: boolean;
+  onAskFollowUp: (question: string) => void;
+  onHandover: () => void;
+}) {
   const [copied, setCopied] = useState(false);
   const [feedback, setFeedback] = useState<"helpful" | "unhelpful" | null>(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
@@ -197,6 +213,16 @@ function AssistantMessage({ message, onHandover }: { message: ConversationMessag
             </>
           ) : null}
         </div>
+        {isLatest && result?.status === "answered" ? (
+          <div className="follow-up-prompts" aria-label="Câu hỏi tiếp theo">
+            <span>Tiếp tục tìm hiểu</span>
+            {followUpSuggestions.map((suggestion) => (
+              <button key={suggestion} onClick={() => onAskFollowUp(suggestion)} type="button">
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        ) : null}
         {result?.handover_recommended ? (
           <button className="button button-handover" onClick={onHandover} type="button">
             <StaffIcon /> Chuyển câu hỏi cho cán bộ
@@ -223,7 +249,15 @@ function HandoverDialog({
   onCreated: (ticket: Ticket) => void;
 }) {
   const [summary, setSummary] = useState(question);
-  const [contact, setContact] = useState("");
+  const [contact, setContact] = useState(() => {
+    if (typeof window === "undefined") return "";
+    try {
+      const stored = JSON.parse(window.localStorage.getItem("vinuni-auth-user") || "null") as { email?: string } | null;
+      return stored?.email || "";
+    } catch {
+      return "";
+    }
+  });
   const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -301,7 +335,7 @@ function HandoverDialog({
           <label className="field-label" htmlFor="handover-summary">Nội dung chuyển</label>
           <textarea id="handover-summary" maxLength={2000} onChange={(event) => setSummary(event.target.value)} rows={5} value={summary} />
           <label className="field-label" htmlFor="handover-contact">Email hoặc số điện thoại <span>(không bắt buộc)</span></label>
-          <input id="handover-contact" maxLength={255} onChange={(event) => setContact(event.target.value)} placeholder="Để trống nếu chỉ theo dõi trong phiên" value={contact} />
+          <input autoComplete="email" id="handover-contact" maxLength={255} onChange={(event) => setContact(event.target.value)} placeholder="Để trống nếu chỉ theo dõi trong phiên" value={contact} />
           <label className="consent-row">
             <input checked={consent} onChange={(event) => setConsent(event.target.checked)} type="checkbox" />
             <span>Tôi đồng ý chuyển nội dung, lịch sử hội thoại và các nguồn liên quan cho cán bộ phụ trách.</span>
@@ -322,18 +356,43 @@ function HandoverDialog({
 function TicketTracker({ sessionId, ticketIds }: { sessionId: string | null; ticketIds: string[] }) {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const hasAccount = typeof window !== "undefined" && Boolean(window.localStorage.getItem("vinuni-auth-token"));
 
   async function refresh() {
-    if (!sessionId || !ticketIds.length) return;
+    if ((!sessionId || !ticketIds.length) && !hasAccount) return;
     setLoading(true);
-    const results = await Promise.allSettled(
-      ticketIds.map((ticketId) =>
-        apiRequest<Ticket>(`/api/v1/handover/${encodeURIComponent(ticketId)}`, {
-          headers: { "X-Session-ID": sessionId },
-        }, 8_000),
-      ),
-    );
-    setTickets(results.flatMap((result) => result.status === "fulfilled" ? [result.value] : []));
+    setError("");
+    let accountFetchFailed = false;
+    const [sessionResults, accountTickets] = await Promise.all([
+      sessionId && ticketIds.length
+        ? Promise.allSettled(
+          ticketIds.map((ticketId) =>
+            apiRequest<Ticket>(`/api/v1/handover/${encodeURIComponent(ticketId)}`, {
+              headers: { "X-Session-ID": sessionId },
+            }, 8_000),
+          ),
+        )
+        : Promise.resolve([]),
+      hasAccount
+        ? apiRequest<Ticket[]>("/api/v1/handover/mine", {}, 8_000).catch(() => {
+          accountFetchFailed = true;
+          return [];
+        })
+        : Promise.resolve([]),
+    ]);
+    const merged = new Map<string, Ticket>();
+    sessionResults.forEach((result) => {
+      if (result.status === "fulfilled") merged.set(result.value.ticket_id, result.value);
+    });
+    accountTickets.forEach((ticket) => merged.set(ticket.ticket_id, ticket));
+    const nextTickets = Array.from(merged.values()).sort((left, right) => (
+      new Date(right.updated_at).getTime() - new Date(left.updated_at).getTime()
+    ));
+    setTickets(nextTickets);
+    if (!nextTickets.length && (accountFetchFailed || ticketIds.length > 0)) {
+      setError("Chưa thể cập nhật trạng thái. Hãy thử lại sau.");
+    }
     setLoading(false);
   }
 
@@ -346,7 +405,7 @@ function TicketTracker({ sessionId, ticketIds }: { sessionId: string | null; tic
     };
     // The serialized IDs keep polling stable when the list content is unchanged.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId, ticketIds.join("|")]);
+  }, [hasAccount, sessionId, ticketIds.join("|")]);
 
   return (
     <section className="side-card ticket-tracker">
@@ -354,9 +413,10 @@ function TicketTracker({ sessionId, ticketIds }: { sessionId: string | null; tic
         <div><span className="eyebrow">Theo dõi</span><h3>Yêu cầu cán bộ</h3></div>
         <button aria-label="Làm mới ticket" className="icon-button small" disabled={loading} onClick={() => void refresh()} type="button"><RefreshIcon className={loading ? "spin" : ""} /></button>
       </div>
-      {!ticketIds.length ? (
+      {!ticketIds.length && !tickets.length ? (
         <div className="empty-compact"><ClockIcon /><p>Chưa có yêu cầu handover trong phiên này.</p></div>
       ) : null}
+      {error ? <p className="tracker-error" role="status">{error}</p> : null}
       <div className="ticket-mini-list">
         {tickets.map((ticket) => {
           const meta = ticketMeta[ticket.status];
@@ -389,9 +449,9 @@ export function ChatAssistant() {
 
   useEffect(() => {
     const hydration = window.setTimeout(() => {
-      // Tickets are not tied to an account. Keep only the anonymous ownership
-      // token and ticket IDs in this browser profile so a visitor can leave and
-      // return later without storing their conversation or requiring a login.
+      // Keep the anonymous session and ticket IDs in this browser profile so a
+      // visitor can return later; signed-in users additionally see their
+      // cross-device inbox from the account-owned handover endpoint.
       // Fall back to the prior sessionStorage keys to preserve existing users.
       const storedSession = window.localStorage.getItem(SESSION_KEY) || window.sessionStorage.getItem(SESSION_KEY);
       const storedMessages = window.sessionStorage.getItem(MESSAGE_KEY);
@@ -421,6 +481,14 @@ export function ChatAssistant() {
     if (sessionId) window.localStorage.setItem(SESSION_KEY, sessionId);
     window.localStorage.setItem(TICKET_KEY, JSON.stringify(ticketIds));
   }, [hydrated, sessionId, ticketIds]);
+
+  useEffect(() => {
+    if (!hydrated || !sessionId || !window.localStorage.getItem("vinuni-auth-token")) return;
+    void apiRequest<{ claimed: number }>("/api/v1/handover/claim-session", {
+      method: "POST",
+      body: JSON.stringify({ session_id: sessionId }),
+    }, 8_000).catch(() => undefined);
+  }, [hydrated, sessionId]);
 
   async function sendQuestion(override?: string, isRetry = false) {
     const question = (override ?? draft).trim();
@@ -498,13 +566,15 @@ export function ChatAssistant() {
           <button className="text-button" onClick={() => void clearConversation()} type="button"><RefreshIcon /> Xóa hội thoại</button>
         </div>
 
-        <div aria-live="polite" className="message-list">
-          {messages.map((message) => message.role === "user" ? (
+          <div className="message-list" aria-label="Lịch sử hội thoại">
+            {messages.map((message) => message.role === "user" ? (
             <div className="message-row user-row" key={message.id}><div className="message-bubble user-bubble">{message.text}</div></div>
           ) : (
             <AssistantMessage
+              isLatest={message.id === messages.at(-1)?.id}
               key={message.id}
               message={message}
+              onAskFollowUp={(question) => void sendQuestion(question)}
               onHandover={() => {
                 setLastQuestion(messages.filter((item) => item.role === "user").at(-1)?.text || "");
                 setLastReason(message.result?.reason_code || "user_requested_handover");
@@ -512,6 +582,9 @@ export function ChatAssistant() {
               }}
             />
           ))}
+          <div aria-live="polite" aria-atomic="true" className="sr-only" role="status">
+            {loading ? "Đang đối chiếu nguồn chính thức…" : ""}
+          </div>
           {loading ? (
             <div className="message-row assistant-row"><span className="message-avatar"><SparkIcon /></span><div className="typing-card"><i/><i/><i/><span>Đang đối chiếu nguồn chính thức…</span></div></div>
           ) : null}

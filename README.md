@@ -19,6 +19,7 @@ hoặc không công khai.
 - Kiểm tra thay đổi URL nguồn chính thức (không tự cập nhật fact): `python scripts/check_sources.py`
 - Chạy quality pipeline: `python scripts/evaluate_quality.py`; thêm `--judge` khi đã cấu hình API key.
 - Tài liệu vận hành: [`docs/accuracy_first_backend.md`](docs/accuracy_first_backend.md)
+- Bài trình bày mentor về liên kết 3 luồng: [`docs/mentor_three_flows.md`](docs/mentor_three_flows.md)
 - Kiến trúc: [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
 ## Chạy nhanh trên Windows

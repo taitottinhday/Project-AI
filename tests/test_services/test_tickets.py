@@ -225,3 +225,33 @@ def test_ticket_is_routed_to_available_specialist_with_lowest_load(tmp_path):
     store.set_staff_availability("tuition-a", StaffAvailability.AVAILABLE)
     assert store.get_for_staff(waiting.ticket_id).assigned_to == "tuition-a"
     assert store.get_for_staff(waiting.ticket_id).status == TicketStatus.ASSIGNED
+
+
+def test_staff_sees_and_claims_only_matching_team_queue(tmp_path):
+    store = TicketStore(tmp_path / "tickets.db")
+    store.upsert_staff_member(
+        "tuition-a", "Tuition A", "Tài chính & Học phí",
+        [TicketCategory.TUITION], StaffAvailability.AVAILABLE, True,
+    )
+    store.update_routing_rule(TicketCategory.TUITION, "Tài chính & Học phí", False)
+    ticket = store.create(
+        "session-team-1234", "Học phí năm nay là bao nhiêu?",
+        "insufficient_retrieval_evidence", None,
+    )
+
+    queue = store.list_for_staff(viewer_id="tuition-a")
+    assert [item.ticket_id for item in queue] == [ticket.ticket_id]
+    assert queue[0].status == TicketStatus.NEW
+    claimed = store.claim(ticket.ticket_id, "tuition-a")
+    assert claimed.status == TicketStatus.IN_PROGRESS
+    assert claimed.assigned_to == "tuition-a"
+
+
+def test_staff_status_transition_does_not_skip_workflow(tmp_path):
+    store = TicketStore(tmp_path / "tickets.db")
+    ticket = store.create("session-transition-1234", "Question", "Reason", None)
+    store.assign(ticket.ticket_id, "admin-1", "staff-1", "Admissions")
+    store.set_status(ticket.ticket_id, "staff-1", TicketStatus.IN_PROGRESS)
+
+    with pytest.raises(ValueError, match="Không thể chuyển ticket"):
+        store.set_status(ticket.ticket_id, "staff-1", TicketStatus.ASSIGNED)

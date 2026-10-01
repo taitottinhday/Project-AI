@@ -143,8 +143,18 @@ export function StaffDashboard() {
 
   useEffect(() => {
     if (!loggedIn || !token) return;
-    const timer = window.setInterval(() => void loadDashboard(token), POLL_INTERVAL_MS);
-    return () => window.clearInterval(timer);
+    const refresh = () => {
+      if (document.visibilityState === "visible") void loadDashboard(token);
+    };
+    const timer = window.setInterval(refresh, POLL_INTERVAL_MS);
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
   }, [loadDashboard, loggedIn, token]);
 
   useEffect(() => {
@@ -220,6 +230,13 @@ export function StaffDashboard() {
     await action(`/api/v1/staff/tickets/${encodeURIComponent(selected.ticket_id)}/status`, {
       staff_id: staffId,
       status: nextStatus,
+    });
+  }
+
+  async function claimTicket() {
+    if (!selected || selected.assigned_to || ["resolved", "closed"].includes(selected.status)) return;
+    await action(`/api/v1/staff/tickets/${encodeURIComponent(selected.ticket_id)}/claim`, {
+      staff_id: staffId,
     });
   }
 
@@ -315,7 +332,7 @@ export function StaffDashboard() {
       </div>
 
       <div className="staff-metrics hitl-metrics">
-        <article><span className="metric-icon waiting"><ClockIcon /></span><div><strong>{metrics?.open_count ?? 0}</strong><span>Đang mở</span></div></article>
+        <article><span className="metric-icon waiting"><ClockIcon /></span><div><strong>{metrics?.team_queue_count ?? 0}</strong><span>Hàng chờ nhóm</span></div></article>
         <article><span className="metric-icon progress"><StaffIcon /></span><div><strong>{myOpenTicketCount}</strong><span>Ticket của tôi</span></div></article>
         <article><span className="metric-icon urgent"><ClockIcon /></span><div><strong>{metrics?.overdue_count ?? 0}</strong><span>Quá SLA</span></div></article>
         <article><span className="metric-icon resolved"><CheckIcon /></span><div><strong>{metrics?.resolved_today ?? 0}</strong><span>Hoàn tất hôm nay</span></div></article>
@@ -342,13 +359,13 @@ export function StaffDashboard() {
 
       <div className="staff-workspace hitl-workspace">
         <section className="ticket-queue">
-          <div className="queue-header"><div><span className="eyebrow">Queue</span><h2>Yêu cầu cần xử lý</h2></div><span>{visibleTickets.length} ticket</span></div>
+          <div className="queue-header"><div><span className="eyebrow">Queue</span><h2>Yêu cầu cần xử lý</h2><small className="queue-policy">Ticket đã phân công cho bạn + ticket mới thuộc chuyên môn đang chờ nhận.</small></div><span>{visibleTickets.length} ticket · {metrics?.team_queue_count ?? 0} chờ nhóm</span></div>
           <div className="queue-list hitl-queue-list">
             {loading && !tickets.length ? <div className="queue-loading">Đang tải hàng chờ…</div> : null}
             {!loading && !visibleTickets.length ? <div className="empty-state"><CheckIcon /><h3>Không có ticket</h3><p>Thử thay đổi bộ lọc hiện tại.</p></div> : null}
             {visibleTickets.map((ticket) => (
               <button className={selectedId === ticket.ticket_id ? "queue-item selected" : "queue-item"} key={ticket.ticket_id} onClick={() => { setSelectedId(ticket.ticket_id); setReply(""); setNote(""); setError(""); }} type="button">
-                <div><strong>{ticket.ticket_id}</strong><span className={`priority-badge priority-${ticket.priority}`}>{priorityLabels[ticket.priority]}</span></div>
+                <div><strong>{ticket.ticket_id}</strong><span className={`priority-badge priority-${ticket.priority}`}>{priorityLabels[ticket.priority]}</span><span className={ticket.assigned_to === staffId ? "queue-ownership mine" : "queue-ownership team"}>{ticket.assigned_to === staffId ? "Của tôi" : "Hàng chờ nhóm"}</span></div>
                 <p>{ticket.question}</p>
                 <div className="queue-badges"><span className={`ticket-badge ticket-${ticket.status}`}>{statusLabels[ticket.status]}</span><span>{categoryLabels[ticket.category]}</span><span className={`sla-badge sla-${ticket.sla_state}`}>{ticket.sla_state === "overdue" ? "Quá SLA" : ticket.sla_state === "due_soon" ? "Sắp quá SLA" : "Trong SLA"}</span></div>
                 <small>{formatDateTime(ticket.created_at)} · {ticket.assigned_to || "Chưa phân công"}</small>
@@ -367,11 +384,11 @@ export function StaffDashboard() {
 
               <div className="hitl-detail-body">
                 <section className="hitl-panel triage-panel">
-                  <div className="panel-heading"><div><span className="eyebrow">AI triage</span><h3>Tóm tắt xử lý</h3></div><button className="text-button" disabled={actionLoading} onClick={() => void regenerateAi()} type="button"><RefreshIcon /> Tạo lại</button></div>
+                  <div className="panel-heading"><div><span className="eyebrow">AI triage</span><h3>Tóm tắt xử lý</h3></div><button className="text-button" disabled={actionLoading || !canEdit} onClick={() => void regenerateAi()} type="button"><RefreshIcon /> Tạo lại</button></div>
                   <p>{selected.ai_summary || "Chưa có tóm tắt."}</p>
                   <div className="triage-grid">
-                    <label>Danh mục<select disabled={actionLoading || ["resolved", "closed"].includes(selected.status)} onChange={(event) => void updateClassification(event.target.value as TicketCategory, selected.priority)} value={selected.category}>{categories.map((value) => <option key={value} value={value}>{categoryLabels[value]}</option>)}</select></label>
-                    <label>Ưu tiên<select disabled={actionLoading || ["resolved", "closed"].includes(selected.status)} onChange={(event) => void updateClassification(selected.category, event.target.value as TicketPriority)} value={selected.priority}>{priorities.map((value) => <option key={value} value={value}>{priorityLabels[value]}</option>)}</select></label>
+                    <label>Danh mục<select disabled={actionLoading || !canEdit || ["resolved", "closed"].includes(selected.status)} onChange={(event) => void updateClassification(event.target.value as TicketCategory, selected.priority)} value={selected.category}>{categories.map((value) => <option key={value} value={value}>{categoryLabels[value]}</option>)}</select></label>
+                    <label>Ưu tiên<select disabled={actionLoading || !canEdit || ["resolved", "closed"].includes(selected.status)} onChange={(event) => void updateClassification(selected.category, event.target.value as TicketPriority)} value={selected.priority}>{priorities.map((value) => <option key={value} value={value}>{priorityLabels[value]}</option>)}</select></label>
                     <dl><dt>Lý do chuyển</dt><dd>{selected.escalation_reason}</dd></dl>
                     <dl><dt>AI confidence</dt><dd>{selected.ai_confidence == null ? "Không có" : `${Math.round(selected.ai_confidence * 100)}%`}</dd></dl>
                   </div>
@@ -379,8 +396,11 @@ export function StaffDashboard() {
 
                 <section className="hitl-panel assignment-panel">
                   <div className="panel-heading"><div><span className="eyebrow">Ownership</span><h3>Phân công</h3></div><span>{selected.assigned_to || "Chưa có người nhận"}</span></div>
-                  <p className="muted-copy">{selected.assigned_to === staffId ? `Ticket do hệ thống phân công cho bạn${selected.assigned_department ? ` · ${selected.assigned_department}` : ""}.` : selected.assigned_to ? `Ticket hiện do ${selected.assigned_to} phụ trách. Admin có thể điều phối lại khi cần.` : "Ticket đang chờ Admin phân công cho cán bộ phù hợp."}</p>
-                  {canEdit ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("in_progress")} type="button">Đang xử lý</button><button disabled={actionLoading} onClick={() => void changeStatus("waiting_for_user")} type="button">Chờ ứng viên</button></div> : null}
+                  <p className="muted-copy">{selected.assigned_to === staffId ? `Ticket do hệ thống/Admin phân công cho bạn${selected.assigned_department ? ` · ${selected.assigned_department}` : ""}.` : selected.assigned_to ? `Ticket hiện do ${selected.assigned_to} phụ trách. Chỉ Admin có thể điều phối lại khi cần.` : "Ticket đang ở hàng chờ nhóm. Bạn chỉ có thể nhận nếu đúng chuyên môn và đang ở trạng thái sẵn sàng."}</p>
+                  {!selected.assigned_to && !["resolved", "closed"].includes(selected.status) ? <div className="status-actions"><button className="button button-secondary" disabled={actionLoading || (profile != null && profile.availability !== "available")} onClick={() => void claimTicket()} type="button"><StaffIcon /> Nhận ticket</button></div> : null}
+                  {canEdit && selected.status === "assigned" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("in_progress")} type="button">Bắt đầu xử lý</button></div> : null}
+                  {canEdit && selected.status === "in_progress" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("waiting_for_user")} type="button">Chờ ứng viên</button></div> : null}
+                  {canEdit && selected.status === "waiting_for_user" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("in_progress")} type="button">Tiếp tục xử lý</button></div> : null}
                 </section>
 
                 <section className="hitl-panel conversation-panel">
@@ -404,7 +424,7 @@ export function StaffDashboard() {
 
                 <section className="hitl-panel notes-panel">
                   <div className="panel-heading"><div><span className="eyebrow">Private</span><h3>Ghi chú nội bộ</h3></div><span>Không hiển thị cho ứng viên</span></div>
-                  <div className="inline-form"><input maxLength={5000} onChange={(event) => setNote(event.target.value)} placeholder="Thêm ghi chú cho nhóm…" value={note} /><button className="button button-secondary" disabled={actionLoading || !note.trim()} onClick={() => void addNote()} type="button">Thêm</button></div>
+                  <div className="inline-form"><input disabled={!canEdit} maxLength={5000} onChange={(event) => setNote(event.target.value)} placeholder={canEdit ? "Thêm ghi chú cho nhóm…" : "Nhận ticket để thêm ghi chú nội bộ"} value={note} /><button className="button button-secondary" disabled={actionLoading || !canEdit || !note.trim()} onClick={() => void addNote()} type="button">Thêm</button></div>
                   <div className="note-list">{selected.notes.map((item) => <article key={item.note_id}><div><strong>{item.author_id}</strong><small>{formatDateTime(item.created_at)}</small></div><p>{item.note}</p></article>)}</div>
                 </section>
 

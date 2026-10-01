@@ -25,16 +25,21 @@ from src.models.schemas import (
     AuthUser,
     ChatRequest,
     ChatResponse,
+    ClaimSessionRequest,
     EmailLoginRequest,
     ExchangeCodeRequest,
     FeedbackRequest,
     FeedbackResponse,
     HandoverCreateRequest,
     KnowledgeGapItem,
+    KnowledgeGapStatus,
+    KnowledgeGapUpdateRequest,
     KnowledgeStatus,
     RegisterOtpRequest,
+    RoutingRule,
     StaffAvailabilityRequest,
     StaffClassificationRequest,
+    StaffMember,
     StaffNoteRequest,
     StaffReplyRequest,
     StaffResolveRequest,
@@ -42,8 +47,6 @@ from src.models.schemas import (
     StaffTicketAction,
     StaffTicketMetrics,
     StaffTicketResponse,
-    StaffMember,
-    RoutingRule,
     TicketCategory,
     TicketPriority,
     TicketResponse,
@@ -415,12 +418,26 @@ async def clear_session(session_id: str) -> None:
     session_store.clear(session_id)
 
 
+def _optional_auth_user(authorization: str | None) -> dict[str, str] | None:
+    if not authorization:
+        return None
+    user = get_auth_store().user_from_session(_bearer_token(authorization))
+    if user is None:
+        raise HTTPException(status_code=401, detail="Phiên đăng nhập đã hết hạn")
+    return user
+
+
 @router.post("/handover", response_model=TicketResponse, status_code=201)
-async def create_handover(request: HandoverCreateRequest) -> TicketResponse:
+async def create_handover(
+    request: HandoverCreateRequest,
+    authorization: str | None = Header(default=None),
+) -> TicketResponse:
     if not request.consent:
         raise HTTPException(status_code=400, detail="Cần sự đồng ý trước khi chuyển nội dung cho cán bộ")
+    user = _optional_auth_user(authorization)
     return get_ticket_store().create(
         session_id=request.session_id,
+        owner_user_id=user["user_id"] if user else None,
         question=request.question,
         reason=request.reason,
         contact=request.contact,
@@ -428,6 +445,26 @@ async def create_handover(request: HandoverCreateRequest) -> TicketResponse:
         evidence=request.evidence,
         ai_confidence=request.ai_confidence,
     )
+
+
+@router.post("/handover/claim-session")
+async def claim_handover_session(
+    request: ClaimSessionRequest,
+    authorization: str | None = Header(default=None),
+) -> dict[str, int]:
+    user = get_auth_store().user_from_session(_bearer_token(authorization))
+    if user is None:
+        raise HTTPException(status_code=401, detail="Phiên đăng nhập đã hết hạn")
+    claimed = get_ticket_store().claim_session(request.session_id, user["user_id"])
+    return {"claimed": claimed}
+
+
+@router.get("/handover/mine", response_model=list[TicketResponse])
+async def list_my_handovers(authorization: str | None = Header(default=None)) -> list[TicketResponse]:
+    user = get_auth_store().user_from_session(_bearer_token(authorization))
+    if user is None:
+        raise HTTPException(status_code=401, detail="Phiên đăng nhập đã hết hạn")
+    return get_ticket_store().list_for_user(user["user_id"])
 
 
 @router.get("/handover/{ticket_id}", response_model=TicketResponse)
@@ -495,6 +532,31 @@ async def update_admin_routing_rule(
     return get_ticket_store().update_routing_rule(category, request.department, request.auto_assign)
 
 
+@router.get("/admin/analytics", response_model=AnalyticsSummary)
+async def admin_analytics(days: int = Query(default=30, ge=1, le=365), _admin_id: str = Depends(require_admin)) -> AnalyticsSummary:
+    return get_analytics_store().summary(days=days)
+
+
+@router.get("/admin/knowledge-gaps", response_model=list[KnowledgeGapItem])
+async def admin_knowledge_gaps(
+    gap_status: KnowledgeGapStatus | None = Query(default=None, alias="status"),
+    _admin_id: str = Depends(require_admin),
+) -> list[KnowledgeGapItem]:
+    return get_ticket_store().list_knowledge_gaps(gap_status)
+
+
+@router.post("/admin/knowledge-gaps/{gap_id}", response_model=KnowledgeGapItem)
+async def update_admin_knowledge_gap(
+    gap_id: str,
+    request: KnowledgeGapUpdateRequest,
+    admin_id: str = Depends(require_admin),
+) -> KnowledgeGapItem:
+    try:
+        return get_ticket_store().update_knowledge_gap(gap_id, request.status, admin_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy knowledge gap") from None
+
+
 @router.get("/admin/tickets", response_model=list[StaffTicketResponse])
 async def list_admin_tickets(
     ticket_status: TicketStatus | None = Query(default=None, alias="status"),
@@ -519,6 +581,8 @@ async def admin_assign_ticket(
         return get_ticket_store().assign_by_admin(ticket_id, admin_id, request.assigned_to)
     except KeyError:
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from None
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from None
 
@@ -743,6 +807,8 @@ async def close_ticket(
         return get_ticket_store().close(ticket_id, request.staff_id)
     except KeyError:
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from None
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from None
 

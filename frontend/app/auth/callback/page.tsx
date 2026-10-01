@@ -8,12 +8,11 @@ import { apiRequest, type AuthSession } from "@/lib/api";
 function AuthCallbackContent() {
   const router = useRouter();
   const params = useSearchParams();
-  const [error, setError] = useState("");
+  const code = params.get("code");
+  const [error, setError] = useState(() => code ? "" : "Thiếu mã đăng nhập Google.");
 
   useEffect(() => {
-    const code = params.get("code");
     if (!code) {
-      setError("Thiếu mã đăng nhập Google.");
       return;
     }
     void apiRequest<AuthSession>("/api/v1/auth/google/exchange", {
@@ -26,7 +25,7 @@ function AuthCallbackContent() {
     }).catch((caught) => {
       setError(caught instanceof Error ? caught.message : "Không thể hoàn tất đăng nhập Google.");
     });
-  }, [params, router]);
+  }, [code, router]);
 
   return (
     <main className="auth-page page-shell">

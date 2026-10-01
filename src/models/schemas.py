@@ -110,6 +110,10 @@ class HandoverCreateRequest(BaseModel):
     ai_confidence: float | None = Field(default=None, ge=0.0, le=1.0)
 
 
+class ClaimSessionRequest(BaseModel):
+    session_id: str = Field(..., min_length=16, max_length=128)
+
+
 class TicketStatus(StrEnum):
     NEW = "new"
     # Backward-compatible Python alias. API responses use `new`.
@@ -219,6 +223,16 @@ class AdminTicketAssignmentRequest(BaseModel):
     assigned_to: str | None = Field(default=None, min_length=2, max_length=100)
 
 
+class KnowledgeGapStatus(StrEnum):
+    OPEN = "open"
+    IN_REVIEW = "in_review"
+    RESOLVED = "resolved"
+
+
+class KnowledgeGapUpdateRequest(BaseModel):
+    status: KnowledgeGapStatus
+
+
 class StaffMember(BaseModel):
     staff_id: str
     display_name: str
@@ -323,6 +337,7 @@ class StaffTicketResponse(TicketResponse):
 class StaffTicketMetrics(BaseModel):
     open_count: int = 0
     unassigned_count: int = 0
+    team_queue_count: int = 0
     overdue_count: int = 0
     resolved_today: int = 0
     average_first_response_minutes: float | None = None

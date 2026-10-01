@@ -162,6 +162,66 @@ async def test_handover_requires_explicit_consent(client):
 
 
 @pytest.mark.asyncio
+async def test_authenticated_handover_is_visible_in_account_inbox(client):
+    from src.services.auth import get_auth_store, hash_password
+
+    auth_store = get_auth_store()
+    auth_store.save_otp("student@example.com", "Student", hash_password("password"), "123456")
+    user = auth_store.verify_otp("student@example.com", "123456")
+    assert user is not None
+    token = auth_store.create_session(user["user_id"])
+    headers = {"Authorization": f"Bearer {token}"}
+
+    created = await client.post(
+        "/api/v1/handover",
+        headers=headers,
+        json={
+            "session_id": "account-session-123456",
+            "question": "Can bo kiem tra ho so cua toi",
+            "reason": "personal_case",
+            "contact": "student@example.com",
+            "consent": True,
+        },
+    )
+    assert created.status_code == 201
+
+    mine = await client.get("/api/v1/handover/mine", headers=headers)
+    assert mine.status_code == 200
+    assert mine.json()[0]["ticket_id"] == created.json()["ticket_id"]
+    assert (await client.get("/api/v1/handover/mine")).status_code == 401
+
+
+@pytest.mark.asyncio
+async def test_anonymous_handover_can_be_claimed_after_login(client):
+    from src.services.auth import get_auth_store, hash_password
+
+    session_id = "anonymous-session-123456"
+    created = await client.post(
+        "/api/v1/handover",
+        json={
+            "session_id": session_id,
+            "question": "Toi can hoi them ve dieu kien",
+            "reason": "needs_clarification",
+            "consent": True,
+        },
+    )
+    assert created.status_code == 201
+
+    auth_store = get_auth_store()
+    auth_store.save_otp("claim@example.com", "Claim User", hash_password("password"), "654321")
+    user = auth_store.verify_otp("claim@example.com", "654321")
+    assert user is not None
+    token = auth_store.create_session(user["user_id"])
+    headers = {"Authorization": f"Bearer {token}"}
+
+    claimed = await client.post("/api/v1/handover/claim-session", headers=headers, json={"session_id": session_id})
+    assert claimed.status_code == 200
+    assert claimed.json()["claimed"] == 1
+    mine = await client.get("/api/v1/handover/mine", headers=headers)
+    assert mine.json()[0]["ticket_id"] == created.json()["ticket_id"]
+
+
+@pytest.mark.asyncio
 async def test_staff_queue_is_closed_when_token_not_configured(client):
     response = await client.get("/api/v1/staff/tickets")
 
@@ -263,6 +323,54 @@ async def test_admin_can_configure_specialist_and_auto_route_ticket(client, monk
 
 
 @pytest.mark.asyncio
+async def test_staff_team_queue_and_admin_assignment_share_one_lifecycle(client, monkeypatch):
+    from src.config import get_settings
+    from src.models.schemas import StaffAvailability, TicketCategory
+    from src.services.tickets import get_ticket_store
+
+    monkeypatch.setattr(get_settings(), "staff_tokens", {"tuition-a": "staff-token"})
+    monkeypatch.setattr(get_settings(), "admin_tokens", {"admin-01": "admin-token"})
+    store = get_ticket_store()
+    store.upsert_staff_member(
+        "tuition-a", "Tuition A", "Tài chính & Học phí",
+        [TicketCategory.TUITION], StaffAvailability.AVAILABLE, True,
+    )
+    await client.post(
+        "/api/v1/admin/routing-rules/tuition",
+        headers={"Authorization": "Bearer admin-token"},
+        json={"department": "Tài chính & Học phí", "auto_assign": False},
+    )
+    created = await client.post(
+        "/api/v1/handover",
+        json={
+            "session_id": "staff-team-session-1234",
+            "question": "Học phí năm nay là bao nhiêu?",
+            "reason": "insufficient_retrieval_evidence",
+            "consent": True,
+        },
+    )
+    ticket_id = created.json()["ticket_id"]
+    staff_headers = {"Authorization": "Bearer staff-token"}
+    queue = await client.get("/api/v1/staff/tickets", headers=staff_headers)
+    assert queue.status_code == 200
+    assert queue.json()[0]["ticket_id"] == ticket_id
+    assert queue.json()[0]["status"] == "new"
+
+    claimed = await client.post(
+        f"/api/v1/staff/tickets/{ticket_id}/claim",
+        headers=staff_headers,
+        json={"staff_id": "tuition-a"},
+    )
+    assert claimed.status_code == 200
+    assert claimed.json()["status"] == "in_progress"
+    admin_queue = await client.get(
+        "/api/v1/admin/tickets?status=in_progress",
+        headers={"Authorization": "Bearer admin-token"},
+    )
+    assert admin_queue.json()[0]["assigned_to"] == "tuition-a"
+
+
+@pytest.mark.asyncio
 async def test_staff_human_in_the_loop_flow_keeps_internal_data_private(client, monkeypatch):
     from src.api import routes
     from src.config import get_settings
@@ -270,6 +378,7 @@ async def test_staff_human_in_the_loop_flow_keeps_internal_data_private(client, 
     from src.services.tickets import get_ticket_store
 
     monkeypatch.setattr(get_settings(), "staff_tokens", {"admissions-a": "token-for-a"})
+    monkeypatch.setattr(get_settings(), "admin_tokens", {"admin-01": "admin-token"})
     get_ticket_store().upsert_staff_member(
         "admissions-a", "Admissions A", "Tuyển sinh",
         [TicketCategory.TUITION], StaffAvailability.AVAILABLE, True,
@@ -354,6 +463,21 @@ async def test_staff_human_in_the_loop_flow_keeps_internal_data_private(client, 
     gaps = await client.get("/api/v1/staff/knowledge-gaps", headers=headers)
     assert gaps.status_code == 200
     assert gaps.json()[0]["ticket_id"] == ticket_id
+
+    admin_headers = {"Authorization": "Bearer admin-token"}
+    admin_gaps = await client.get("/api/v1/admin/knowledge-gaps?status=open", headers=admin_headers)
+    assert admin_gaps.status_code == 200
+    assert admin_gaps.json()[0]["gap_id"] == gaps.json()[0]["gap_id"]
+    reviewed = await client.post(
+        f"/api/v1/admin/knowledge-gaps/{gaps.json()[0]['gap_id']}",
+        headers=admin_headers,
+        json={"status": "in_review"},
+    )
+    assert reviewed.status_code == 200
+    assert reviewed.json()["status"] == "in_review"
+    analytics = await client.get("/api/v1/admin/analytics?days=30", headers=admin_headers)
+    assert analytics.status_code == 200
+    assert "answer_rate" in analytics.json()
 
     metrics = await client.get("/api/v1/staff/tickets/metrics", headers=headers)
     assert metrics.status_code == 200

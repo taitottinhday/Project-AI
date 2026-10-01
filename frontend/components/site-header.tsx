@@ -5,27 +5,46 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ChatIcon, MenuIcon, ShieldIcon, StaffIcon } from "@/components/icons";
-import { apiRequest, type AuthUser } from "@/lib/api";
+import { ApiError, apiRequest, type AuthUser } from "@/lib/api";
+
+function readStoredAuthUser(): AuthUser | null {
+  if (typeof window === "undefined") return null;
+  const storedUser = window.localStorage.getItem("vinuni-auth-user");
+  if (!storedUser) return null;
+  try {
+    const parsed = JSON.parse(storedUser) as Partial<AuthUser>;
+    return parsed.user_id && parsed.email && parsed.display_name ? parsed as AuthUser : null;
+  } catch {
+    window.localStorage.removeItem("vinuni-auth-user");
+    return null;
+  }
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(readStoredAuthUser);
   const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
-    const storedUser = window.localStorage.getItem("vinuni-auth-user");
-    if (!storedUser) return;
-
-    try {
-      const parsed = JSON.parse(storedUser) as Partial<AuthUser>;
-      if (parsed.user_id && parsed.email && parsed.display_name) {
-        setUser(parsed as AuthUser);
-      }
-    } catch {
-      window.localStorage.removeItem("vinuni-auth-user");
-    }
+    const token = window.localStorage.getItem("vinuni-auth-token");
+    // The local profile is only a fast first paint.  Validate it against the
+    // backend so an expired/revoked session never leaves a false signed-in
+    // state in the shared header.
+    if (!token) return;
+    void apiRequest<AuthUser>("/api/v1/auth/me", { method: "GET" }, 8_000)
+      .then((freshUser) => {
+        setUser(freshUser);
+        window.localStorage.setItem("vinuni-auth-user", JSON.stringify(freshUser));
+      })
+      .catch((caught) => {
+        if (caught instanceof ApiError && caught.status === 401) {
+          window.localStorage.removeItem("vinuni-auth-token");
+          window.localStorage.removeItem("vinuni-auth-user");
+          setUser(null);
+        }
+      });
   }, []);
 
   function handleLogout() {
