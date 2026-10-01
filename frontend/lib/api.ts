@@ -77,6 +77,17 @@ export type KnowledgeStatus = {
   load_errors: string[];
 };
 
+export type AuthUser = {
+  user_id: string;
+  email: string;
+  display_name: string;
+};
+
+export type AuthSession = {
+  access_token: string;
+  user: AuthUser;
+};
+
 export class ApiError extends Error {
   status: number;
 
@@ -87,7 +98,7 @@ export class ApiError extends Error {
   }
 }
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
+export const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
 
 function errorMessage(payload: unknown, fallback: string): string {
   if (payload && typeof payload === "object" && "detail" in payload) {
@@ -105,12 +116,14 @@ export async function apiRequest<T>(
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
   try {
+    const authToken = window.localStorage.getItem("vinuni-auth-token");
     const response = await fetch(`${API_BASE}${path}`, {
       ...init,
       cache: "no-store",
       signal: controller.signal,
       headers: {
         "Content-Type": "application/json",
+        ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
         ...init.headers,
       },
     });

@@ -141,3 +141,42 @@ class KnowledgeStatus(BaseModel):
     chunks: int = 0
     sources: int = 0
     load_errors: list[str] = Field(default_factory=list)
+
+
+class AuthUser(BaseModel):
+    user_id: str
+    email: str
+    display_name: str
+
+
+class AuthSessionResponse(BaseModel):
+    access_token: str
+    user: AuthUser
+
+
+class RegisterOtpRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=254)
+    display_name: str = Field(..., min_length=2, max_length=100)
+    password: str = Field(..., min_length=8, max_length=128)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, value: str) -> str:
+        value = value.strip().lower()
+        if "@" not in value or "." not in value.rsplit("@", 1)[-1]:
+            raise ValueError("Email không hợp lệ")
+        return value
+
+
+class VerifyOtpRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=254)
+    code: str = Field(..., min_length=6, max_length=6)
+
+
+class EmailLoginRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=254)
+    password: str = Field(..., min_length=8, max_length=128)
+
+
+class ExchangeCodeRequest(BaseModel):
+    code: str = Field(..., min_length=20, max_length=200)

@@ -49,6 +49,9 @@ export function SiteHeader() {
               {label}
             </Link>
           ))}
+          <Link className={pathname === "/auth" ? "nav-link active auth-nav-link" : "nav-link auth-nav-link"} href="/auth" onClick={() => setOpen(false)}>
+            Đăng nhập
+          </Link>
         </nav>
       </div>
     </header>

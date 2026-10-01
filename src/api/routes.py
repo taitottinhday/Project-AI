@@ -2,29 +2,41 @@ from __future__ import annotations
 
 import hmac
 import logging
+import secrets
+import smtplib
 import time
 import uuid
 from datetime import UTC, datetime
+from urllib.parse import urlencode
 
+import httpx
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, status
+from fastapi.responses import RedirectResponse
 
 from src.agents.graph import agent
 from src.config import get_settings
 from src.models.schemas import (
     AnalyticsSummary,
     AnswerStatus,
+    AuthSessionResponse,
+    AuthUser,
     ChatRequest,
     ChatResponse,
+    EmailLoginRequest,
+    ExchangeCodeRequest,
     FeedbackRequest,
     FeedbackResponse,
     HandoverCreateRequest,
     KnowledgeStatus,
+    RegisterOtpRequest,
     StaffReplyRequest,
     StaffTicketAction,
     TicketResponse,
     TicketStatus,
+    VerifyOtpRequest,
 )
 from src.services.analytics import get_analytics_store
+from src.services.auth import get_auth_store, hash_password, send_otp_email
 from src.services.knowledge_base import get_knowledge_base
 from src.services.rate_limit import enforce_rate_limit
 from src.services.response_cache import response_cache
@@ -34,6 +46,134 @@ from src.services.tickets import get_ticket_store
 
 router = APIRouter(dependencies=[Depends(enforce_rate_limit)])
 logger = logging.getLogger(__name__)
+
+
+def _auth_user_response(user: dict[str, str], token: str) -> AuthSessionResponse:
+    return AuthSessionResponse(
+        access_token=token,
+        user=AuthUser(user_id=user["user_id"], email=user["email"], display_name=user["display_name"]),
+    )
+
+
+def _bearer_token(authorization: str | None) -> str:
+    if not authorization or not authorization.lower().startswith("bearer "):
+        raise HTTPException(status_code=401, detail="Cần đăng nhập")
+    return authorization[7:].strip()
+
+
+@router.get("/auth/google/start", include_in_schema=False)
+async def google_start() -> RedirectResponse:
+    settings = get_settings()
+    if not settings.google_client_id or not settings.google_client_secret:
+        raise HTTPException(status_code=503, detail="Google OAuth chưa được cấu hình trên backend")
+    state = get_auth_store().save_oauth_state()
+    query = urlencode(
+        {
+            "client_id": settings.google_client_id,
+            "redirect_uri": settings.google_redirect_uri,
+            "response_type": "code",
+            "scope": "openid email profile",
+            "access_type": "online",
+            "prompt": "select_account",
+            "state": state,
+        }
+    )
+    return RedirectResponse(f"https://accounts.google.com/o/oauth2/v2/auth?{query}")
+
+
+@router.get("/auth/google/callback", include_in_schema=False)
+async def google_callback(code: str | None = None, state: str | None = None, error: str | None = None) -> RedirectResponse:
+    settings = get_settings()
+    if error or not code or not state or not get_auth_store().consume_oauth_state(state):
+        return RedirectResponse(f"{settings.frontend_url.rstrip('/')}/auth?error=google_login_failed")
+    try:
+        async with httpx.AsyncClient(timeout=15) as client:
+            token_response = await client.post(
+                "https://oauth2.googleapis.com/token",
+                data={
+                    "code": code,
+                    "client_id": settings.google_client_id,
+                    "client_secret": settings.google_client_secret,
+                    "redirect_uri": settings.google_redirect_uri,
+                    "grant_type": "authorization_code",
+                },
+            )
+            token_response.raise_for_status()
+            access_token = token_response.json().get("access_token")
+            if not access_token:
+                raise ValueError("Google không trả access token")
+            profile_response = await client.get(
+                "https://openidconnect.googleapis.com/v1/userinfo",
+                headers={"Authorization": f"Bearer {access_token}"},
+            )
+            profile_response.raise_for_status()
+            profile = profile_response.json()
+        email = str(profile.get("email", "")).strip().lower()
+        if not email or profile.get("email_verified") is not True or not profile.get("sub"):
+            raise ValueError("Google account chưa xác minh email")
+        user = get_auth_store().create_or_update_google_user(email, str(profile.get("name") or email), str(profile["sub"]))
+        exchange_code = get_auth_store().save_exchange_code(user["user_id"])
+        return RedirectResponse(f"{settings.frontend_url.rstrip('/')}/auth/callback?code={exchange_code}")
+    except (httpx.HTTPError, ValueError, KeyError):
+        logger.exception("Google OAuth callback failed")
+        return RedirectResponse(f"{settings.frontend_url.rstrip('/')}/auth?error=google_login_failed")
+
+
+@router.post("/auth/register/request-otp")
+async def request_register_otp(request: RegisterOtpRequest) -> dict[str, str]:
+    store = get_auth_store()
+    if store.email_exists(request.email):
+        raise HTTPException(status_code=409, detail="Email đã được đăng ký. Hãy đăng nhập.")
+    code = f"{secrets.randbelow(1_000_000):06d}"
+    store.save_otp(request.email, request.display_name.strip(), hash_password(request.password), code)
+    try:
+        send_otp_email(request.email, code)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from None
+    except (OSError, smtplib.SMTPException):
+        logger.exception("Could not send registration OTP")
+        raise HTTPException(status_code=503, detail="Không thể gửi OTP lúc này. Vui lòng thử lại.") from None
+    return {"message": "Mã OTP đã được gửi tới email của bạn", "email": request.email}
+
+
+@router.post("/auth/register/verify-otp", response_model=AuthSessionResponse)
+async def verify_register_otp(request: VerifyOtpRequest) -> AuthSessionResponse:
+    user = get_auth_store().verify_otp(request.email.strip().lower(), request.code)
+    if user is None:
+        raise HTTPException(status_code=400, detail="OTP không đúng, đã hết hạn hoặc vượt quá số lần thử")
+    return _auth_user_response(user, get_auth_store().create_session(user["user_id"]))
+
+
+@router.post("/auth/login", response_model=AuthSessionResponse)
+async def email_login(request: EmailLoginRequest) -> AuthSessionResponse:
+    email = request.email.strip().lower()
+    store = get_auth_store()
+    user = store.password_user(email, request.password)
+    if user is None:
+        raise HTTPException(status_code=401, detail="Email hoặc mật khẩu không đúng")
+    return _auth_user_response(user, store.create_session(user["user_id"]))
+
+
+@router.post("/auth/google/exchange", response_model=AuthSessionResponse)
+async def exchange_google_code(request: ExchangeCodeRequest) -> AuthSessionResponse:
+    store = get_auth_store()
+    user = store.consume_exchange_code(request.code)
+    if user is None:
+        raise HTTPException(status_code=400, detail="Mã đăng nhập Google không hợp lệ hoặc đã hết hạn")
+    return _auth_user_response(user, store.create_session(user["user_id"]))
+
+
+@router.get("/auth/me", response_model=AuthUser)
+async def current_auth_user(authorization: str | None = Header(default=None)) -> AuthUser:
+    user = get_auth_store().user_from_session(_bearer_token(authorization))
+    if user is None:
+        raise HTTPException(status_code=401, detail="Phiên đăng nhập đã hết hạn")
+    return AuthUser(**user)
+
+
+@router.post("/auth/logout", status_code=204)
+async def logout(authorization: str | None = Header(default=None)) -> None:
+    get_auth_store().revoke_session(_bearer_token(authorization))
 
 REPEATED_UNRESOLVED_REASONS = {
     "generation_failed",

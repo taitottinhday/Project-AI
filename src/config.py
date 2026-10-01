@@ -56,6 +56,23 @@ class Settings(BaseSettings):
     staff_tokens: dict[str, str] = Field(default_factory=dict)
     rate_limit_per_minute: int = Field(default=30, ge=1, le=600)
 
+    # Applicant authentication: Google OAuth and email OTP registration.
+    frontend_url: str = "http://localhost:3000"
+    auth_secret: str = "change-me-in-production"
+    auth_session_ttl_hours: int = Field(default=168, ge=1, le=8760)
+    otp_ttl_minutes: int = Field(default=10, ge=1, le=30)
+    otp_max_attempts: int = Field(default=5, ge=1, le=10)
+    google_client_id: str = ""
+    google_client_secret: str = ""
+    google_redirect_uri: str = "http://localhost:8000/api/v1/auth/google/callback"
+    smtp_host: str = ""
+    smtp_port: int = Field(default=587, ge=1, le=65535)
+    smtp_username: str = ""
+    smtp_password: str = ""
+    smtp_from_email: str = ""
+    smtp_from_name: str = "VinUni Guide"
+    smtp_starttls: bool = True
+
     @property
     def project_root(self) -> Path:
         return Path(__file__).resolve().parents[1]
