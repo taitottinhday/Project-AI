@@ -227,6 +227,42 @@ async def test_staff_token_cannot_claim_ticket_as_another_staff_member(client, m
 
 
 @pytest.mark.asyncio
+async def test_admin_can_configure_specialist_and_auto_route_ticket(client, monkeypatch):
+    from src.config import get_settings
+
+    monkeypatch.setattr(get_settings(), "admin_tokens", {"admin-01": "admin-token"})
+    headers = {"Authorization": "Bearer admin-token"}
+    created = await client.post(
+        "/api/v1/admin/staff",
+        headers=headers,
+        json={
+            "staff_id": "tuition-01",
+            "display_name": "Tuition specialist",
+            "department": "Tài chính & Học phí",
+            "specialties": ["tuition"],
+            "availability": "available",
+            "active": True,
+        },
+    )
+    assert created.status_code == 200
+
+    ticket = await client.post(
+        "/api/v1/handover",
+        json={
+            "session_id": "session-1234567890",
+            "question": "Học phí năm nay là bao nhiêu?",
+            "reason": "insufficient_retrieval_evidence",
+            "consent": True,
+        },
+    )
+    assert ticket.status_code == 201
+    queue = await client.get("/api/v1/admin/tickets", headers=headers)
+    routed = next(item for item in queue.json() if item["ticket_id"] == ticket.json()["ticket_id"])
+    assert routed["assigned_to"] == "tuition-01"
+    assert routed["assigned_department"] == "Tài chính & Học phí"
+
+
+@pytest.mark.asyncio
 async def test_staff_human_in_the_loop_flow_keeps_internal_data_private(client, monkeypatch):
     from src.api import routes
     from src.config import get_settings

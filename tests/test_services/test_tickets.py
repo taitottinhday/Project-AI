@@ -2,7 +2,7 @@ import sqlite3
 
 import pytest
 
-from src.models.schemas import TicketStatus
+from src.models.schemas import StaffAvailability, TicketCategory, TicketStatus
 from src.services.session import SessionStore
 from src.services.tickets import TicketStore
 
@@ -190,3 +190,33 @@ def test_assignment_email_state_and_knowledge_gap(tmp_path):
     )
     assert resolved.knowledge_gap is True
     assert store.list_knowledge_gaps()[0].ticket_id == ticket.ticket_id
+
+
+def test_ticket_is_routed_to_available_specialist_with_lowest_load(tmp_path):
+    store = TicketStore(tmp_path / "tickets.db")
+    store.upsert_staff_member(
+        "tuition-a", "Tuition A", "Tài chính & Học phí",
+        [TicketCategory.TUITION], StaffAvailability.AVAILABLE, True,
+    )
+    store.upsert_staff_member(
+        "tuition-b", "Tuition B", "Tài chính & Học phí",
+        [TicketCategory.TUITION], StaffAvailability.BUSY, True,
+    )
+
+    ticket = store.create(
+        "session-owner-1234", "Học phí năm nay là bao nhiêu?",
+        "insufficient_retrieval_evidence", None,
+    )
+    routed = store.get_for_staff(ticket.ticket_id)
+
+    assert routed.status == TicketStatus.ASSIGNED
+    assert routed.assigned_to == "tuition-a"
+    assert routed.assigned_department == "Tài chính & Học phí"
+
+    store.set_staff_availability("tuition-a", StaffAvailability.BUSY)
+    waiting = store.create(
+        "session-owner-5678", "Học phí chương trình MBA?",
+        "insufficient_retrieval_evidence", None,
+    )
+    assert waiting.status == TicketStatus.NEW
+    assert store.get_for_staff(waiting.ticket_id).assigned_department == "Tài chính & Học phí"

@@ -56,6 +56,24 @@ export type AnalyticsSummary = {
 export type TicketStatus = "new" | "assigned" | "in_progress" | "waiting_for_user" | "resolved" | "closed";
 export type TicketCategory = "admissions" | "tuition" | "scholarship" | "program" | "application" | "technical" | "other";
 export type TicketPriority = "low" | "medium" | "high" | "urgent";
+export type StaffAvailability = "available" | "busy" | "offline";
+
+export type StaffMember = {
+  staff_id: string;
+  display_name: string;
+  department: string;
+  specialties: TicketCategory[];
+  availability: StaffAvailability;
+  active: boolean;
+  open_ticket_count: number;
+  updated_at: string;
+};
+
+export type RoutingRule = {
+  category: TicketCategory;
+  department: string;
+  auto_assign: boolean;
+};
 
 export type TicketMessage = {
   message_id: string;

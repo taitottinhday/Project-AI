@@ -54,6 +54,9 @@ class Settings(BaseSettings):
     session_max_turns: int = Field(default=8, ge=1, le=30)
     staff_api_token: str = ""
     staff_tokens: dict[str, str] = Field(default_factory=dict)
+    # Admin identities are deliberately separate from staff identities. They
+    # can manage teams and routing, but never need to share a staff secret.
+    admin_tokens: dict[str, str] = Field(default_factory=dict)
     rate_limit_per_minute: int = Field(default=30, ge=1, le=600)
 
     # Applicant authentication: Google OAuth and email OTP registration.

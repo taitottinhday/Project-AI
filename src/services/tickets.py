@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import secrets
 import sqlite3
 import uuid
 from datetime import UTC, datetime, timedelta
@@ -13,6 +14,9 @@ from src.models.schemas import (
     HandoverMessageSnapshot,
     KnowledgeGapItem,
     MetricBreakdown,
+    RoutingRule,
+    StaffAvailability,
+    StaffMember,
     StaffTicketMetrics,
     StaffTicketResponse,
     TicketActivity,
@@ -37,6 +41,17 @@ def _now() -> str:
 
 def _id(prefix: str) -> str:
     return f"{prefix}-{uuid.uuid4().hex}"
+
+
+DEFAULT_ROUTING_DEPARTMENTS: dict[TicketCategory, str] = {
+    TicketCategory.ADMISSIONS: "Tuyển sinh",
+    TicketCategory.TUITION: "Tài chính & Học phí",
+    TicketCategory.SCHOLARSHIP: "Học bổng",
+    TicketCategory.PROGRAM: "Chương trình đào tạo",
+    TicketCategory.APPLICATION: "Hỗ trợ hồ sơ",
+    TicketCategory.TECHNICAL: "Kỹ thuật",
+    TicketCategory.OTHER: "Tuyển sinh",
+}
 
 
 class TicketStore:
@@ -209,6 +224,51 @@ class TicketStore:
                 );
                 """
             )
+            connection.executescript(
+                """
+                CREATE TABLE IF NOT EXISTS staff_members (
+                    staff_id TEXT PRIMARY KEY,
+                    display_name TEXT NOT NULL,
+                    department TEXT NOT NULL,
+                    specialties_json TEXT NOT NULL DEFAULT '[]',
+                    availability TEXT NOT NULL DEFAULT 'available',
+                    active INTEGER NOT NULL DEFAULT 1,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_staff_members_routing
+                    ON staff_members(active, availability, department);
+
+                CREATE TABLE IF NOT EXISTS ticket_routing_rules (
+                    category TEXT PRIMARY KEY,
+                    department TEXT NOT NULL,
+                    auto_assign INTEGER NOT NULL DEFAULT 1,
+                    updated_at TEXT NOT NULL
+                );
+                """
+            )
+            timestamp = _now()
+            for category, department in DEFAULT_ROUTING_DEPARTMENTS.items():
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO ticket_routing_rules
+                        (category, department, auto_assign, updated_at)
+                    VALUES (?, ?, 1, ?)
+                    """,
+                    (category.value, department, timestamp),
+                )
+            # Profiles are independent from secrets.  Bootstrap configured
+            # staff identities as inactive routing profiles only when they do
+            # not exist yet; Admin still chooses their team and specialties.
+            for staff_id in get_settings().staff_tokens:
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO staff_members
+                        (staff_id, display_name, department, specialties_json, availability, active, created_at, updated_at)
+                    VALUES (?, ?, 'Chưa phân nhóm', '[]', 'offline', 1, ?, ?)
+                    """,
+                    (staff_id, staff_id, timestamp, timestamp),
+                )
             connection.execute(
                 """
                 UPDATE handover_tickets
@@ -231,6 +291,163 @@ class TicketStore:
             (_id("activity"), ticket_id, actor_id, action, detail, _now()),
         )
 
+    @staticmethod
+    def _member_from_row(connection: sqlite3.Connection, row: sqlite3.Row) -> StaffMember:
+        try:
+            specialties = [TicketCategory(value) for value in json.loads(row["specialties_json"])]
+        except (TypeError, ValueError, json.JSONDecodeError):
+            specialties = []
+        open_ticket_count = connection.execute(
+            """
+            SELECT COUNT(*) FROM handover_tickets
+            WHERE assigned_to = ? AND status IN (?, ?, ?)
+            """,
+            (
+                row["staff_id"], TicketStatus.ASSIGNED.value,
+                TicketStatus.IN_PROGRESS.value, TicketStatus.WAITING_FOR_USER.value,
+            ),
+        ).fetchone()[0]
+        return StaffMember(
+            staff_id=row["staff_id"], display_name=row["display_name"],
+            department=row["department"], specialties=specialties,
+            availability=StaffAvailability(row["availability"]), active=bool(row["active"]),
+            open_ticket_count=open_ticket_count, updated_at=datetime.fromisoformat(row["updated_at"]),
+        )
+
+    def list_staff_members(self) -> list[StaffMember]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT * FROM staff_members ORDER BY department, display_name, staff_id"
+            ).fetchall()
+            return [self._member_from_row(connection, row) for row in rows]
+
+    def get_staff_member(self, staff_id: str) -> StaffMember:
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT * FROM staff_members WHERE staff_id = ?", (staff_id,)
+            ).fetchone()
+            if not row:
+                raise KeyError(staff_id)
+            return self._member_from_row(connection, row)
+
+    def upsert_staff_member(
+        self,
+        staff_id: str,
+        display_name: str,
+        department: str,
+        specialties: list[TicketCategory],
+        availability: StaffAvailability,
+        active: bool,
+    ) -> StaffMember:
+        timestamp = _now()
+        encoded_specialties = json.dumps(sorted({item.value for item in specialties}))
+        with self._connect() as connection:
+            connection.execute(
+                """
+                INSERT INTO staff_members
+                    (staff_id, display_name, department, specialties_json, availability, active, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(staff_id) DO UPDATE SET
+                    display_name = excluded.display_name,
+                    department = excluded.department,
+                    specialties_json = excluded.specialties_json,
+                    availability = excluded.availability,
+                    active = excluded.active,
+                    updated_at = excluded.updated_at
+                """,
+                (staff_id.strip(), display_name.strip(), department.strip(), encoded_specialties,
+                 availability.value, int(active), timestamp, timestamp),
+            )
+        return self.get_staff_member(staff_id.strip())
+
+    def set_staff_availability(self, staff_id: str, availability: StaffAvailability) -> StaffMember:
+        with self._connect() as connection:
+            updated = connection.execute(
+                "UPDATE staff_members SET availability = ?, updated_at = ? WHERE staff_id = ?",
+                (availability.value, _now(), staff_id),
+            ).rowcount
+            if not updated:
+                raise KeyError(staff_id)
+        return self.get_staff_member(staff_id)
+
+    def list_routing_rules(self) -> list[RoutingRule]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT * FROM ticket_routing_rules ORDER BY category"
+            ).fetchall()
+        return [
+            RoutingRule(
+                category=TicketCategory(row["category"]), department=row["department"],
+                auto_assign=bool(row["auto_assign"]),
+            )
+            for row in rows
+        ]
+
+    def update_routing_rule(
+        self, category: TicketCategory, department: str, auto_assign: bool
+    ) -> RoutingRule:
+        with self._connect() as connection:
+            connection.execute(
+                """
+                INSERT INTO ticket_routing_rules (category, department, auto_assign, updated_at)
+                VALUES (?, ?, ?, ?)
+                ON CONFLICT(category) DO UPDATE SET
+                    department = excluded.department,
+                    auto_assign = excluded.auto_assign,
+                    updated_at = excluded.updated_at
+                """,
+                (category.value, department.strip(), int(auto_assign), _now()),
+            )
+        return RoutingRule(category=category, department=department.strip(), auto_assign=auto_assign)
+
+    @staticmethod
+    def _routing_rule(connection: sqlite3.Connection, category: TicketCategory) -> sqlite3.Row:
+        row = connection.execute(
+            "SELECT * FROM ticket_routing_rules WHERE category = ?", (category.value,)
+        ).fetchone()
+        if not row:
+            raise KeyError(category.value)
+        return row
+
+    def _eligible_staff(
+        self, connection: sqlite3.Connection, category: TicketCategory
+    ) -> list[sqlite3.Row]:
+        rows = connection.execute(
+            "SELECT * FROM staff_members WHERE active = 1 AND availability = ?",
+            (StaffAvailability.AVAILABLE.value,),
+        ).fetchall()
+        return [
+            row for row in rows
+            if category.value in json.loads(row["specialties_json"])
+        ]
+
+    def _auto_assign(
+        self, connection: sqlite3.Connection, ticket_id: str, category: TicketCategory
+    ) -> tuple[str | None, str]:
+        rule = self._routing_rule(connection, category)
+        department = rule["department"]
+        if not bool(rule["auto_assign"]):
+            return None, department
+        candidates = self._eligible_staff(connection, category)
+        if not candidates:
+            return None, department
+        open_counts = {
+            row["staff_id"]: connection.execute(
+                """
+                SELECT COUNT(*) FROM handover_tickets
+                WHERE assigned_to = ? AND status IN (?, ?, ?)
+                """,
+                (
+                    row["staff_id"], TicketStatus.ASSIGNED.value,
+                    TicketStatus.IN_PROGRESS.value, TicketStatus.WAITING_FOR_USER.value,
+                ),
+            ).fetchone()[0]
+            for row in candidates
+        }
+        lowest = min(open_counts.values())
+        least_loaded = [row["staff_id"] for row in candidates if open_counts[row["staff_id"]] == lowest]
+        return secrets.choice(least_loaded), department
+
     def create(
         self,
         session_id: str,
@@ -250,17 +467,19 @@ class TicketStore:
         suggestion = build_suggested_reply(question, evidence)
         user_email = contact.strip().lower() if contact and "@" in contact else None
         with self._connect() as connection:
+            assigned_to, assigned_department = self._auto_assign(connection, ticket_id, category)
+            initial_status = TicketStatus.ASSIGNED.value if assigned_to else TicketStatus.NEW.value
             connection.execute(
                 """
                 INSERT INTO handover_tickets (
                     ticket_id, session_id, question, reason, contact, user_email,
-                    status, category, priority, escalation_reason, ai_confidence,
+                    status, assigned_to, assigned_department, category, priority, escalation_reason, ai_confidence,
                     ai_summary, suggested_reply, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     ticket_id, session_id, question, reason, contact, user_email,
-                    TicketStatus.NEW.value, category.value, priority.value,
+                    initial_status, assigned_to, assigned_department, category.value, priority.value,
                     escalation.value, ai_confidence, summary, suggestion, timestamp, timestamp,
                 ),
             )
@@ -296,6 +515,11 @@ class TicketStore:
                 )
             self._activity(connection, ticket_id, "system", "ticket_created", f"priority={priority.value}")
             self._activity(connection, ticket_id, "system", "ai_triage_completed", f"category={category.value}")
+            self._activity(connection, ticket_id, "system", "ticket_routed", assigned_department)
+            if assigned_to:
+                self._activity(connection, ticket_id, "system", "ticket_auto_assigned", assigned_to)
+            else:
+                self._activity(connection, ticket_id, "system", "ticket_waiting_for_available_staff")
         return self.get_for_session(ticket_id, session_id)
 
     def get_for_session(self, ticket_id: str, session_id: str) -> TicketResponse:
@@ -396,6 +620,37 @@ class TicketStore:
             )
             action = "ticket_assigned" if assigned_to else "ticket_unassigned"
             self._activity(connection, ticket_id, actor_id, action, assigned_to or None)
+        return self.get_for_staff(ticket_id)
+
+    def assign_by_admin(
+        self, ticket_id: str, admin_id: str, assigned_to: str | None
+    ) -> StaffTicketResponse:
+        """Assign or return a ticket to the queue with an auditable admin action."""
+        timestamp = _now()
+        with self._connect() as connection:
+            self._assert_open(self._required_row(connection, ticket_id))
+            department: str | None = None
+            if assigned_to:
+                member = connection.execute(
+                    "SELECT * FROM staff_members WHERE staff_id = ?", (assigned_to,)
+                ).fetchone()
+                if not member or not bool(member["active"]):
+                    raise ValueError("Cán bộ được chọn không tồn tại hoặc đã ngừng hoạt động")
+                department = member["department"]
+            new_status = TicketStatus.ASSIGNED.value if assigned_to else TicketStatus.NEW.value
+            connection.execute(
+                """
+                UPDATE handover_tickets
+                SET assigned_to = ?, assigned_department = ?, status = ?, updated_at = ?
+                WHERE ticket_id = ?
+                """,
+                (assigned_to, department, new_status, timestamp, ticket_id),
+            )
+            self._activity(
+                connection, ticket_id, admin_id,
+                "admin_ticket_assigned" if assigned_to else "admin_ticket_unassigned",
+                assigned_to,
+            )
         return self.get_for_staff(ticket_id)
 
     def set_status(self, ticket_id: str, staff_id: str, status: TicketStatus) -> StaffTicketResponse:

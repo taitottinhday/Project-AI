@@ -138,6 +138,12 @@ class TicketPriority(StrEnum):
     URGENT = "urgent"
 
 
+class StaffAvailability(StrEnum):
+    AVAILABLE = "available"
+    BUSY = "busy"
+    OFFLINE = "offline"
+
+
 class EscalationReason(StrEnum):
     LOW_CONFIDENCE = "low_confidence"
     MISSING_EVIDENCE = "missing_evidence"
@@ -189,6 +195,45 @@ class StaffReplyRequest(StaffTicketAction):
 class StaffAssignmentRequest(StaffTicketAction):
     assigned_to: str | None = Field(default=None, min_length=2, max_length=100)
     department: str | None = Field(default=None, max_length=100)
+
+
+class StaffAvailabilityRequest(BaseModel):
+    availability: StaffAvailability
+
+
+class AdminStaffUpsertRequest(BaseModel):
+    staff_id: str = Field(..., min_length=2, max_length=100)
+    display_name: str = Field(..., min_length=2, max_length=120)
+    department: str = Field(..., min_length=2, max_length=100)
+    specialties: list[TicketCategory] = Field(default_factory=list, max_length=7)
+    availability: StaffAvailability = StaffAvailability.AVAILABLE
+    active: bool = True
+
+
+class AdminRoutingRuleRequest(BaseModel):
+    department: str = Field(..., min_length=2, max_length=100)
+    auto_assign: bool = True
+
+
+class AdminTicketAssignmentRequest(BaseModel):
+    assigned_to: str | None = Field(default=None, min_length=2, max_length=100)
+
+
+class StaffMember(BaseModel):
+    staff_id: str
+    display_name: str
+    department: str
+    specialties: list[TicketCategory] = Field(default_factory=list)
+    availability: StaffAvailability
+    active: bool
+    open_ticket_count: int = Field(ge=0)
+    updated_at: datetime
+
+
+class RoutingRule(BaseModel):
+    category: TicketCategory
+    department: str
+    auto_assign: bool
 
 
 class StaffStatusRequest(StaffTicketAction):

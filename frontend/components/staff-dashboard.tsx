@@ -9,6 +9,8 @@ import {
   formatDateTime,
   type StaffTicket,
   type StaffTicketMetrics,
+  type StaffAvailability,
+  type StaffMember,
   type TicketCategory,
   type TicketPriority,
   type TicketStatus,
@@ -73,8 +75,7 @@ export function StaffDashboard() {
   const [search, setSearch] = useState("");
   const [reply, setReply] = useState("");
   const [note, setNote] = useState("");
-  const [assignee, setAssignee] = useState("");
-  const [department, setDepartment] = useState("Admissions");
+  const [profile, setProfile] = useState<StaffMember | null>(null);
   const [resolutionSummary, setResolutionSummary] = useState("");
   const [resolutionType, setResolutionType] = useState("answered");
   const [knowledgeGap, setKnowledgeGap] = useState(false);
@@ -125,6 +126,15 @@ export function StaffDashboard() {
       setSelectedId((current) => ticketData.some((ticket) => ticket.ticket_id === current)
         ? current
         : ticketData[0]?.ticket_id || null);
+      try {
+        const member = await apiRequest<StaffMember>("/api/v1/staff/me", {
+          headers: authHeaders(activeToken),
+        }, 8_000);
+        setProfile(member);
+      } catch {
+        // A legacy development token may not have an Admin-created profile.
+        setProfile(null);
+      }
       setError("");
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Không thể tải dashboard.");
@@ -191,19 +201,21 @@ export function StaffDashboard() {
     }
   }
 
-  async function claim() {
-    if (!selected) return;
-    await action(`/api/v1/staff/tickets/${encodeURIComponent(selected.ticket_id)}/claim`, { staff_id: staffId });
-  }
-
-  async function assign(nextAssignee: string | null = assignee.trim() || null) {
-    if (!selected) return;
-    const updated = await action(`/api/v1/staff/tickets/${encodeURIComponent(selected.ticket_id)}/assign`, {
-      staff_id: staffId,
-      assigned_to: nextAssignee,
-      department: nextAssignee ? department.trim() || null : null,
-    });
-    if (updated) setAssignee("");
+  async function setMyAvailability(availability: StaffAvailability) {
+    setActionLoading(true);
+    try {
+      const member = await apiRequest<StaffMember>("/api/v1/staff/me/availability", {
+        method: "POST",
+        headers: authHeaders(token),
+        body: JSON.stringify({ availability }),
+      });
+      setProfile(member);
+      setError("");
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Không thể cập nhật trạng thái làm việc.");
+    } finally {
+      setActionLoading(false);
+    }
   }
 
   async function changeStatus(nextStatus: TicketStatus) {
@@ -295,7 +307,7 @@ export function StaffDashboard() {
   return (
     <div className="staff-dashboard hitl-dashboard">
       <div className="staff-topbar">
-        <div><span className="eyebrow">Human-in-the-loop workspace</span><strong>{staffId}</strong></div>
+        <div><span className="eyebrow">Human-in-the-loop workspace</span><strong>{profile?.display_name || staffId}</strong>{profile ? <label className="staff-availability">Trạng thái<select disabled={actionLoading} onChange={(event) => void setMyAvailability(event.target.value as StaffAvailability)} value={profile.availability}><option value="available">Rảnh · nhận ticket</option><option value="busy">Bận · tạm dừng nhận</option><option value="offline">Ngoại tuyến</option></select></label> : null}</div>
         <div>
           <button className="text-button" disabled={loading} onClick={() => void loadDashboard()} type="button"><RefreshIcon className={loading ? "spin" : ""} /> Làm mới</button>
           <button className="text-button danger" onClick={logout} type="button">Đăng xuất</button>
@@ -370,8 +382,7 @@ export function StaffDashboard() {
 
                 <section className="hitl-panel assignment-panel">
                   <div className="panel-heading"><div><span className="eyebrow">Ownership</span><h3>Phân công</h3></div><span>{selected.assigned_to || "Chưa có người nhận"}</span></div>
-                  {selected.status === "new" ? <button className="button button-primary" disabled={actionLoading} onClick={() => void claim()} type="button"><StaffIcon /> Tôi nhận xử lý</button> : null}
-                  {!(["resolved", "closed"] as TicketStatus[]).includes(selected.status) ? <div className="inline-form"><input onChange={(event) => setAssignee(event.target.value)} placeholder="Mã cán bộ nhận ticket" value={assignee} /><input onChange={(event) => setDepartment(event.target.value)} placeholder="Phòng ban" value={department} /><button className="button button-secondary" disabled={actionLoading || !assignee.trim()} onClick={() => void assign()} type="button">Phân công</button>{selected.assigned_to ? <button className="text-button danger" disabled={actionLoading} onClick={() => void assign(null)} type="button">Bỏ phân công</button> : null}</div> : null}
+                  <p className="muted-copy">{selected.assigned_to === staffId ? `Ticket do hệ thống phân công cho bạn${selected.assigned_department ? ` · ${selected.assigned_department}` : ""}.` : selected.assigned_to ? `Ticket hiện do ${selected.assigned_to} phụ trách. Admin có thể điều phối lại khi cần.` : "Ticket đang chờ Admin phân công cho cán bộ phù hợp."}</p>
                   {canEdit ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("in_progress")} type="button">Đang xử lý</button><button disabled={actionLoading} onClick={() => void changeStatus("waiting_for_user")} type="button">Chờ ứng viên</button></div> : null}
                 </section>
 
@@ -388,7 +399,7 @@ export function StaffDashboard() {
                 <section className="hitl-panel reply-panel">
                   <div className="panel-heading"><div><span className="eyebrow">Human response</span><h3>Soạn phản hồi</h3></div><span>{selected.user_email ? `Email: ${selected.user_email}` : "Không có email"}</span></div>
                   <div className="suggested-reply"><strong>Gợi ý của AI · bắt buộc cán bộ kiểm tra</strong><p>{selected.suggested_reply || "Chưa có gợi ý."}</p><button className="text-button" disabled={!canEdit} onClick={() => setReply(selected.suggested_reply || "")} type="button">Dùng làm bản nháp</button></div>
-                  {!canEdit ? <div className="reply-locked" role="status"><div><strong>Nhận ticket để bắt đầu trả lời</strong><p>{selected.status === "new" ? "Ticket này chưa có cán bộ phụ trách. Nhận xử lý để mở ô soạn phản hồi." : selected.assigned_to ? `Ticket hiện do ${selected.assigned_to} phụ trách. Bạn cần được phân công lại để phản hồi.` : "Ticket cần được phân công cho bạn trước khi gửi phản hồi."}</p></div>{selected.status === "new" ? <button className="button button-primary" disabled={actionLoading} onClick={() => void claim()} type="button"><StaffIcon /> Tôi nhận xử lý ticket này</button> : null}</div> : null}
+                  {!canEdit ? <div className="reply-locked" role="status"><div><strong>Ticket chưa thuộc quyền xử lý của bạn</strong><p>{selected.assigned_to ? `Ticket hiện do ${selected.assigned_to} phụ trách. Hãy liên hệ Admin nếu cần điều phối lại.` : "Admin sẽ phân công ticket cho đúng nhóm chuyên môn và cán bộ đang rảnh."}</p></div></div> : null}
                   <textarea disabled={!canEdit} maxLength={5000} onChange={(event) => setReply(event.target.value)} placeholder={canEdit ? "Nhập phản hồi đã được kiểm tra…" : "Nhận/phân công ticket cho bạn để trả lời"} rows={6} value={reply} />
                   <div className="editor-actions"><span>{reply.length}/5000</span><button className="button button-primary" disabled={actionLoading || !canEdit || !reply.trim()} onClick={() => void sendReply()} type="button"><SendIcon /> Gửi phản hồi</button></div>
                   {selected.email_delivery_status ? <p className={`delivery-status delivery-${selected.email_delivery_status}`}>Trạng thái email: {selected.email_delivery_status}</p> : null}

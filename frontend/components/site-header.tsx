@@ -45,6 +45,7 @@ export function SiteHeader() {
     { href: "/", label: "Tổng quan" },
     { href: "/chat", label: "Hỏi đáp", icon: ChatIcon },
     { href: "/staff", label: "Dành cho cán bộ", icon: StaffIcon },
+    { href: "/admin", label: "Quản trị", icon: ShieldIcon },
   ];
 
   return (

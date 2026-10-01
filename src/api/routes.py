@@ -16,6 +16,9 @@ from fastapi.responses import RedirectResponse
 from src.agents.graph import agent
 from src.config import get_settings
 from src.models.schemas import (
+    AdminRoutingRuleRequest,
+    AdminStaffUpsertRequest,
+    AdminTicketAssignmentRequest,
     AnalyticsSummary,
     AnswerStatus,
     AuthSessionResponse,
@@ -31,6 +34,7 @@ from src.models.schemas import (
     KnowledgeStatus,
     RegisterOtpRequest,
     StaffAssignmentRequest,
+    StaffAvailabilityRequest,
     StaffClassificationRequest,
     StaffNoteRequest,
     StaffReplyRequest,
@@ -39,6 +43,8 @@ from src.models.schemas import (
     StaffTicketAction,
     StaffTicketMetrics,
     StaffTicketResponse,
+    StaffMember,
+    RoutingRule,
     TicketCategory,
     TicketPriority,
     TicketResponse,
@@ -252,6 +258,22 @@ def require_staff(authorization: str | None = Header(default=None)) -> str | Non
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Không có quyền truy cập")
 
 
+def require_admin(authorization: str | None = Header(default=None)) -> str:
+    settings = get_settings()
+    if not settings.admin_tokens:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="ADMIN_TOKENS chÆ°a Ä‘Æ°á»£c cáº¥u hÃ¬nh",
+        )
+    supplied = ""
+    if authorization and authorization.lower().startswith("bearer "):
+        supplied = authorization[7:]
+    for admin_id, token in settings.admin_tokens.items():
+        if token and hmac.compare_digest(supplied.encode(), token.encode()):
+            return admin_id
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="KhÃ´ng cÃ³ quyá»n quáº£n trá»‹")
+
+
 def check_staff_identity(requested: str, authenticated: str | None) -> None:
     if authenticated is not None and requested != authenticated:
         raise HTTPException(status_code=403, detail="Mã cán bộ không khớp tài khoản đã xác thực")
@@ -419,6 +441,87 @@ async def get_handover(
     except KeyError:
         # Same response for missing and unauthorized tickets prevents ID probing.
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+
+
+@router.get("/staff/me", response_model=StaffMember)
+async def current_staff_profile(identity: str | None = Depends(require_staff)) -> StaffMember:
+    if identity is None:
+        raise HTTPException(status_code=403, detail="Tài khoản cán bộ cá nhân là bắt buộc")
+    try:
+        return get_ticket_store().get_staff_member(identity)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Cán bộ chưa được Admin thiết lập hồ sơ") from None
+
+
+@router.post("/staff/me/availability", response_model=StaffMember)
+async def update_my_availability(
+    request: StaffAvailabilityRequest,
+    identity: str | None = Depends(require_staff),
+) -> StaffMember:
+    if identity is None:
+        raise HTTPException(status_code=403, detail="Tài khoản cán bộ cá nhân là bắt buộc")
+    try:
+        return get_ticket_store().set_staff_availability(identity, request.availability)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Cán bộ chưa được Admin thiết lập hồ sơ") from None
+
+
+@router.get("/admin/staff", response_model=list[StaffMember])
+async def list_admin_staff(_admin_id: str = Depends(require_admin)) -> list[StaffMember]:
+    return get_ticket_store().list_staff_members()
+
+
+@router.post("/admin/staff", response_model=StaffMember)
+async def upsert_admin_staff(
+    request: AdminStaffUpsertRequest,
+    _admin_id: str = Depends(require_admin),
+) -> StaffMember:
+    return get_ticket_store().upsert_staff_member(
+        request.staff_id, request.display_name, request.department,
+        request.specialties, request.availability, request.active,
+    )
+
+
+@router.get("/admin/routing-rules", response_model=list[RoutingRule])
+async def list_admin_routing_rules(_admin_id: str = Depends(require_admin)) -> list[RoutingRule]:
+    return get_ticket_store().list_routing_rules()
+
+
+@router.post("/admin/routing-rules/{category}", response_model=RoutingRule)
+async def update_admin_routing_rule(
+    category: TicketCategory,
+    request: AdminRoutingRuleRequest,
+    _admin_id: str = Depends(require_admin),
+) -> RoutingRule:
+    return get_ticket_store().update_routing_rule(category, request.department, request.auto_assign)
+
+
+@router.get("/admin/tickets", response_model=list[StaffTicketResponse])
+async def list_admin_tickets(
+    ticket_status: TicketStatus | None = Query(default=None, alias="status"),
+    category: TicketCategory | None = Query(default=None),
+    priority: TicketPriority | None = Query(default=None),
+    search: str | None = Query(default=None, max_length=200),
+    sort: str = Query(default="priority", pattern="^(oldest|newest|priority)$"),
+    _admin_id: str = Depends(require_admin),
+) -> list[StaffTicketResponse]:
+    return get_ticket_store().list_for_staff(
+        ticket_status, category=category, priority=priority, search=search, sort=sort,
+    )
+
+
+@router.post("/admin/tickets/{ticket_id}/assign", response_model=StaffTicketResponse)
+async def admin_assign_ticket(
+    ticket_id: str,
+    request: AdminTicketAssignmentRequest,
+    admin_id: str = Depends(require_admin),
+) -> StaffTicketResponse:
+    try:
+        return get_ticket_store().assign_by_admin(ticket_id, admin_id, request.assigned_to)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from None
 
 
 @router.get("/staff/tickets", response_model=list[StaffTicketResponse])
