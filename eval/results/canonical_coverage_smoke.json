@@ -1,0 +1,435 @@
+{
+  "summary": {
+    "dataset_id": "vinuni_undergraduate_2026_2027",
+    "academic_year": "2026-2027",
+    "dataset_fingerprint": "77eff3a455c0926317b330734db26f581a00393b78f5d573f3f8cd73a80bf615",
+    "total_canonical_chunks": 219,
+    "all_chunks_have_valid_source_mapping": true,
+    "invalid_source_mapping_chunk_ids": [],
+    "case_counts": {
+      "answer": 19,
+      "safe": 1
+    },
+    "answer_coverage": {
+      "passed": 15,
+      "total": 19,
+      "retrieved_target": 19
+    },
+    "safety_coverage": {
+      "passed": 1,
+      "total": 1,
+      "retrieved_target": 1
+    },
+    "metadata_structurally_audited": 0,
+    "failures": [
+      {
+        "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:17",
+        "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+        "section": "founder educational development grant",
+        "flags": [],
+        "query": "Học phí VinUni cho founder educational development grant năm 2026-2027 là bao nhiêu?",
+        "expected": "answer",
+        "status": "answered",
+        "reason_code": "grounded_answer",
+        "grounded": true,
+        "retrieved_target": true,
+        "draft_evidence_ids": [
+          "vinuni_tuition_undergraduate_2026_2027_clean:15",
+          "vinuni_tuition_undergraduate_2026_2027_clean:14",
+          "vinuni_tuition_undergraduate_2026_2027_clean:16"
+        ],
+        "passed": false
+      },
+      {
+        "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:18",
+        "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+        "section": "tuition includes",
+        "flags": [],
+        "query": "Học phí VinUni cho tuition includes năm 2026-2027 là bao nhiêu?",
+        "expected": "answer",
+        "status": "answered",
+        "reason_code": "grounded_answer",
+        "grounded": true,
+        "retrieved_target": true,
+        "draft_evidence_ids": [
+          "vinuni_tuition_undergraduate_2026_2027_clean:15",
+          "vinuni_tuition_undergraduate_2026_2027_clean:14",
+          "vinuni_tuition_undergraduate_2026_2027_clean:16"
+        ],
+        "passed": false
+      },
+      {
+        "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:19",
+        "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+        "section": "per credit rate applies when",
+        "flags": [],
+        "query": "Học phí VinUni cho per credit rate applies when năm 2026-2027 là bao nhiêu?",
+        "expected": "answer",
+        "status": "answered",
+        "reason_code": "grounded_answer",
+        "grounded": true,
+        "retrieved_target": true,
+        "draft_evidence_ids": [
+          "vinuni_tuition_undergraduate_2026_2027_clean:15",
+          "vinuni_tuition_undergraduate_2026_2027_clean:14",
+          "vinuni_tuition_undergraduate_2026_2027_clean:16"
+        ],
+        "passed": false
+      },
+      {
+        "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:20",
+        "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+        "section": "payment",
+        "flags": [],
+        "query": "Học phí VinUni cho payment năm 2026-2027 là bao nhiêu?",
+        "expected": "answer",
+        "status": "answered",
+        "reason_code": "grounded_answer",
+        "grounded": true,
+        "retrieved_target": true,
+        "draft_evidence_ids": [
+          "vinuni_tuition_undergraduate_2026_2027_clean:15",
+          "vinuni_tuition_undergraduate_2026_2027_clean:14",
+          "vinuni_tuition_undergraduate_2026_2027_clean:16"
+        ],
+        "passed": false
+      }
+    ]
+  },
+  "cases": [
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:1",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Truyền thông Đa phương tiện",
+      "flags": [],
+      "query": "Chương trình Cử nhân Truyền thông Đa phương tiện tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:1"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:2",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kinh tế",
+      "flags": [],
+      "query": "Chương trình Cử nhân Kinh tế tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:2"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:3",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Tâm lý học",
+      "flags": [],
+      "query": "Chương trình Cử nhân Tâm lý học tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:3"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:4",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Quản trị Kinh doanh",
+      "flags": [],
+      "query": "Chương trình Cử nhân Quản trị Kinh doanh tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:4"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:5",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Tài chính và Ngân hàng",
+      "flags": [],
+      "query": "Chương trình Cử nhân Tài chính và Ngân hàng tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:5"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:6",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Khoa học Máy tính",
+      "flags": [],
+      "query": "Chương trình Cử nhân Khoa học Máy tính tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:6"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:7",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kỹ thuật Điện",
+      "flags": [],
+      "query": "Chương trình Cử nhân Kỹ thuật Điện tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:7"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:8",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kỹ thuật Cơ khí",
+      "flags": [],
+      "query": "Chương trình Cử nhân Kỹ thuật Cơ khí tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:8"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:9",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Kỹ thuật Cơ khí > disputed program code",
+      "flags": [
+        "conflict"
+      ],
+      "query": "Chương trình disputed program code tại VinUni học mấy năm?",
+      "expected": "safe",
+      "status": "handover_suggested",
+      "reason_code": "unsafe_evidence_status",
+      "grounded": false,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:7",
+        "vinuni_undergraduate_programs_2026_2027:9"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:10",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Khoa học Dữ liệu",
+      "flags": [],
+      "query": "Chương trình Cử nhân Khoa học Dữ liệu tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:10"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:11",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Cử nhân Điều dưỡng",
+      "flags": [],
+      "query": "Chương trình Cử nhân Điều dưỡng tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:11"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:12",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "programs > Bác sĩ Y khoa",
+      "flags": [],
+      "query": "Chương trình Bác sĩ Y khoa tại VinUni học mấy năm?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:12"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_undergraduate_programs_2026_2027:13",
+      "document": "programs/vinuni_undergraduate_programs_2026_2027.json",
+      "section": "not counted as separate confirmed 2026 admission programs",
+      "flags": [],
+      "query": "VinUni có những chương trình nào không được tính là ngành tuyển sinh riêng?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_undergraduate_programs_2026_2027:7",
+        "vinuni_undergraduate_programs_2026_2027:13"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:14",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "listed tuition > Cử nhân Điều dưỡng",
+      "flags": [],
+      "query": "Học phí VinUni cho Cử nhân Điều dưỡng năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:14"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:15",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "listed tuition > Bác sĩ Y khoa",
+      "flags": [],
+      "query": "Học phí VinUni cho Bác sĩ Y khoa năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:15"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:16",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "listed tuition > Các chương trình cử nhân khác",
+      "flags": [],
+      "query": "Học phí VinUni cho Các chương trình cử nhân khác năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:16",
+        "vinuni_tuition_undergraduate_2026_2027_clean:14",
+        "vinuni_tuition_undergraduate_2026_2027_clean:15"
+      ],
+      "passed": true
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:17",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "founder educational development grant",
+      "flags": [],
+      "query": "Học phí VinUni cho founder educational development grant năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:15",
+        "vinuni_tuition_undergraduate_2026_2027_clean:14",
+        "vinuni_tuition_undergraduate_2026_2027_clean:16"
+      ],
+      "passed": false
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:18",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "tuition includes",
+      "flags": [],
+      "query": "Học phí VinUni cho tuition includes năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:15",
+        "vinuni_tuition_undergraduate_2026_2027_clean:14",
+        "vinuni_tuition_undergraduate_2026_2027_clean:16"
+      ],
+      "passed": false
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:19",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "per credit rate applies when",
+      "flags": [],
+      "query": "Học phí VinUni cho per credit rate applies when năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:15",
+        "vinuni_tuition_undergraduate_2026_2027_clean:14",
+        "vinuni_tuition_undergraduate_2026_2027_clean:16"
+      ],
+      "passed": false
+    },
+    {
+      "chunk_id": "vinuni_tuition_undergraduate_2026_2027_clean:20",
+      "document": "tuition/vinuni_tuition_undergraduate_2026_2027_clean.json",
+      "section": "payment",
+      "flags": [],
+      "query": "Học phí VinUni cho payment năm 2026-2027 là bao nhiêu?",
+      "expected": "answer",
+      "status": "answered",
+      "reason_code": "grounded_answer",
+      "grounded": true,
+      "retrieved_target": true,
+      "draft_evidence_ids": [
+        "vinuni_tuition_undergraduate_2026_2027_clean:15",
+        "vinuni_tuition_undergraduate_2026_2027_clean:14",
+        "vinuni_tuition_undergraduate_2026_2027_clean:16"
+      ],
+      "passed": false
+    }
+  ]
+}

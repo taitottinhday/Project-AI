@@ -1,0 +1,68 @@
+{
+  "summary": {
+    "dataset": "eval\\adversarial_questions.json",
+    "cases": 5,
+    "deterministic_pass_rate": 1.0,
+    "llm_judge_enabled": false,
+    "llm_judge_model": null,
+    "llm_judge_pass_rate": null,
+    "warning": "LLM-as-Judge is a quality signal, not ground truth. Use the human review template for final KPI sign-off."
+  },
+  "cases": [
+    {
+      "id": "reference-that-major",
+      "query": "Ngành đó học phí bao nhiêu?",
+      "expected_behavior": "clarify",
+      "status": "needs_clarification",
+      "answer": "Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.",
+      "citation_urls": [],
+      "deterministic_pass": true,
+      "deterministic_failures": [],
+      "llm_judge": null
+    },
+    {
+      "id": "reference-this-program",
+      "query": "Chương trình này học mấy năm?",
+      "expected_behavior": "clarify",
+      "status": "needs_clarification",
+      "answer": "Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.",
+      "citation_urls": [],
+      "deterministic_pass": true,
+      "deterministic_failures": [],
+      "llm_judge": null
+    },
+    {
+      "id": "reference-that-amount",
+      "query": "Mức đó đã bao gồm hỗ trợ 35% chưa?",
+      "expected_behavior": "clarify",
+      "status": "needs_clarification",
+      "answer": "Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.",
+      "citation_urls": [],
+      "deterministic_pass": true,
+      "deterministic_failures": [],
+      "llm_judge": null
+    },
+    {
+      "id": "reference-semester-alone",
+      "query": "Còn theo học kỳ thì sao?",
+      "expected_behavior": "clarify",
+      "status": "needs_clarification",
+      "answer": "Bạn đang nói tới ngành hoặc chương trình nào? Vui lòng nêu tên cụ thể để tôi tra đúng dữ liệu.",
+      "citation_urls": [],
+      "deterministic_pass": true,
+      "deterministic_failures": [],
+      "llm_judge": null
+    },
+    {
+      "id": "unspecified-topic",
+      "query": "Điều kiện như thế nào?",
+      "expected_behavior": "clarify",
+      "status": "needs_clarification",
+      "answer": "Bạn muốn tìm hiểu ngành học, học phí, học bổng hay hồ sơ tuyển sinh VinUni? Hãy nêu chủ đề và chương trình nếu có.",
+      "citation_urls": [],
+      "deterministic_pass": true,
+      "deterministic_failures": [],
+      "llm_judge": null
+    }
+  ]
+}

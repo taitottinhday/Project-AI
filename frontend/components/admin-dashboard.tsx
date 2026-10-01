@@ -73,6 +73,7 @@ export function AdminDashboard() {
   const [staff, setStaff] = useState<StaffMember[]>([]);
   const [rules, setRules] = useState<RoutingRule[]>([]);
   const [tickets, setTickets] = useState<StaffTicket[]>([]);
+  const [ticketFilter, setTicketFilter] = useState<"all" | StaffTicket["status"]>("all");
   const [selectedTicketId, setSelectedTicketId] = useState("");
   const [draft, setDraft] = useState<StaffDraft>(emptyDraft);
   const [saving, setSaving] = useState(false);
@@ -80,6 +81,11 @@ export function AdminDashboard() {
   const selectedTicket = useMemo(
     () => tickets.find((ticket) => ticket.ticket_id === selectedTicketId) || null,
     [selectedTicketId, tickets],
+  );
+
+  const visibleTickets = useMemo(
+    () => ticketFilter === "all" ? tickets : tickets.filter((ticket) => ticket.status === ticketFilter),
+    [ticketFilter, tickets],
   );
 
   const load = useCallback(async (activeToken = token) => {
@@ -212,7 +218,7 @@ export function AdminDashboard() {
 
       <section className="admin-panel"><div className="panel-heading"><div><span className="eyebrow">Routing policy</span><h3>Phân loại → Nhóm phụ trách</h3></div><span>Auto-dispatch</span></div><p className="muted-copy">Hệ thống chỉ chọn cán bộ đang rảnh, đúng chuyên môn và có ít ticket mở nhất. Nếu đồng tải, hệ thống chọn ngẫu nhiên.</p><div className="routing-rule-list">{rules.map((rule) => <div className="routing-rule" key={rule.category}><strong>{categories.find((item) => item.value === rule.category)?.label || rule.category}</strong><input aria-label={`Nhóm cho ${rule.category}`} disabled={saving} onBlur={(event) => { if (event.target.value.trim() && event.target.value !== rule.department) void updateRule(rule.category, { department: event.target.value.trim() }); }} defaultValue={rule.department} /><label><input checked={rule.auto_assign} disabled={saving} onChange={(event) => void updateRule(rule.category, { auto_assign: event.target.checked })} type="checkbox" />Tự động phân công</label></div>)}</div></section>
 
-      <section className="admin-panel admin-ticket-panel"><div className="panel-heading"><div><span className="eyebrow">Queue control</span><h3>Điều phối ticket</h3></div><span>{tickets.length} ticket</span></div><div className="admin-ticket-list">{tickets.map((ticket) => <button className={selectedTicketId === ticket.ticket_id ? "admin-ticket-row selected" : "admin-ticket-row"} key={ticket.ticket_id} onClick={() => setSelectedTicketId(ticket.ticket_id)} type="button"><span><strong>{ticket.ticket_id}</strong><small>{ticketStatus(ticket.status)} · {categories.find((item) => item.value === ticket.category)?.label}</small></span><p>{ticket.question}</p><small>{ticket.assigned_department || "Chưa định tuyến"} · {ticket.assigned_to || "Chưa có cán bộ"}</small></button>)}</div>{selectedTicket ? <div className="ticket-dispatch"><strong>Phân công {selectedTicket.ticket_id}</strong><p>{selectedTicket.question}</p><select disabled={saving} onChange={(event) => { if (event.target.value) void assignTicket(event.target.value); }} value=""><option value="">Chọn cán bộ để phân công…</option>{staff.filter((member) => member.active).map((member) => <option key={member.staff_id} value={member.staff_id}>{member.display_name} · {member.department} · {availabilityLabels[member.availability]}</option>)}</select>{selectedTicket.assigned_to ? <button className="text-button danger" disabled={saving} onClick={() => void assignTicket(null)} type="button">Gỡ phân công, đưa về hàng chờ</button> : null}</div> : null}</section>
+      <section className="admin-panel admin-ticket-panel"><div className="panel-heading"><div><span className="eyebrow">Queue control</span><h3>Điều phối ticket</h3></div><div className="panel-heading-tools"><span>{visibleTickets.length}/{tickets.length} ticket</span><select aria-label="Lọc ticket theo trạng thái" onChange={(event) => setTicketFilter(event.target.value as typeof ticketFilter)} value={ticketFilter}><option value="all">Tất cả</option><option value="new">Chờ phân công</option><option value="assigned">Đã phân công</option><option value="in_progress">Đang xử lý</option><option value="waiting_for_user">Chờ ứng viên</option></select></div></div><div className="admin-ticket-list">{visibleTickets.map((ticket) => <button className={selectedTicketId === ticket.ticket_id ? "admin-ticket-row selected" : "admin-ticket-row"} key={ticket.ticket_id} onClick={() => setSelectedTicketId(ticket.ticket_id)} type="button"><span><strong>{ticket.ticket_id}</strong><small>{ticketStatus(ticket.status)} · {categories.find((item) => item.value === ticket.category)?.label}</small></span><p>{ticket.question}</p><small>{ticket.assigned_department || "Chưa định tuyến"} · {ticket.assigned_to || "Chưa có cán bộ"}</small></button>)}</div>{selectedTicket ? <div className="ticket-dispatch"><strong>Phân công {selectedTicket.ticket_id}</strong><p>{selectedTicket.question}</p><select disabled={saving} onChange={(event) => { if (event.target.value) void assignTicket(event.target.value); }} value=""><option value="">Chọn cán bộ để phân công…</option>{staff.filter((member) => member.active).map((member) => <option key={member.staff_id} value={member.staff_id}>{member.display_name} · {member.department} · {availabilityLabels[member.availability]}</option>)}</select>{selectedTicket.assigned_to ? <button className="text-button danger" disabled={saving} onClick={() => void assignTicket(null)} type="button">Gỡ phân công, đưa về hàng chờ</button> : null}</div> : null}</section>
     </div>
   </div>;
 }
