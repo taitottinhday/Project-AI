@@ -3116,16 +3116,51 @@ button:disabled {
   text-transform: uppercase;
 }
 
+.reply-panel,
+.resolve-panel {
+  display: grid;
+  gap: 10px;
+}
+
+/* Textareas do not inherit a width from the dashboard form controls.  Set it
+   explicitly so the staff reply editor always fills its ticket panel. */
 .reply-panel textarea,
 .resolve-panel textarea {
-  min-height: 110px;
+  background: white;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: var(--ink);
+  display: block;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 100%;
+  min-height: 132px;
+  outline: 0;
+  padding: 12px;
+  resize: vertical;
+  width: 100%;
+}
+
+.reply-panel textarea:focus,
+.resolve-panel textarea:focus {
+  border-color: var(--teal-700);
+  box-shadow: 0 0 0 3px rgba(32, 116, 121, 0.1);
+}
+
+.reply-panel textarea:disabled {
+  background: #f2f6f5;
+  color: var(--ink-soft);
+  cursor: not-allowed;
+  opacity: 1;
 }
 
 .editor-actions {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-top: 7px;
+  margin-top: 0;
 }
 
 .editor-actions > span,
@@ -3145,7 +3180,6 @@ button:disabled {
 }
 
 .note-list p { margin: 6px 0 0; }
-.resolve-panel { display: grid; gap: 9px; }
 .resolve-panel .consent-row { margin: 0; }
 
 .audit-panel summary {
