@@ -7,6 +7,7 @@ import {
   ApiError,
   apiRequest,
   formatDateTime,
+  notifyAuthChanged,
   type StaffTicket,
   type StaffTicketMetrics,
   type StaffAvailability,
@@ -171,12 +172,14 @@ export function StaffDashboard() {
     }
     window.sessionStorage.setItem(STAFF_TOKEN_KEY, token.trim());
     window.sessionStorage.setItem(STAFF_ID_KEY, staffId.trim());
+    notifyAuthChanged();
     await loadDashboard(token.trim());
   }
 
   function logout() {
     window.sessionStorage.removeItem(STAFF_TOKEN_KEY);
     window.sessionStorage.removeItem(STAFF_ID_KEY);
+    notifyAuthChanged();
     setLoggedIn(false);
     setToken("");
     setTickets([]);

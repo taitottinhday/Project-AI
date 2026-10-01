@@ -186,6 +186,10 @@ export type AuthSession = {
 
 export const AUTH_CHANGED_EVENT = "vinuni-auth-changed";
 
+export function notifyAuthChanged(): void {
+  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+}
+
 /**
  * Persist auth state and notify long-lived layout components immediately.
  * The browser's `storage` event does not fire in the same tab that changed
@@ -194,13 +198,13 @@ export const AUTH_CHANGED_EVENT = "vinuni-auth-changed";
 export function saveAuthSession(session: AuthSession): void {
   window.localStorage.setItem("vinuni-auth-token", session.access_token);
   window.localStorage.setItem("vinuni-auth-user", JSON.stringify(session.user));
-  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+  notifyAuthChanged();
 }
 
 export function clearAuthSession(): void {
   window.localStorage.removeItem("vinuni-auth-token");
   window.localStorage.removeItem("vinuni-auth-user");
-  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+  notifyAuthChanged();
 }
 
 export class ApiError extends Error {

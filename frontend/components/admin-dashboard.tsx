@@ -5,6 +5,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { CheckIcon, RefreshIcon, ShieldIcon } from "@/components/icons";
 import {
   apiRequest,
+  notifyAuthChanged,
   type AnalyticsSummary,
   type KnowledgeGapItem,
   type KnowledgeGapStatus,
@@ -152,11 +153,13 @@ export function AdminDashboard() {
       return;
     }
     window.sessionStorage.setItem(ADMIN_TOKEN_KEY, token.trim());
+    notifyAuthChanged();
     await load(token.trim());
   }
 
   function logout() {
     window.sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+    notifyAuthChanged();
     setToken("");
     setReady(false);
     setStaff([]);

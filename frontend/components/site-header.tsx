@@ -7,6 +7,11 @@ import { useEffect, useState } from "react";
 import { ChatIcon, MenuIcon, ShieldIcon, StaffIcon } from "@/components/icons";
 import { AUTH_CHANGED_EVENT, ApiError, apiRequest, clearAuthSession, type AuthUser } from "@/lib/api";
 
+type HeaderIdentity = {
+  user: AuthUser;
+  source: "applicant" | "staff" | "admin";
+};
+
 function readStoredAuthUser(): AuthUser | null {
   if (typeof window === "undefined") return null;
   const storedUser = window.localStorage.getItem("vinuni-auth-user");
@@ -20,21 +25,70 @@ function readStoredAuthUser(): AuthUser | null {
   }
 }
 
+function readHeaderIdentity(pathname: string): HeaderIdentity | null {
+  if (typeof window === "undefined") return null;
+
+  const applicant = readStoredAuthUser();
+  const applicantToken = window.localStorage.getItem("vinuni-auth-token");
+  const staffToken = window.sessionStorage.getItem("vinuni-staff-token");
+  const staffId = window.sessionStorage.getItem("vinuni-staff-id");
+  const adminToken = window.sessionStorage.getItem("vinuni-admin-token");
+
+  // Staff/admin tokens are intentionally separate from applicant auth. On
+  // their protected pages, prefer the operator identity even if the same
+  // browser also has an applicant session.
+  if (pathname.startsWith("/staff") && staffToken && staffId) {
+    return {
+      source: "staff",
+      user: { user_id: staffId, email: "Cán bộ tuyển sinh", display_name: staffId },
+    };
+  }
+  if (pathname.startsWith("/admin") && adminToken) {
+    return {
+      source: "admin",
+      user: { user_id: "admin", email: "Quản trị vận hành", display_name: "Quản trị viên" },
+    };
+  }
+  if (applicantToken && applicant) return { source: "applicant", user: applicant };
+  if (staffToken && staffId) {
+    return {
+      source: "staff",
+      user: { user_id: staffId, email: "Cán bộ tuyển sinh", display_name: staffId },
+    };
+  }
+  if (adminToken) {
+    return {
+      source: "admin",
+      user: { user_id: "admin", email: "Quản trị vận hành", display_name: "Quản trị viên" },
+    };
+  }
+  return null;
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<AuthUser | null>(readStoredAuthUser);
+  const [identity, setIdentity] = useState<HeaderIdentity | null>(() => readHeaderIdentity(pathname));
   const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
     let active = true;
 
     function syncAuthState() {
-      const token = window.localStorage.getItem("vinuni-auth-token");
+      const nextIdentity = readHeaderIdentity(pathname);
       // Clear stale UI immediately when logout or another tab removes auth.
+      if (!nextIdentity) {
+        setIdentity(null);
+        return;
+      }
+
+      setIdentity(nextIdentity);
+      if (nextIdentity.source !== "applicant") return;
+
+      const token = window.localStorage.getItem("vinuni-auth-token");
       if (!token) {
-        setUser(null);
+        setIdentity(null);
         return;
       }
 
@@ -45,14 +99,14 @@ export function SiteHeader() {
       void apiRequest<AuthUser>("/api/v1/auth/me", { method: "GET" }, 8_000)
         .then((freshUser) => {
           if (!active || window.localStorage.getItem("vinuni-auth-token") !== token) return;
-          setUser(freshUser);
+          setIdentity({ source: "applicant", user: freshUser });
           window.localStorage.setItem("vinuni-auth-user", JSON.stringify(freshUser));
         })
         .catch((caught) => {
           if (!active) return;
           if (caught instanceof ApiError && caught.status === 401 && window.localStorage.getItem("vinuni-auth-token") === token) {
             clearAuthSession();
-            setUser(null);
+            setIdentity(null);
           }
         });
     }
@@ -65,15 +119,24 @@ export function SiteHeader() {
       window.removeEventListener(AUTH_CHANGED_EVENT, syncAuthState);
       window.removeEventListener("storage", syncAuthState);
     };
-  }, []);
+  }, [pathname]);
 
   function handleLogout() {
     setLoggingOut(true);
     // Revoke the server session in the background, but never make the user
     // wait for a slow/unavailable backend before leaving the protected view.
-    void apiRequest("/api/v1/auth/logout", { method: "POST" }).catch(() => undefined);
-    clearAuthSession();
-    setUser(null);
+    if (identity?.source === "applicant") {
+      void apiRequest("/api/v1/auth/logout", { method: "POST" }).catch(() => undefined);
+      clearAuthSession();
+    } else if (identity?.source === "staff") {
+      window.sessionStorage.removeItem("vinuni-staff-token");
+      window.sessionStorage.removeItem("vinuni-staff-id");
+      window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+    } else if (identity?.source === "admin") {
+      window.sessionStorage.removeItem("vinuni-admin-token");
+      window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+    }
+    setIdentity(null);
     setLoggingOut(false);
     setOpen(false);
     router.replace("/auth");
@@ -119,9 +182,9 @@ export function SiteHeader() {
               {label}
             </Link>
           ))}
-          {user ? (
+          {identity ? (
             <div className="auth-user-menu">
-              <span className="auth-user-name" title={user.email}>{user.display_name}</span>
+              <span className="auth-user-name" title={identity.user.email}>{identity.user.display_name}</span>
               <button className="auth-logout" disabled={loggingOut} onClick={handleLogout} type="button">
                 {loggingOut ? "Đang thoát…" : "Đăng xuất"}
               </button>
