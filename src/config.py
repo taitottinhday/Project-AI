@@ -72,6 +72,11 @@ class Settings(BaseSettings):
     smtp_from_email: str = ""
     smtp_from_name: str = "VinUni Guide"
     smtp_starttls: bool = True
+    # Railway Free/Trial/Hobby plans block outbound SMTP. When a Resend key is
+    # present, the HTTPS email API is preferred automatically.
+    resend_api_key: str = ""
+    resend_from_email: str = ""
+    resend_api_url: str = "https://api.resend.com/emails"
 
     @property
     def project_root(self) -> Path:

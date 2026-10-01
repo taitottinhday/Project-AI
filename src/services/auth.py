@@ -11,6 +11,8 @@ from datetime import UTC, datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
 
+import httpx
+
 from src.config import get_settings
 
 
@@ -245,6 +247,37 @@ class AuthStore:
             return {"user_id": row["user_id"], "email": row["email"], "display_name": row["display_name"]}
 
 
+def _send_resend_message(message: EmailMessage) -> None:
+    settings = get_settings()
+    api_key = settings.resend_api_key.strip()
+    from_email = (settings.resend_from_email or settings.smtp_from_email or settings.smtp_username).strip()
+    if not from_email:
+        raise RuntimeError("Resend chưa được cấu hình. Thiếu RESEND_FROM_EMAIL")
+
+    payload = {
+        "from": f"{settings.smtp_from_name} <{from_email}>",
+        "to": [message["To"]],
+        "subject": message["Subject"],
+        "text": message.get_content(),
+    }
+    try:
+        with httpx.Client(timeout=20) as client:
+            response = client.post(
+                settings.resend_api_url,
+                headers={"Authorization": f"Bearer {api_key}"},
+                json=payload,
+            )
+    except httpx.HTTPError as exc:
+        raise RuntimeError("Không thể kết nối Resend API từ backend.") from exc
+
+    if response.is_error:
+        try:
+            detail = response.json().get("message", "Resend từ chối yêu cầu")
+        except ValueError:
+            detail = "Resend từ chối yêu cầu"
+        raise RuntimeError(f"Resend không gửi được email: {detail}")
+
+
 def _send_smtp_message(message: EmailMessage) -> None:
     settings = get_settings()
     host = settings.smtp_host.strip()
@@ -281,6 +314,14 @@ def _send_smtp_message(message: EmailMessage) -> None:
             client.send_message(message)
 
 
+def _send_email(message: EmailMessage) -> None:
+    settings = get_settings()
+    if settings.resend_api_key.strip():
+        _send_resend_message(message)
+    else:
+        _send_smtp_message(message)
+
+
 def send_otp_email(email: str, code: str) -> None:
     settings = get_settings()
     message = EmailMessage()
@@ -291,7 +332,7 @@ def send_otp_email(email: str, code: str) -> None:
         f"Mã có hiệu lực trong {settings.otp_ttl_minutes} phút. "
         "Nếu bạn không yêu cầu mã này, hãy bỏ qua email."
     )
-    _send_smtp_message(message)
+    _send_email(message)
 
 
 def send_login_notification_email(email: str, display_name: str) -> None:
@@ -305,7 +346,7 @@ def send_login_notification_email(email: str, display_name: str) -> None:
         f"Tài khoản Google của bạn vừa đăng nhập vào VinUni Guide lúc {now}.\n\n"
         "Nếu đây không phải là bạn, hãy đổi mật khẩu Google và kiểm tra hoạt động đăng nhập.\n"
     )
-    _send_smtp_message(message)
+    _send_email(message)
 
 
 _auth_store: AuthStore | None = None

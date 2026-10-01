@@ -29,6 +29,12 @@ SMTP_PASSWORD=<Google App Password 16 ký tự>
 SMTP_FROM_EMAIL=<gmail gửi OTP>
 SMTP_FROM_NAME=VinUni Guide
 SMTP_STARTTLS=true
+
+# Railway Free/Trial/Hobby blocks outbound SMTP. If SMTP is blocked, use
+# Resend's HTTPS API instead; the backend automatically prefers Resend when
+# RESEND_API_KEY is present.
+RESEND_API_KEY=<Resend API key>
+RESEND_FROM_EMAIL=<verified sender, e.g. onboarding@resend.dev>
 ```
 
 Không commit các giá trị thật vào GitHub. `AUTH_SECRET`, `GOOGLE_CLIENT_SECRET` và `SMTP_PASSWORD` phải chỉ nằm trong Railway Variables.
@@ -61,6 +67,10 @@ Tài khoản Gmail gửi OTP cần bật 2-Step Verification, sau đó tạo App
 4. Dùng chuỗi 16 ký tự đó làm `SMTP_PASSWORD`.
 
 Không dùng mật khẩu Gmail chính và không bật “less secure apps”.
+
+## Nếu Railway chặn SMTP
+
+Railway Free/Trial/Hobby không cho phép kết nối SMTP outbound. Khi đó tạo API key trên Resend, xác minh domain gửi email (hoặc dùng `onboarding@resend.dev` để thử với email tài khoản Resend), rồi thêm `RESEND_API_KEY` và `RESEND_FROM_EMAIL` vào Railway. Backend gửi qua HTTPS nên không cần `SMTP_PORT`.
 
 ## API auth
 
