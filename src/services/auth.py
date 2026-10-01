@@ -10,6 +10,7 @@ import uuid
 from datetime import UTC, datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import httpx
 
@@ -337,13 +338,16 @@ def send_otp_email(email: str, code: str) -> None:
 
 def send_login_notification_email(email: str, display_name: str) -> None:
     """Send a security notice after Google login without blocking the login."""
-    now = _now().astimezone().strftime("%H:%M %d/%m/%Y")
+    settings = get_settings()
+    now = _now().astimezone(ZoneInfo("Asia/Ho_Chi_Minh")).strftime("%H:%M %d/%m/%Y")
     message = EmailMessage()
     message["Subject"] = "Bạn vừa đăng nhập VinUni Guide"
     message["To"] = email
     message.set_content(
         f"Xin chào {display_name or email},\n\n"
-        f"Tài khoản Google của bạn vừa đăng nhập vào VinUni Guide lúc {now}.\n\n"
+        f"Tài khoản Google của bạn vừa đăng nhập vào VinUni Guide lúc {now} (giờ Việt Nam).\n"
+        f"Trang đăng nhập: {settings.frontend_url.rstrip('/')}\n\n"
+        "Nếu đây là bạn, bạn không cần làm gì thêm.\n"
         "Nếu đây không phải là bạn, hãy đổi mật khẩu Google và kiểm tra hoạt động đăng nhập.\n"
     )
     _send_email(message)

@@ -79,7 +79,10 @@ async def google_start() -> RedirectResponse:
             "response_type": "code",
             "scope": "openid email profile",
             "access_type": "online",
-            "prompt": "select_account",
+            # Always show account selection and the consent step so users know
+            # exactly which profile/email they are sharing with this app.
+            "prompt": "consent select_account",
+            "include_granted_scopes": "true",
             "state": state,
         }
     )
