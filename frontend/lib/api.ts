@@ -53,7 +53,35 @@ export type AnalyticsSummary = {
   top_reason_codes: MetricBreakdown[];
 };
 
-export type TicketStatus = "waiting" | "in_progress" | "resolved";
+export type TicketStatus = "new" | "assigned" | "in_progress" | "waiting_for_user" | "resolved" | "closed";
+export type TicketCategory = "admissions" | "tuition" | "scholarship" | "program" | "application" | "technical" | "other";
+export type TicketPriority = "low" | "medium" | "high" | "urgent";
+
+export type TicketMessage = {
+  message_id: string;
+  role: "user" | "assistant" | "staff";
+  content: string;
+  author_id?: string | null;
+  request_id?: string | null;
+  confidence?: number | null;
+  grounded?: boolean | null;
+  reason_code?: string | null;
+  created_at: string;
+};
+
+export type TicketEvidence = {
+  evidence_id: string;
+  source_id: string;
+  title: string;
+  url: string;
+  content_preview?: string | null;
+  retrieval_score?: number | null;
+  source_category?: string | null;
+  created_at: string;
+};
+
+export type TicketNote = { note_id: string; author_id: string; note: string; created_at: string };
+export type TicketActivity = { activity_id: string; actor_id: string; action: string; detail?: string | null; created_at: string };
 
 export type Ticket = {
   ticket_id: string;
@@ -64,6 +92,43 @@ export type Ticket = {
   assigned_to?: string | null;
   created_at: string;
   updated_at: string;
+};
+
+export type StaffTicket = Ticket & {
+  contact?: string | null;
+  user_email?: string | null;
+  assigned_department?: string | null;
+  category: TicketCategory;
+  priority: TicketPriority;
+  escalation_reason: string;
+  ai_confidence?: number | null;
+  ai_summary?: string | null;
+  suggested_reply?: string | null;
+  resolution_summary?: string | null;
+  resolution_type?: string | null;
+  knowledge_gap: boolean;
+  first_response_at?: string | null;
+  last_response_at?: string | null;
+  resolved_at?: string | null;
+  closed_at?: string | null;
+  email_delivery_status?: string | null;
+  sla_deadline: string;
+  sla_state: "on_track" | "due_soon" | "overdue" | "completed";
+  messages: TicketMessage[];
+  evidence: TicketEvidence[];
+  notes: TicketNote[];
+  activities: TicketActivity[];
+};
+
+export type StaffTicketMetrics = {
+  open_count: number;
+  unassigned_count: number;
+  overdue_count: number;
+  resolved_today: number;
+  average_first_response_minutes?: number | null;
+  by_status: MetricBreakdown[];
+  by_category: MetricBreakdown[];
+  by_priority: MetricBreakdown[];
 };
 
 export type KnowledgeStatus = {

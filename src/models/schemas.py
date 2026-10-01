@@ -105,12 +105,66 @@ class HandoverCreateRequest(BaseModel):
     reason: str = Field(..., min_length=1, max_length=500)
     consent: bool
     contact: str | None = Field(default=None, max_length=255)
+    conversation: list[HandoverMessageSnapshot] = Field(default_factory=list, max_length=50)
+    evidence: list[HandoverEvidenceSnapshot] = Field(default_factory=list, max_length=30)
+    ai_confidence: float | None = Field(default=None, ge=0.0, le=1.0)
 
 
 class TicketStatus(StrEnum):
-    WAITING = "waiting"
+    NEW = "new"
+    # Backward-compatible Python alias. API responses use `new`.
+    WAITING = "new"
+    ASSIGNED = "assigned"
     IN_PROGRESS = "in_progress"
+    WAITING_FOR_USER = "waiting_for_user"
     RESOLVED = "resolved"
+    CLOSED = "closed"
+
+
+class TicketCategory(StrEnum):
+    ADMISSIONS = "admissions"
+    TUITION = "tuition"
+    SCHOLARSHIP = "scholarship"
+    PROGRAM = "program"
+    APPLICATION = "application"
+    TECHNICAL = "technical"
+    OTHER = "other"
+
+
+class TicketPriority(StrEnum):
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+    URGENT = "urgent"
+
+
+class EscalationReason(StrEnum):
+    LOW_CONFIDENCE = "low_confidence"
+    MISSING_EVIDENCE = "missing_evidence"
+    CONFLICTING_EVIDENCE = "conflicting_evidence"
+    PERSONAL_CASE = "personal_case"
+    OUTDATED_SOURCE = "outdated_source"
+    USER_REQUESTED = "user_requested"
+    OTHER = "other"
+
+
+class HandoverMessageSnapshot(BaseModel):
+    role: str = Field(..., pattern="^(user|assistant)$")
+    content: str = Field(..., min_length=1, max_length=10000)
+    created_at: datetime | None = None
+    request_id: str | None = Field(default=None, max_length=128)
+    confidence: float | None = Field(default=None, ge=0.0, le=1.0)
+    grounded: bool | None = None
+    reason_code: str | None = Field(default=None, max_length=128)
+
+
+class HandoverEvidenceSnapshot(BaseModel):
+    source_id: str = Field(..., min_length=1, max_length=255)
+    title: str = Field(..., min_length=1, max_length=500)
+    url: str = Field(..., min_length=1, max_length=2000)
+    content_preview: str | None = Field(default=None, max_length=3000)
+    retrieval_score: float | None = None
+    source_category: str | None = Field(default=None, max_length=100)
 
 
 class TicketResponse(BaseModel):
@@ -130,6 +184,116 @@ class StaffTicketAction(BaseModel):
 
 class StaffReplyRequest(StaffTicketAction):
     reply: str = Field(..., min_length=1, max_length=5000)
+
+
+class StaffAssignmentRequest(StaffTicketAction):
+    assigned_to: str | None = Field(default=None, min_length=2, max_length=100)
+    department: str | None = Field(default=None, max_length=100)
+
+
+class StaffStatusRequest(StaffTicketAction):
+    status: TicketStatus
+
+
+class StaffNoteRequest(StaffTicketAction):
+    note: str = Field(..., min_length=1, max_length=5000)
+
+
+class StaffClassificationRequest(StaffTicketAction):
+    category: TicketCategory | None = None
+    priority: TicketPriority | None = None
+
+
+class StaffResolveRequest(StaffTicketAction):
+    resolution_summary: str = Field(..., min_length=3, max_length=5000)
+    resolution_type: str = Field(..., min_length=2, max_length=100)
+    knowledge_gap: bool = False
+    knowledge_gap_description: str | None = Field(default=None, max_length=3000)
+
+
+class TicketMessage(BaseModel):
+    message_id: str
+    role: str
+    content: str
+    author_id: str | None = None
+    request_id: str | None = None
+    confidence: float | None = None
+    grounded: bool | None = None
+    reason_code: str | None = None
+    created_at: datetime
+
+
+class TicketEvidence(BaseModel):
+    evidence_id: str
+    source_id: str
+    title: str
+    url: str
+    content_preview: str | None = None
+    retrieval_score: float | None = None
+    source_category: str | None = None
+    created_at: datetime
+
+
+class TicketNote(BaseModel):
+    note_id: str
+    author_id: str
+    note: str
+    created_at: datetime
+
+
+class TicketActivity(BaseModel):
+    activity_id: str
+    actor_id: str
+    action: str
+    detail: str | None = None
+    created_at: datetime
+
+
+class StaffTicketResponse(TicketResponse):
+    contact: str | None = None
+    user_email: str | None = None
+    assigned_department: str | None = None
+    category: TicketCategory
+    priority: TicketPriority
+    escalation_reason: EscalationReason
+    ai_confidence: float | None = None
+    ai_summary: str | None = None
+    suggested_reply: str | None = None
+    resolution_summary: str | None = None
+    resolution_type: str | None = None
+    knowledge_gap: bool = False
+    first_response_at: datetime | None = None
+    last_response_at: datetime | None = None
+    resolved_at: datetime | None = None
+    closed_at: datetime | None = None
+    email_delivery_status: str | None = None
+    sla_deadline: datetime
+    sla_state: str
+    messages: list[TicketMessage] = Field(default_factory=list)
+    evidence: list[TicketEvidence] = Field(default_factory=list)
+    notes: list[TicketNote] = Field(default_factory=list)
+    activities: list[TicketActivity] = Field(default_factory=list)
+
+
+class StaffTicketMetrics(BaseModel):
+    open_count: int = 0
+    unassigned_count: int = 0
+    overdue_count: int = 0
+    resolved_today: int = 0
+    average_first_response_minutes: float | None = None
+    by_status: list[MetricBreakdown] = Field(default_factory=list)
+    by_category: list[MetricBreakdown] = Field(default_factory=list)
+    by_priority: list[MetricBreakdown] = Field(default_factory=list)
+
+
+class KnowledgeGapItem(BaseModel):
+    gap_id: str
+    ticket_id: str
+    category: TicketCategory
+    description: str
+    status: str
+    created_by: str
+    created_at: datetime
 
 
 class KnowledgeStatus(BaseModel):

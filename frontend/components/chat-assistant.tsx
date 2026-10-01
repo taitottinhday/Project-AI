@@ -31,6 +31,7 @@ type ConversationMessage = {
   role: "user" | "assistant";
   text: string;
   result?: ChatResponse;
+  created_at?: string;
 };
 
 const SESSION_KEY = "vinuni-guide-session";
@@ -59,9 +60,12 @@ const statusMeta: Record<AnswerStatus, { label: string; className: string }> = {
 };
 
 const ticketMeta: Record<TicketStatus, { label: string; className: string }> = {
-  waiting: { label: "Đang chờ", className: "ticket-waiting" },
+  new: { label: "Mới tiếp nhận", className: "ticket-waiting" },
+  assigned: { label: "Đã phân công", className: "ticket-progress" },
   in_progress: { label: "Đang xử lý", className: "ticket-progress" },
+  waiting_for_user: { label: "Chờ bạn phản hồi", className: "ticket-progress" },
   resolved: { label: "Đã phản hồi", className: "ticket-resolved" },
+  closed: { label: "Đã đóng", className: "ticket-resolved" },
 };
 
 function makeId(): string {
@@ -207,12 +211,14 @@ function HandoverDialog({
   question,
   reason,
   sessionId,
+  messages,
   onClose,
   onCreated,
 }: {
   question: string;
   reason: string;
   sessionId: string | null;
+  messages: ConversationMessage[];
   onClose: () => void;
   onCreated: (ticket: Ticket) => void;
 }) {
@@ -235,6 +241,32 @@ function HandoverDialog({
     setSubmitting(true);
     setError("");
     try {
+      const sharedMessages = messages
+        .filter((message) => message.id !== "welcome")
+        .map((message) => ({
+          role: message.role,
+          content: message.text,
+          created_at: message.created_at || new Date().toISOString(),
+          request_id: message.result?.request_id || null,
+          confidence: message.result?.confidence ?? null,
+          grounded: message.result?.grounded ?? null,
+          reason_code: message.result?.reason_code || null,
+        }));
+      const seenEvidence = new Set<string>();
+      const sharedEvidence = messages.flatMap((message) =>
+        (message.result?.citations || []).flatMap((citation) => {
+          const key = `${citation.source_id}|${citation.url}`;
+          if (seenEvidence.has(key)) return [];
+          seenEvidence.add(key);
+          return [{
+            source_id: citation.source_id,
+            title: citation.title,
+            url: citation.url,
+            source_category: citation.section || null,
+          }];
+        }),
+      );
+      const latestResult = [...messages].reverse().find((message) => message.result)?.result;
       const ticket = await apiRequest<Ticket>("/api/v1/handover", {
         method: "POST",
         body: JSON.stringify({
@@ -243,6 +275,9 @@ function HandoverDialog({
           reason,
           consent: true,
           contact: contact.trim() || null,
+          conversation: sharedMessages,
+          evidence: sharedEvidence,
+          ai_confidence: latestResult?.confidence ?? null,
         }),
       });
       onCreated(ticket);
@@ -261,7 +296,7 @@ function HandoverDialog({
           <div><span className="section-kicker"><StaffIcon /> Handover an toàn</span><h2 id="handover-title">Chuyển cho cán bộ tuyển sinh</h2></div>
           <button aria-label="Đóng" className="icon-button" onClick={onClose} type="button"><CloseIcon /></button>
         </div>
-        <p className="modal-intro">Chỉ nội dung dưới đây và kênh liên hệ tùy chọn được chuyển. Hệ thống không hứa thời gian phản hồi khi chưa có SLA chính thức.</p>
+        <p className="modal-intro">Nội dung tóm tắt, lịch sử hội thoại trong phiên và các nguồn đã hiển thị sẽ được chuyển cho cán bộ khi bạn đồng ý.</p>
         <form onSubmit={submit}>
           <label className="field-label" htmlFor="handover-summary">Nội dung chuyển</label>
           <textarea id="handover-summary" maxLength={2000} onChange={(event) => setSummary(event.target.value)} rows={5} value={summary} />
@@ -269,7 +304,7 @@ function HandoverDialog({
           <input id="handover-contact" maxLength={255} onChange={(event) => setContact(event.target.value)} placeholder="Để trống nếu chỉ theo dõi trong phiên" value={contact} />
           <label className="consent-row">
             <input checked={consent} onChange={(event) => setConsent(event.target.checked)} type="checkbox" />
-            <span>Tôi đồng ý chuyển nội dung trên cho cán bộ phụ trách.</span>
+            <span>Tôi đồng ý chuyển nội dung, lịch sử hội thoại và các nguồn liên quan cho cán bộ phụ trách.</span>
           </label>
           {error ? <p className="form-error" role="alert">{error}</p> : null}
           <div className="modal-actions">
@@ -391,7 +426,12 @@ export function ChatAssistant() {
     const question = (override ?? draft).trim();
     if (!question || loading) return;
     if (!isRetry) {
-      const userMessage: ConversationMessage = { id: makeId(), role: "user", text: question };
+      const userMessage: ConversationMessage = {
+        id: makeId(),
+        role: "user",
+        text: question,
+        created_at: new Date().toISOString(),
+      };
       setMessages((current) => [...current, userMessage]);
     }
     setLastQuestion(question);
@@ -407,7 +447,13 @@ export function ChatAssistant() {
       setLastReason(result.reason_code);
       setMessages((current) => [
         ...current,
-        { id: result.request_id, role: "assistant", text: result.response, result },
+        {
+          id: result.request_id,
+          role: "assistant",
+          text: result.response,
+          result,
+          created_at: new Date().toISOString(),
+        },
       ]);
     } catch (caught) {
       const message = caught instanceof Error ? caught.message : "Không thể kết nối trợ lý.";
@@ -518,6 +564,7 @@ export function ChatAssistant() {
 
       {handoverOpen ? (
         <HandoverDialog
+          messages={messages}
           onClose={() => setHandoverOpen(false)}
           onCreated={addTicket}
           question={lastQuestion}

@@ -27,7 +27,16 @@ def test_ticket_lifecycle_and_session_isolation(tmp_path):
 
     replied = store.reply(ticket.ticket_id, "staff-1", "Da kiem tra")
     assert replied.staff_reply == "Da kiem tra"
-    assert replied.status == TicketStatus.RESOLVED
+    assert replied.status == TicketStatus.WAITING_FOR_USER
+
+    resolved = store.resolve(
+        ticket.ticket_id,
+        "staff-1",
+        resolution_summary="Da tra loi ung vien",
+        resolution_type="answered",
+    )
+    assert resolved.status == TicketStatus.RESOLVED
+    assert resolved.resolution_summary == "Da tra loi ung vien"
 
 
 def test_ticket_cannot_resolve_without_reply(tmp_path):
@@ -54,6 +63,50 @@ def test_legacy_replied_ticket_is_backfilled_to_resolved(tmp_path):
     assert migrated_store.get_for_staff(ticket.ticket_id).status == TicketStatus.RESOLVED
 
 
+def test_legacy_ticket_table_is_migrated_without_losing_data(tmp_path):
+    path = tmp_path / "legacy.db"
+    with sqlite3.connect(path) as connection:
+        connection.execute(
+            """
+            CREATE TABLE handover_tickets (
+                ticket_id TEXT PRIMARY KEY,
+                session_id TEXT NOT NULL,
+                question TEXT NOT NULL,
+                reason TEXT NOT NULL,
+                contact TEXT,
+                status TEXT NOT NULL CHECK(status IN ('waiting', 'in_progress', 'resolved')),
+                assigned_to TEXT,
+                staff_reply TEXT,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """
+        )
+        connection.execute(
+            "INSERT INTO handover_tickets VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (
+                "VU-LEGACY",
+                "session-owner-1234",
+                "Hoc phi nam nay?",
+                "missing_evidence",
+                "student@example.com",
+                "waiting",
+                None,
+                None,
+                "2026-09-01T00:00:00+00:00",
+                "2026-09-01T00:00:00+00:00",
+            ),
+        )
+
+    store = TicketStore(path)
+    migrated = store.get_for_staff("VU-LEGACY")
+
+    assert migrated.status == TicketStatus.NEW
+    assert migrated.question == "Hoc phi nam nay?"
+    assert migrated.user_email == "student@example.com"
+    assert migrated.category.value == "tuition"
+
+
 def test_anonymous_session_identifier_survives_process_restart():
     """A persisted ticket remains readable when the API process recreates session memory."""
     session_id = "anonymous-owner-token-1234567890"
@@ -62,3 +115,78 @@ def test_anonymous_session_identifier_survives_process_restart():
 
     restarted_process = SessionStore()
     assert restarted_process.get_or_create(session_id).session_id == session_id
+
+
+def test_ticket_persists_context_evidence_notes_and_audit(tmp_path):
+    from datetime import UTC, datetime
+
+    from src.models.schemas import HandoverEvidenceSnapshot, HandoverMessageSnapshot
+
+    store = TicketStore(tmp_path / "tickets.db")
+    ticket = store.create(
+        session_id="session-owner-1234",
+        question="Hoc phi Bac si Y khoa bao nhieu?",
+        reason="insufficient_retrieval_evidence",
+        contact="student@example.com",
+        ai_confidence=0.2,
+        conversation=[
+            HandoverMessageSnapshot(
+                role="user",
+                content="Hoc phi Bac si Y khoa bao nhieu?",
+                created_at=datetime.now(UTC),
+            ),
+            HandoverMessageSnapshot(
+                role="assistant",
+                content="Chua du can cu.",
+                confidence=0.2,
+                grounded=False,
+                reason_code="insufficient_retrieval_evidence",
+                created_at=datetime.now(UTC),
+            ),
+        ],
+        evidence=[
+            HandoverEvidenceSnapshot(
+                source_id="tuition-2026",
+                title="Bieu phi 2026",
+                url="https://vinuni.edu.vn/tuition",
+            )
+        ],
+    )
+
+    detail = store.get_for_staff(ticket.ticket_id)
+    assert detail.category.value == "tuition"
+    assert detail.priority.value == "high"
+    assert detail.user_email == "student@example.com"
+    assert len(detail.messages) == 2
+    assert len(detail.evidence) == 1
+    assert detail.ai_summary
+    assert detail.suggested_reply
+    assert detail.activities
+
+    store.add_note(ticket.ticket_id, "staff-1", "Can doi chieu phong tai chinh")
+    assert store.get_for_staff(ticket.ticket_id).notes[0].note == "Can doi chieu phong tai chinh"
+
+
+def test_assignment_email_state_and_knowledge_gap(tmp_path):
+    store = TicketStore(tmp_path / "tickets.db")
+    ticket = store.create("session-owner-1234", "Question", "personal_case", "student@example.com")
+
+    assigned = store.assign(ticket.ticket_id, "lead-1", "staff-1", "Admissions")
+    assert assigned.status == TicketStatus.ASSIGNED
+    assert assigned.assigned_to == "staff-1"
+
+    store.set_status(ticket.ticket_id, "staff-1", TicketStatus.IN_PROGRESS)
+    store.reply(ticket.ticket_id, "staff-1", "Da kiem tra")
+    delivery = store.record_email_delivery(ticket.ticket_id, delivered=True)
+    assert delivery.email_delivery_status == "sent"
+
+    resolved = store.resolve(
+        ticket.ticket_id,
+        "staff-1",
+        resolution_summary="Thieu huong dan cho truong hop ca nhan",
+        resolution_type="answered",
+        knowledge_gap=True,
+        knowledge_gap_description="Can bo sung FAQ cho truong hop ca nhan",
+    )
+    assert resolved.knowledge_gap is True
+    assert store.list_knowledge_gaps()[0].ticket_id == ticket.ticket_id

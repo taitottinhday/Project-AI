@@ -27,10 +27,20 @@ from src.models.schemas import (
     FeedbackRequest,
     FeedbackResponse,
     HandoverCreateRequest,
+    KnowledgeGapItem,
     KnowledgeStatus,
     RegisterOtpRequest,
+    StaffAssignmentRequest,
+    StaffClassificationRequest,
+    StaffNoteRequest,
     StaffReplyRequest,
+    StaffResolveRequest,
+    StaffStatusRequest,
     StaffTicketAction,
+    StaffTicketMetrics,
+    StaffTicketResponse,
+    TicketCategory,
+    TicketPriority,
     TicketResponse,
     TicketStatus,
     VerifyOtpRequest,
@@ -41,6 +51,7 @@ from src.services.auth import (
     hash_password,
     send_login_notification_email,
     send_otp_email,
+    send_transactional_email,
 )
 from src.services.knowledge_base import get_knowledge_base
 from src.services.rate_limit import enforce_rate_limit
@@ -392,6 +403,9 @@ async def create_handover(request: HandoverCreateRequest) -> TicketResponse:
         question=request.question,
         reason=request.reason,
         contact=request.contact,
+        conversation=request.conversation,
+        evidence=request.evidence,
+        ai_confidence=request.ai_confidence,
     )
 
 
@@ -407,11 +421,45 @@ async def get_handover(
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
 
 
-@router.get("/staff/tickets", response_model=list[TicketResponse], dependencies=[Depends(require_staff)])
+@router.get("/staff/tickets", response_model=list[StaffTicketResponse])
 async def list_tickets(
     ticket_status: TicketStatus | None = Query(default=None, alias="status"),
-) -> list[TicketResponse]:
-    return get_ticket_store().list_for_staff(ticket_status)
+    category: TicketCategory | None = Query(default=None),
+    priority: TicketPriority | None = Query(default=None),
+    assigned_to: str | None = Query(default=None),
+    search: str | None = Query(default=None, max_length=200),
+    sort: str = Query(default="oldest", pattern="^(oldest|newest|priority)$"),
+    _identity: str | None = Depends(require_staff),
+) -> list[StaffTicketResponse]:
+    return get_ticket_store().list_for_staff(
+        ticket_status,
+        category=category,
+        priority=priority,
+        assigned_to=assigned_to,
+        search=search,
+        sort=sort,
+    )
+
+
+@router.get("/staff/tickets/metrics", response_model=StaffTicketMetrics)
+async def ticket_metrics(_identity: str | None = Depends(require_staff)) -> StaffTicketMetrics:
+    return get_ticket_store().metrics()
+
+
+@router.get("/staff/knowledge-gaps", response_model=list[KnowledgeGapItem])
+async def knowledge_gaps(_identity: str | None = Depends(require_staff)) -> list[KnowledgeGapItem]:
+    return get_ticket_store().list_knowledge_gaps()
+
+
+@router.get("/staff/tickets/{ticket_id}", response_model=StaffTicketResponse)
+async def get_staff_ticket(
+    ticket_id: str,
+    _identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
+    try:
+        return get_ticket_store().get_for_staff(ticket_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
 
 
 @router.get(
@@ -430,10 +478,9 @@ async def source_monitor_status() -> dict:
 
 @router.post(
     "/staff/tickets/{ticket_id}/claim",
-    response_model=TicketResponse,
-    dependencies=[Depends(require_staff)],
+    response_model=StaffTicketResponse,
 )
-async def claim_ticket(ticket_id: str, request: StaffTicketAction, identity: str | None = Depends(require_staff)) -> TicketResponse:
+async def claim_ticket(ticket_id: str, request: StaffTicketAction, identity: str | None = Depends(require_staff)) -> StaffTicketResponse:
     check_staff_identity(request.staff_id, identity)
     try:
         return get_ticket_store().claim(ticket_id, request.staff_id)
@@ -447,13 +494,30 @@ async def claim_ticket(ticket_id: str, request: StaffTicketAction, identity: str
 
 @router.post(
     "/staff/tickets/{ticket_id}/reply",
-    response_model=TicketResponse,
-    dependencies=[Depends(require_staff)],
+    response_model=StaffTicketResponse,
 )
-async def reply_ticket(ticket_id: str, request: StaffReplyRequest, identity: str | None = Depends(require_staff)) -> TicketResponse:
+async def reply_ticket(ticket_id: str, request: StaffReplyRequest, identity: str | None = Depends(require_staff)) -> StaffTicketResponse:
     check_staff_identity(request.staff_id, identity)
     try:
-        return get_ticket_store().reply(ticket_id, request.staff_id, request.reply)
+        store = get_ticket_store()
+        updated = store.reply(ticket_id, request.staff_id, request.reply)
+        if updated.user_email:
+            try:
+                send_transactional_email(
+                    updated.user_email,
+                    f"Phản hồi từ VinUni Guide · {updated.ticket_id}",
+                    f"Xin chào,\n\nCán bộ tuyển sinh đã phản hồi yêu cầu {updated.ticket_id}:\n\n"
+                    f"{request.reply.strip()}\n\nBạn có thể tiếp tục theo dõi yêu cầu trên VinUni Guide.",
+                )
+            except Exception as exc:
+                logger.exception("Could not deliver staff reply for ticket_id=%s", ticket_id)
+                return store.record_email_delivery(ticket_id, delivered=False, detail=str(exc)[:500])
+            return store.record_email_delivery(ticket_id, delivered=True)
+        return store.record_email_delivery(
+            ticket_id,
+            delivered=False,
+            detail="Người dùng chưa cung cấp email",
+        )
     except KeyError:
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
     except PermissionError as exc:
@@ -464,17 +528,119 @@ async def reply_ticket(ticket_id: str, request: StaffReplyRequest, identity: str
 
 @router.post(
     "/staff/tickets/{ticket_id}/resolve",
-    response_model=TicketResponse,
-    dependencies=[Depends(require_staff)],
+    response_model=StaffTicketResponse,
 )
-async def resolve_ticket(ticket_id: str, request: StaffTicketAction, identity: str | None = Depends(require_staff)) -> TicketResponse:
+async def resolve_ticket(
+    ticket_id: str,
+    request: StaffResolveRequest,
+    identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
     check_staff_identity(request.staff_id, identity)
     try:
-        return get_ticket_store().resolve(ticket_id, request.staff_id)
+        return get_ticket_store().resolve(
+            ticket_id,
+            request.staff_id,
+            request.resolution_summary,
+            request.resolution_type,
+            request.knowledge_gap,
+            request.knowledge_gap_description,
+        )
     except KeyError:
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
     except PermissionError as exc:
         raise HTTPException(status_code=409, detail=str(exc)) from None
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from None
+
+
+@router.post("/staff/tickets/{ticket_id}/assign", response_model=StaffTicketResponse)
+async def assign_ticket(
+    ticket_id: str,
+    request: StaffAssignmentRequest,
+    identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
+    check_staff_identity(request.staff_id, identity)
+    try:
+        return get_ticket_store().assign(
+            ticket_id, request.staff_id, request.assigned_to, request.department
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from None
+
+
+@router.post("/staff/tickets/{ticket_id}/status", response_model=StaffTicketResponse)
+async def change_ticket_status(
+    ticket_id: str,
+    request: StaffStatusRequest,
+    identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
+    check_staff_identity(request.staff_id, identity)
+    try:
+        return get_ticket_store().set_status(ticket_id, request.staff_id, request.status)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+    except PermissionError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from None
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from None
+
+
+@router.post("/staff/tickets/{ticket_id}/classification", response_model=StaffTicketResponse)
+async def classify_ticket(
+    ticket_id: str,
+    request: StaffClassificationRequest,
+    identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
+    check_staff_identity(request.staff_id, identity)
+    try:
+        return get_ticket_store().update_classification(
+            ticket_id, request.staff_id, request.category, request.priority
+        )
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from None
+
+
+@router.post("/staff/tickets/{ticket_id}/notes", response_model=StaffTicketResponse)
+async def add_ticket_note(
+    ticket_id: str,
+    request: StaffNoteRequest,
+    identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
+    check_staff_identity(request.staff_id, identity)
+    try:
+        return get_ticket_store().add_note(ticket_id, request.staff_id, request.note)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+
+
+@router.post("/staff/tickets/{ticket_id}/regenerate-ai", response_model=StaffTicketResponse)
+async def regenerate_ticket_ai(
+    ticket_id: str,
+    request: StaffTicketAction,
+    identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
+    check_staff_identity(request.staff_id, identity)
+    try:
+        return get_ticket_store().regenerate_ai(ticket_id, request.staff_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+
+
+@router.post("/staff/tickets/{ticket_id}/close", response_model=StaffTicketResponse)
+async def close_ticket(
+    ticket_id: str,
+    request: StaffTicketAction,
+    identity: str | None = Depends(require_staff),
+) -> StaffTicketResponse:
+    check_staff_identity(request.staff_id, identity)
+    try:
+        return get_ticket_store().close(ticket_id, request.staff_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from None
 

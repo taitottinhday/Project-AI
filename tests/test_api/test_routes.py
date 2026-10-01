@@ -224,3 +224,102 @@ async def test_staff_token_cannot_claim_ticket_as_another_staff_member(client, m
     )
 
     assert response.status_code == 403
+
+
+@pytest.mark.asyncio
+async def test_staff_human_in_the_loop_flow_keeps_internal_data_private(client, monkeypatch):
+    from src.api import routes
+    from src.config import get_settings
+
+    monkeypatch.setattr(get_settings(), "staff_tokens", {"admissions-a": "token-for-a"})
+    sent_emails = []
+    monkeypatch.setattr(
+        routes,
+        "send_transactional_email",
+        lambda email, subject, text: sent_emails.append((email, subject, text)),
+    )
+    ticket = await client.post(
+        "/api/v1/handover",
+        json={
+            "session_id": "session-1234567890",
+            "question": "Hoc phi nam 2026 la bao nhieu?",
+            "reason": "insufficient_retrieval_evidence",
+            "contact": "student@example.com",
+            "consent": True,
+            "ai_confidence": 0.2,
+            "conversation": [
+                {"role": "user", "content": "Hoc phi nam 2026 la bao nhieu?"},
+                {
+                    "role": "assistant",
+                    "content": "Chua du can cu.",
+                    "confidence": 0.2,
+                    "grounded": False,
+                },
+            ],
+            "evidence": [
+                {
+                    "source_id": "tuition-2026",
+                    "title": "Bieu phi 2026",
+                    "url": "https://vinuni.edu.vn/tuition",
+                }
+            ],
+        },
+    )
+    ticket_id = ticket.json()["ticket_id"]
+    headers = {"Authorization": "Bearer token-for-a"}
+
+    queue = await client.get("/api/v1/staff/tickets?priority=high", headers=headers)
+    assert queue.status_code == 200
+    assert queue.json()[0]["messages"]
+    assert queue.json()[0]["evidence"]
+
+    claimed = await client.post(
+        f"/api/v1/staff/tickets/{ticket_id}/claim",
+        headers=headers,
+        json={"staff_id": "admissions-a"},
+    )
+    assert claimed.json()["status"] == "in_progress"
+
+    noted = await client.post(
+        f"/api/v1/staff/tickets/{ticket_id}/notes",
+        headers=headers,
+        json={"staff_id": "admissions-a", "note": "Ghi chu noi bo"},
+    )
+    assert noted.json()["notes"][0]["note"] == "Ghi chu noi bo"
+
+    public = await client.get(
+        f"/api/v1/handover/{ticket_id}",
+        headers={"X-Session-ID": "session-1234567890"},
+    )
+    assert "notes" not in public.json()
+    assert "evidence" not in public.json()
+
+    replied = await client.post(
+        f"/api/v1/staff/tickets/{ticket_id}/reply",
+        headers=headers,
+        json={"staff_id": "admissions-a", "reply": "Cau tra loi da kiem tra"},
+    )
+    assert replied.json()["status"] == "waiting_for_user"
+    assert replied.json()["email_delivery_status"] == "sent"
+    assert sent_emails[0][0] == "student@example.com"
+
+    resolved = await client.post(
+        f"/api/v1/staff/tickets/{ticket_id}/resolve",
+        headers=headers,
+        json={
+            "staff_id": "admissions-a",
+            "resolution_summary": "Da tra loi day du",
+            "resolution_type": "answered",
+            "knowledge_gap": True,
+            "knowledge_gap_description": "Can them du lieu hoc phi",
+        },
+    )
+    assert resolved.json()["status"] == "resolved"
+
+    gaps = await client.get("/api/v1/staff/knowledge-gaps", headers=headers)
+    assert gaps.status_code == 200
+    assert gaps.json()[0]["ticket_id"] == ticket_id
+
+    metrics = await client.get("/api/v1/staff/tickets/metrics", headers=headers)
+    assert metrics.status_code == 200
+    assert metrics.json()["resolved_today"] == 1

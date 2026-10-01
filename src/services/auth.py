@@ -323,6 +323,15 @@ def _send_email(message: EmailMessage) -> None:
         _send_smtp_message(message)
 
 
+def send_transactional_email(email: str, subject: str, text: str) -> None:
+    """Send a plain-text product email through the configured Resend/SMTP transport."""
+    message = EmailMessage()
+    message["Subject"] = subject
+    message["To"] = email
+    message.set_content(text)
+    _send_email(message)
+
+
 def send_otp_email(email: str, code: str) -> None:
     settings = get_settings()
     message = EmailMessage()
