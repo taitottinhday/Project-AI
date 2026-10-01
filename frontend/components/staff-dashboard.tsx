@@ -70,7 +70,6 @@ export function StaffDashboard() {
   const [statusFilter, setStatusFilter] = useState<"all" | TicketStatus>("all");
   const [categoryFilter, setCategoryFilter] = useState<"all" | TicketCategory>("all");
   const [priorityFilter, setPriorityFilter] = useState<"all" | TicketPriority>("all");
-  const [assignmentFilter, setAssignmentFilter] = useState<"all" | "mine" | "unassigned">("all");
   const [sort, setSort] = useState<"oldest" | "newest" | "priority">("priority");
   const [search, setSearch] = useState("");
   const [reply, setReply] = useState("");
@@ -93,12 +92,10 @@ export function StaffDashboard() {
     if (statusFilter !== "all" && ticket.status !== statusFilter) return false;
     if (categoryFilter !== "all" && ticket.category !== categoryFilter) return false;
     if (priorityFilter !== "all" && ticket.priority !== priorityFilter) return false;
-    if (assignmentFilter === "mine" && ticket.assigned_to !== staffId) return false;
-    if (assignmentFilter === "unassigned" && ticket.assigned_to) return false;
     const needle = search.trim().toLocaleLowerCase("vi");
     return !needle || `${ticket.ticket_id} ${ticket.question} ${ticket.ai_summary || ""} ${ticket.contact || ""}`
       .toLocaleLowerCase("vi").includes(needle);
-  }), [assignmentFilter, categoryFilter, priorityFilter, search, staffId, statusFilter, tickets]);
+  }), [categoryFilter, priorityFilter, search, statusFilter, tickets]);
 
   useEffect(() => {
     const hydration = window.setTimeout(() => {
@@ -316,7 +313,7 @@ export function StaffDashboard() {
 
       <div className="staff-metrics hitl-metrics">
         <article><span className="metric-icon waiting"><ClockIcon /></span><div><strong>{metrics?.open_count ?? 0}</strong><span>Đang mở</span></div></article>
-        <article><span className="metric-icon progress"><StaffIcon /></span><div><strong>{metrics?.unassigned_count ?? 0}</strong><span>Chưa phân công</span></div></article>
+        <article><span className="metric-icon progress"><StaffIcon /></span><div><strong>{metrics?.open_count ?? 0}</strong><span>Ticket của tôi</span></div></article>
         <article><span className="metric-icon urgent"><ClockIcon /></span><div><strong>{metrics?.overdue_count ?? 0}</strong><span>Quá SLA</span></div></article>
         <article><span className="metric-icon resolved"><CheckIcon /></span><div><strong>{metrics?.resolved_today ?? 0}</strong><span>Hoàn tất hôm nay</span></div></article>
         <article><span className="metric-icon neutral"><RefreshIcon /></span><div><strong>{compactTime(metrics?.average_first_response_minutes)}</strong><span>Phản hồi đầu TB</span></div></article>
@@ -334,9 +331,6 @@ export function StaffDashboard() {
         </select>
         <select aria-label="Ưu tiên" onChange={(event) => setPriorityFilter(event.target.value as typeof priorityFilter)} value={priorityFilter}>
           <option value="all">Mọi ưu tiên</option>{priorities.map((value) => <option key={value} value={value}>{priorityLabels[value]}</option>)}
-        </select>
-        <select aria-label="Phân công" onChange={(event) => setAssignmentFilter(event.target.value as typeof assignmentFilter)} value={assignmentFilter}>
-          <option value="all">Mọi người xử lý</option><option value="mine">Ticket của tôi</option><option value="unassigned">Chưa phân công</option>
         </select>
         <select aria-label="Sắp xếp" onChange={(event) => setSort(event.target.value as typeof sort)} value={sort}>
           <option value="priority">Ưu tiên cao trước</option><option value="oldest">Cũ nhất trước</option><option value="newest">Mới nhất trước</option>

@@ -266,8 +266,14 @@ async def test_admin_can_configure_specialist_and_auto_route_ticket(client, monk
 async def test_staff_human_in_the_loop_flow_keeps_internal_data_private(client, monkeypatch):
     from src.api import routes
     from src.config import get_settings
+    from src.models.schemas import StaffAvailability, TicketCategory
+    from src.services.tickets import get_ticket_store
 
     monkeypatch.setattr(get_settings(), "staff_tokens", {"admissions-a": "token-for-a"})
+    get_ticket_store().upsert_staff_member(
+        "admissions-a", "Admissions A", "Tuyển sinh",
+        [TicketCategory.TUITION], StaffAvailability.AVAILABLE, True,
+    )
     sent_emails = []
     monkeypatch.setattr(
         routes,
@@ -308,13 +314,6 @@ async def test_staff_human_in_the_loop_flow_keeps_internal_data_private(client, 
     assert queue.status_code == 200
     assert queue.json()[0]["messages"]
     assert queue.json()[0]["evidence"]
-
-    claimed = await client.post(
-        f"/api/v1/staff/tickets/{ticket_id}/claim",
-        headers=headers,
-        json={"staff_id": "admissions-a"},
-    )
-    assert claimed.json()["status"] == "in_progress"
 
     noted = await client.post(
         f"/api/v1/staff/tickets/{ticket_id}/notes",

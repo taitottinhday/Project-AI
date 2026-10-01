@@ -358,6 +358,8 @@ class TicketStore:
                 (staff_id.strip(), display_name.strip(), department.strip(), encoded_specialties,
                  availability.value, int(active), timestamp, timestamp),
             )
+            if active and availability == StaffAvailability.AVAILABLE:
+                self._dispatch_pending(connection, specialties)
         return self.get_staff_member(staff_id.strip())
 
     def set_staff_availability(self, staff_id: str, availability: StaffAvailability) -> StaffMember:
@@ -368,6 +370,12 @@ class TicketStore:
             ).rowcount
             if not updated:
                 raise KeyError(staff_id)
+            if availability == StaffAvailability.AVAILABLE:
+                row = connection.execute(
+                    "SELECT specialties_json FROM staff_members WHERE staff_id = ?", (staff_id,)
+                ).fetchone()
+                specialties = [TicketCategory(value) for value in json.loads(row["specialties_json"])]
+                self._dispatch_pending(connection, specialties)
         return self.get_staff_member(staff_id)
 
     def list_routing_rules(self) -> list[RoutingRule]:
@@ -398,6 +406,8 @@ class TicketStore:
                 """,
                 (category.value, department.strip(), int(auto_assign), _now()),
             )
+            if auto_assign:
+                self._dispatch_pending(connection, [category])
         return RoutingRule(category=category, department=department.strip(), auto_assign=auto_assign)
 
     @staticmethod
@@ -447,6 +457,34 @@ class TicketStore:
         lowest = min(open_counts.values())
         least_loaded = [row["staff_id"] for row in candidates if open_counts[row["staff_id"]] == lowest]
         return secrets.choice(least_loaded), department
+
+    def _dispatch_pending(
+        self, connection: sqlite3.Connection, specialties: list[TicketCategory]
+    ) -> None:
+        """Fill the team queue when a specialist becomes available."""
+        for category in set(specialties):
+            rows = connection.execute(
+                """
+                SELECT ticket_id, priority FROM handover_tickets
+                WHERE category = ? AND status = ? AND assigned_to IS NULL
+                ORDER BY CASE priority WHEN 'urgent' THEN 0 WHEN 'high' THEN 1
+                    WHEN 'medium' THEN 2 ELSE 3 END, created_at ASC
+                """,
+                (category.value, TicketStatus.NEW.value),
+            ).fetchall()
+            for row in rows:
+                assigned_to, department = self._auto_assign(connection, row["ticket_id"], category)
+                if not assigned_to:
+                    continue
+                connection.execute(
+                    """
+                    UPDATE handover_tickets
+                    SET assigned_to = ?, assigned_department = ?, status = ?, updated_at = ?
+                    WHERE ticket_id = ? AND assigned_to IS NULL
+                    """,
+                    (assigned_to, department, TicketStatus.ASSIGNED.value, _now(), row["ticket_id"]),
+                )
+                self._activity(connection, row["ticket_id"], "system", "ticket_auto_assigned", assigned_to)
 
     def create(
         self,
@@ -539,6 +577,7 @@ class TicketStore:
         category: TicketCategory | None = None,
         priority: TicketPriority | None = None,
         assigned_to: str | None = None,
+        viewer_id: str | None = None,
         search: str | None = None,
         sort: str = "oldest",
     ) -> list[StaffTicketResponse]:
@@ -558,6 +597,9 @@ class TicketStore:
         elif assigned_to:
             where.append("assigned_to = ?")
             parameters.append(assigned_to)
+        if viewer_id:
+            where.append("assigned_to = ?")
+            parameters.append(viewer_id)
         if search:
             where.append("(ticket_id LIKE ? OR question LIKE ? OR contact LIKE ? OR ai_summary LIKE ?)")
             needle = f"%{search.strip()}%"
@@ -575,13 +617,15 @@ class TicketStore:
             rows = connection.execute(query, parameters).fetchall()
             return [self._to_staff(connection, row) for row in rows]
 
-    def get_for_staff(self, ticket_id: str) -> StaffTicketResponse:
+    def get_for_staff(self, ticket_id: str, viewer_id: str | None = None) -> StaffTicketResponse:
         with self._connect() as connection:
             row = connection.execute(
                 "SELECT * FROM handover_tickets WHERE ticket_id = ?", (ticket_id,)
             ).fetchone()
             if row is None:
                 raise KeyError(ticket_id)
+            if viewer_id and row["assigned_to"] != viewer_id:
+                raise PermissionError("Cán bộ chỉ được xem ticket được phân công cho mình")
             return self._to_staff(connection, row)
 
     def claim(self, ticket_id: str, staff_id: str) -> StaffTicketResponse:
@@ -589,6 +633,11 @@ class TicketStore:
         with self._connect() as connection:
             row = self._required_row(connection, ticket_id)
             self._assert_open(row)
+            configured_member = connection.execute(
+                "SELECT 1 FROM staff_members WHERE staff_id = ?", (staff_id,)
+            ).fetchone()
+            if configured_member:
+                raise PermissionError("Ticket được phân công tự động; chỉ Admin có thể điều phối lại")
             if row["assigned_to"] and row["assigned_to"] != staff_id:
                 raise PermissionError("Ticket đang do cán bộ khác xử lý")
             connection.execute(
@@ -678,6 +727,7 @@ class TicketStore:
             raise ValueError("Cần chọn category hoặc priority")
         with self._connect() as connection:
             row = self._required_row(connection, ticket_id)
+            self._assert_owner(row, staff_id)
             self._assert_open(row)
             next_category = category.value if category else row["category"]
             next_priority = priority.value if priority else row["priority"]
@@ -693,7 +743,8 @@ class TicketStore:
 
     def add_note(self, ticket_id: str, staff_id: str, note: str) -> StaffTicketResponse:
         with self._connect() as connection:
-            self._required_row(connection, ticket_id)
+            row = self._required_row(connection, ticket_id)
+            self._assert_owner(row, staff_id)
             connection.execute(
                 "INSERT INTO ticket_notes VALUES (?, ?, ?, ?, ?)",
                 (_id("note"), ticket_id, staff_id, note.strip(), _now()),
@@ -734,7 +785,7 @@ class TicketStore:
         detail: str | None = None,
     ) -> StaffTicketResponse:
         with self._connect() as connection:
-            self._required_row(connection, ticket_id)
+            row = self._required_row(connection, ticket_id)
             delivery = "sent" if delivered else "failed"
             connection.execute(
                 "UPDATE handover_tickets SET email_delivery_status = ?, updated_at = ? WHERE ticket_id = ?",
@@ -746,6 +797,7 @@ class TicketStore:
     def regenerate_ai(self, ticket_id: str, staff_id: str) -> StaffTicketResponse:
         with self._connect() as connection:
             row = self._required_row(connection, ticket_id)
+            self._assert_owner(row, staff_id)
             messages = self._messages(connection, ticket_id)
             evidence = self._evidence(connection, ticket_id)
             message_snapshots = [
@@ -829,9 +881,11 @@ class TicketStore:
             self._activity(connection, ticket_id, staff_id, "ticket_closed")
         return self.get_for_staff(ticket_id)
 
-    def metrics(self) -> StaffTicketMetrics:
+    def metrics(self, staff_id: str | None = None) -> StaffTicketMetrics:
         with self._connect() as connection:
             rows = connection.execute("SELECT * FROM handover_tickets").fetchall()
+        if staff_id:
+            rows = [row for row in rows if row["assigned_to"] == staff_id]
         now = _now_dt()
         open_rows = [row for row in rows if row["status"] not in {"resolved", "closed"}]
         response_minutes = [

@@ -33,7 +33,6 @@ from src.models.schemas import (
     KnowledgeGapItem,
     KnowledgeStatus,
     RegisterOtpRequest,
-    StaffAssignmentRequest,
     StaffAvailabilityRequest,
     StaffClassificationRequest,
     StaffNoteRequest,
@@ -539,6 +538,7 @@ async def list_tickets(
         category=category,
         priority=priority,
         assigned_to=assigned_to,
+        viewer_id=_identity,
         search=search,
         sort=sort,
     )
@@ -546,7 +546,7 @@ async def list_tickets(
 
 @router.get("/staff/tickets/metrics", response_model=StaffTicketMetrics)
 async def ticket_metrics(_identity: str | None = Depends(require_staff)) -> StaffTicketMetrics:
-    return get_ticket_store().metrics()
+    return get_ticket_store().metrics(_identity)
 
 
 @router.get("/staff/knowledge-gaps", response_model=list[KnowledgeGapItem])
@@ -560,9 +560,11 @@ async def get_staff_ticket(
     _identity: str | None = Depends(require_staff),
 ) -> StaffTicketResponse:
     try:
-        return get_ticket_store().get_for_staff(ticket_id)
+        return get_ticket_store().get_for_staff(ticket_id, viewer_id=_identity)
     except KeyError:
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
+    except PermissionError:
+        raise HTTPException(status_code=403, detail="Ticket không thuộc phạm vi xử lý của bạn") from None
 
 
 @router.get(
@@ -659,14 +661,11 @@ async def resolve_ticket(
 @router.post("/staff/tickets/{ticket_id}/assign", response_model=StaffTicketResponse)
 async def assign_ticket(
     ticket_id: str,
-    request: StaffAssignmentRequest,
-    identity: str | None = Depends(require_staff),
+    request: AdminTicketAssignmentRequest,
+    admin_id: str = Depends(require_admin),
 ) -> StaffTicketResponse:
-    check_staff_identity(request.staff_id, identity)
     try:
-        return get_ticket_store().assign(
-            ticket_id, request.staff_id, request.assigned_to, request.department
-        )
+        return get_ticket_store().assign_by_admin(ticket_id, admin_id, request.assigned_to)
     except KeyError:
         raise HTTPException(status_code=404, detail="Không tìm thấy ticket") from None
     except ValueError as exc:

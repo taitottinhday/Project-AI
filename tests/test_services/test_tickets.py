@@ -163,6 +163,7 @@ def test_ticket_persists_context_evidence_notes_and_audit(tmp_path):
     assert detail.suggested_reply
     assert detail.activities
 
+    store.claim(ticket.ticket_id, "staff-1")
     store.add_note(ticket.ticket_id, "staff-1", "Can doi chieu phong tai chinh")
     assert store.get_for_staff(ticket.ticket_id).notes[0].note == "Can doi chieu phong tai chinh"
 
@@ -220,3 +221,7 @@ def test_ticket_is_routed_to_available_specialist_with_lowest_load(tmp_path):
     )
     assert waiting.status == TicketStatus.NEW
     assert store.get_for_staff(waiting.ticket_id).assigned_department == "Tài chính & Học phí"
+
+    store.set_staff_availability("tuition-a", StaffAvailability.AVAILABLE)
+    assert store.get_for_staff(waiting.ticket_id).assigned_to == "tuition-a"
+    assert store.get_for_staff(waiting.ticket_id).status == TicketStatus.ASSIGNED
