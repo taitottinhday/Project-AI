@@ -2894,11 +2894,58 @@ button:disabled {
 
 /* Staff HITL workspace */
 .hitl-dashboard {
-  gap: 12px;
+  gap: 16px;
 }
 
 .hitl-metrics {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.hitl-metrics article {
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(31, 48, 52, 0.025);
+  min-height: 76px;
+  padding: 15px 17px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.hitl-metrics article:hover {
+  border-color: #b9cdcb;
+  box-shadow: 0 8px 20px rgba(31, 48, 52, 0.07);
+  transform: translateY(-2px);
+}
+
+.hitl-metrics article > div {
+  min-width: 0;
+}
+
+.hitl-metrics strong {
+  color: var(--teal-950);
+  font-size: clamp(22px, 1.7vw, 28px);
+  font-variant-numeric: tabular-nums;
+}
+
+.hitl-metrics article div span {
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.35;
+  margin-top: 6px;
+}
+
+.hitl-metrics .metric-icon {
+  align-items: center;
+  border-radius: 12px;
+  display: inline-flex;
+  flex: 0 0 44px;
+  height: 44px;
+  justify-content: center;
+  line-height: 0;
+  width: 44px;
+}
+
+.hitl-metrics .metric-icon svg {
+  height: 21px;
+  width: 21px;
 }
 
 .metric-icon.urgent {
@@ -3543,6 +3590,10 @@ button:disabled {
 
   .hitl-workspace {
     grid-template-columns: 1fr;
+  }
+
+  .hitl-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hitl-queue-list {

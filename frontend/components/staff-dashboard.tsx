@@ -300,6 +300,9 @@ export function StaffDashboard() {
   }
 
   const canEdit = selected?.assigned_to === staffId && !["resolved", "closed"].includes(selected.status);
+  const myOpenTicketCount = tickets.filter((ticket) => (
+    ticket.assigned_to === staffId && !["resolved", "closed"].includes(ticket.status)
+  )).length;
 
   return (
     <div className="staff-dashboard hitl-dashboard">
@@ -313,7 +316,7 @@ export function StaffDashboard() {
 
       <div className="staff-metrics hitl-metrics">
         <article><span className="metric-icon waiting"><ClockIcon /></span><div><strong>{metrics?.open_count ?? 0}</strong><span>Đang mở</span></div></article>
-        <article><span className="metric-icon progress"><StaffIcon /></span><div><strong>{metrics?.open_count ?? 0}</strong><span>Ticket của tôi</span></div></article>
+        <article><span className="metric-icon progress"><StaffIcon /></span><div><strong>{myOpenTicketCount}</strong><span>Ticket của tôi</span></div></article>
         <article><span className="metric-icon urgent"><ClockIcon /></span><div><strong>{metrics?.overdue_count ?? 0}</strong><span>Quá SLA</span></div></article>
         <article><span className="metric-icon resolved"><CheckIcon /></span><div><strong>{metrics?.resolved_today ?? 0}</strong><span>Hoàn tất hôm nay</span></div></article>
         <article><span className="metric-icon neutral"><RefreshIcon /></span><div><strong>{compactTime(metrics?.average_first_response_minutes)}</strong><span>Phản hồi đầu TB</span></div></article>
