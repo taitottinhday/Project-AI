@@ -158,6 +158,13 @@ export function StaffDashboard() {
     };
   }, [loadDashboard, loggedIn, token]);
 
+  // The dashboard may finish hydrating after the shared root Header has
+  // already mounted. Re-announce the operator session after authentication so
+  // the Header cannot remain on its server-rendered "Đăng nhập" state.
+  useEffect(() => {
+    if (loggedIn) notifyAuthChanged();
+  }, [loggedIn]);
+
   useEffect(() => {
     if (!loggedIn || !token) return;
     const refresh = window.setTimeout(() => void loadDashboard(token), 0);

@@ -146,6 +146,12 @@ export function AdminDashboard() {
     };
   }, [load, ready, saving, token]);
 
+  // Re-announce after the protected data has loaded. This covers the small
+  // hydration window where the root Header can miss the initial login event.
+  useEffect(() => {
+    if (ready) notifyAuthChanged();
+  }, [ready]);
+
   async function login(event: FormEvent) {
     event.preventDefault();
     if (!token.trim()) {
