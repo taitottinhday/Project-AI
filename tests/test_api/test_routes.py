@@ -323,6 +323,19 @@ async def test_admin_can_configure_specialist_and_auto_route_ticket(client, monk
 
 
 @pytest.mark.asyncio
+async def test_single_admin_api_token_is_accepted(client, monkeypatch):
+    from src.config import get_settings
+
+    monkeypatch.setattr(get_settings(), "admin_api_token", "single-admin-token")
+    response = await client.get(
+        "/api/v1/admin/staff",
+        headers={"Authorization": "Bearer single-admin-token "},
+    )
+
+    assert response.status_code == 200
+
+
+@pytest.mark.asyncio
 async def test_staff_team_queue_and_admin_assignment_share_one_lifecycle(client, monkeypatch):
     from src.config import get_settings
     from src.models.schemas import StaffAvailability, TicketCategory

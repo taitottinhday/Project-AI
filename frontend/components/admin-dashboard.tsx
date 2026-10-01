@@ -154,7 +154,11 @@ export function AdminDashboard() {
     }
     window.sessionStorage.setItem(ADMIN_TOKEN_KEY, token.trim());
     notifyAuthChanged();
-    await load(token.trim());
+    try {
+      await load(token.trim());
+    } catch {
+      // load keeps the API error in the panel; guard the submit promise too.
+    }
   }
 
   function logout() {

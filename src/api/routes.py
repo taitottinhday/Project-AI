@@ -262,18 +262,24 @@ def require_staff(authorization: str | None = Header(default=None)) -> str | Non
 
 def require_admin(authorization: str | None = Header(default=None)) -> str:
     settings = get_settings()
-    if not settings.admin_tokens:
+    expected = settings.admin_api_token.strip()
+    if not expected and not settings.admin_tokens:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="ADMIN_TOKENS chÆ°a Ä‘Æ°á»£c cáº¥u hÃ¬nh",
+            detail="ChÆ°a cáº¥u hÃ¬nh ADMIN_API_TOKEN hoáº·c ADMIN_TOKENS",
         )
     supplied = ""
     if authorization and authorization.lower().startswith("bearer "):
-        supplied = authorization[7:]
+        supplied = authorization[7:].strip()
+    if expected and supplied and hmac.compare_digest(supplied.encode(), expected.encode()):
+        return "admin"
     for admin_id, token in settings.admin_tokens.items():
-        if token and hmac.compare_digest(supplied.encode(), token.encode()):
+        if token and supplied and hmac.compare_digest(supplied.encode(), token.encode()):
             return admin_id
-    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="KhÃ´ng cÃ³ quyá»n quáº£n trá»‹")
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Admin token khÃ´ng há»£p lá»‡. DÃ¹ng ADMIN_API_TOKEN hoáº·c giÃ¡ trá»‹ trong ADMIN_TOKENS, khÃ´ng dÃ¹ng Staff token.",
+    )
 
 
 def check_staff_identity(requested: str, authenticated: str | None) -> None:
