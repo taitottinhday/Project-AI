@@ -3116,6 +3116,37 @@ button:disabled {
   text-transform: uppercase;
 }
 
+.reply-locked {
+  align-items: center;
+  background: #f7faf9;
+  border: 1px solid #cbded9;
+  border-radius: 10px;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.reply-locked > div {
+  min-width: 0;
+}
+
+.reply-locked strong {
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.reply-locked p {
+  color: var(--ink-soft);
+  font-size: 10px;
+  margin: 4px 0 0;
+}
+
+.reply-locked .button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .reply-panel,
 .resolve-panel {
   display: grid;
@@ -3523,6 +3554,15 @@ button:disabled {
 
   .ticket-metadata {
     grid-template-columns: 1fr;
+  }
+
+  .reply-locked {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .reply-locked .button {
+    width: 100%;
   }
 
   .footer-meta {
