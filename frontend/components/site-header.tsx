@@ -28,20 +28,17 @@ export function SiteHeader() {
     }
   }, []);
 
-  async function handleLogout() {
+  function handleLogout() {
     setLoggingOut(true);
-    try {
-      await apiRequest("/api/v1/auth/logout", { method: "POST" });
-    } catch {
-      // Clear the local session even if the backend is temporarily unavailable.
-    } finally {
-      window.localStorage.removeItem("vinuni-auth-token");
-      window.localStorage.removeItem("vinuni-auth-user");
-      setUser(null);
-      setLoggingOut(false);
-      setOpen(false);
-      router.replace("/auth");
-    }
+    // Revoke the server session in the background, but never make the user
+    // wait for a slow/unavailable backend before leaving the protected view.
+    void apiRequest("/api/v1/auth/logout", { method: "POST" }).catch(() => undefined);
+    window.localStorage.removeItem("vinuni-auth-token");
+    window.localStorage.removeItem("vinuni-auth-user");
+    setUser(null);
+    setLoggingOut(false);
+    setOpen(false);
+    router.replace("/auth");
   }
 
   const links = [
