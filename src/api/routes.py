@@ -36,7 +36,12 @@ from src.models.schemas import (
     VerifyOtpRequest,
 )
 from src.services.analytics import get_analytics_store
-from src.services.auth import get_auth_store, hash_password, send_otp_email
+from src.services.auth import (
+    get_auth_store,
+    hash_password,
+    send_login_notification_email,
+    send_otp_email,
+)
 from src.services.knowledge_base import get_knowledge_base
 from src.services.rate_limit import enforce_rate_limit
 from src.services.response_cache import response_cache
@@ -112,6 +117,12 @@ async def google_callback(code: str | None = None, state: str | None = None, err
         if not email or profile.get("email_verified") is not True or not profile.get("sub"):
             raise ValueError("Google account chưa xác minh email")
         user = get_auth_store().create_or_update_google_user(email, str(profile.get("name") or email), str(profile["sub"]))
+        try:
+            send_login_notification_email(user["email"], user["display_name"])
+        except (RuntimeError, OSError, smtplib.SMTPException):
+            # OAuth login must remain available if the notification provider is
+            # temporarily unavailable. The failure is visible in Railway logs.
+            logger.warning("Could not send Google login notification to %s", email, exc_info=True)
         exchange_code = get_auth_store().save_exchange_code(user["user_id"])
         return RedirectResponse(f"{settings.frontend_url.rstrip('/')}/auth/callback?code={exchange_code}")
     except (httpx.HTTPError, ValueError, KeyError):
@@ -130,9 +141,30 @@ async def request_register_otp(request: RegisterOtpRequest) -> dict[str, str]:
         send_otp_email(request.email, code)
     except RuntimeError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from None
-    except (OSError, smtplib.SMTPException):
+    except smtplib.SMTPAuthenticationError:
+        logger.exception("SMTP authentication failed while sending OTP")
+        raise HTTPException(
+            status_code=503,
+            detail="Gmail từ chối xác thực SMTP. Hãy kiểm tra SMTP_USERNAME và dùng Google App Password, không dùng mật khẩu Gmail thường.",
+        ) from None
+    except smtplib.SMTPConnectError:
+        logger.exception("SMTP connection failed while sending OTP")
+        raise HTTPException(
+            status_code=503,
+            detail="Không kết nối được máy chủ Gmail SMTP. Hãy kiểm tra SMTP_HOST=smtp.gmail.com và SMTP_PORT=587.",
+        ) from None
+    except (OSError, TimeoutError):
+        logger.exception("SMTP network failure while sending OTP")
+        raise HTTPException(
+            status_code=503,
+            detail="Không thể kết nối Gmail SMTP từ backend. Hãy kiểm tra SMTP_HOST, SMTP_PORT và thử lại.",
+        ) from None
+    except smtplib.SMTPException:
         logger.exception("Could not send registration OTP")
-        raise HTTPException(status_code=503, detail="Không thể gửi OTP lúc này. Vui lòng thử lại.") from None
+        raise HTTPException(
+            status_code=503,
+            detail="Gmail SMTP không gửi được OTP. Kiểm tra lại tài khoản gửi và Google App Password.",
+        ) from None
     return {"message": "Mã OTP đã được gửi tới email của bạn", "email": request.email}
 
 

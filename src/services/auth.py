@@ -245,30 +245,67 @@ class AuthStore:
             return {"user_id": row["user_id"], "email": row["email"], "display_name": row["display_name"]}
 
 
-def send_otp_email(email: str, code: str) -> None:
+def _send_smtp_message(message: EmailMessage) -> None:
     settings = get_settings()
-    if not all((settings.smtp_host, settings.smtp_username, settings.smtp_password, settings.smtp_from_email)):
-        raise RuntimeError("SMTP chưa được cấu hình trên backend")
-    message = EmailMessage()
-    message["Subject"] = "Mã xác minh VinUni Guide"
-    message["From"] = f"{settings.smtp_from_name} <{settings.smtp_from_email}>"
-    message["To"] = email
-    message.set_content(
-        f"Mã OTP đăng ký VinUni Guide của bạn là: {code}\n\nMã có hiệu lực trong {settings.otp_ttl_minutes} phút. "
-        "Nếu bạn không yêu cầu mã này, hãy bỏ qua email."
-    )
+    host = settings.smtp_host.strip()
+    username = settings.smtp_username.strip()
+    # Google displays App Passwords with spaces; Gmail authenticates the same
+    # 16 characters when the separators are removed.
+    password = "".join(settings.smtp_password.split())
+    from_email = (settings.smtp_from_email or username).strip()
+    missing = [
+        name
+        for name, value in (
+            ("SMTP_HOST", host),
+            ("SMTP_USERNAME", username),
+            ("SMTP_PASSWORD", password),
+            ("SMTP_FROM_EMAIL", from_email),
+        )
+        if not value
+    ]
+    if missing:
+        raise RuntimeError(f"SMTP chưa được cấu hình. Thiếu: {', '.join(missing)}")
+
+    message["From"] = f"{settings.smtp_from_name} <{from_email}>"
     context = ssl.create_default_context()
     if settings.smtp_starttls:
-        with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=20) as client:
+        with smtplib.SMTP(host, settings.smtp_port, timeout=20) as client:
             client.ehlo()
             client.starttls(context=context)
             client.ehlo()
-            client.login(settings.smtp_username, settings.smtp_password)
+            client.login(username, password)
             client.send_message(message)
     else:
-        with smtplib.SMTP_SSL(settings.smtp_host, settings.smtp_port, context=context, timeout=20) as client:
-            client.login(settings.smtp_username, settings.smtp_password)
+        with smtplib.SMTP_SSL(host, settings.smtp_port, context=context, timeout=20) as client:
+            client.login(username, password)
             client.send_message(message)
+
+
+def send_otp_email(email: str, code: str) -> None:
+    settings = get_settings()
+    message = EmailMessage()
+    message["Subject"] = "Mã xác minh VinUni Guide"
+    message["To"] = email
+    message.set_content(
+        f"Mã OTP đăng ký VinUni Guide của bạn là: {code}\n\n"
+        f"Mã có hiệu lực trong {settings.otp_ttl_minutes} phút. "
+        "Nếu bạn không yêu cầu mã này, hãy bỏ qua email."
+    )
+    _send_smtp_message(message)
+
+
+def send_login_notification_email(email: str, display_name: str) -> None:
+    """Send a security notice after Google login without blocking the login."""
+    now = _now().astimezone().strftime("%H:%M %d/%m/%Y")
+    message = EmailMessage()
+    message["Subject"] = "Bạn vừa đăng nhập VinUni Guide"
+    message["To"] = email
+    message.set_content(
+        f"Xin chào {display_name or email},\n\n"
+        f"Tài khoản Google của bạn vừa đăng nhập vào VinUni Guide lúc {now}.\n\n"
+        "Nếu đây không phải là bạn, hãy đổi mật khẩu Google và kiểm tra hoạt động đăng nhập.\n"
+    )
+    _send_smtp_message(message)
 
 
 _auth_store: AuthStore | None = None

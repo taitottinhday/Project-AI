@@ -33,11 +33,11 @@ export function AuthPanel() {
           method: "POST", body: JSON.stringify({ email, password }),
         }));
       } else if (mode === "register") {
-        await apiRequest("/api/v1/auth/register/request-otp", {
+        const result = await apiRequest<{ message: string }>("/api/v1/auth/register/request-otp", {
           method: "POST", body: JSON.stringify({ email, display_name: name, password }),
         });
         setMode("verify");
-        setMessage("Mã OTP đã được gửi tới email. Kiểm tra cả mục Spam/Quảng cáo.");
+        setMessage(`${result.message}. Kiểm tra cả mục Spam/Quảng cáo.`);
       } else {
         saveSession(await apiRequest<AuthSession>("/api/v1/auth/register/verify-otp", {
           method: "POST", body: JSON.stringify({ email, code }),

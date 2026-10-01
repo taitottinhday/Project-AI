@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ChatIcon, MenuIcon, ShieldIcon, StaffIcon } from "@/components/icons";
@@ -9,6 +9,7 @@ import { apiRequest, type AuthUser } from "@/lib/api";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loggingOut, setLoggingOut] = useState(false);
@@ -39,6 +40,7 @@ export function SiteHeader() {
       setUser(null);
       setLoggingOut(false);
       setOpen(false);
+      router.replace("/auth");
     }
   }
 
