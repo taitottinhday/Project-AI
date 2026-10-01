@@ -184,6 +184,25 @@ export type AuthSession = {
   user: AuthUser;
 };
 
+export const AUTH_CHANGED_EVENT = "vinuni-auth-changed";
+
+/**
+ * Persist auth state and notify long-lived layout components immediately.
+ * The browser's `storage` event does not fire in the same tab that changed
+ * localStorage, which is the tab used by the email and Google login flows.
+ */
+export function saveAuthSession(session: AuthSession): void {
+  window.localStorage.setItem("vinuni-auth-token", session.access_token);
+  window.localStorage.setItem("vinuni-auth-user", JSON.stringify(session.user));
+  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+}
+
+export function clearAuthSession(): void {
+  window.localStorage.removeItem("vinuni-auth-token");
+  window.localStorage.removeItem("vinuni-auth-user");
+  window.dispatchEvent(new Event(AUTH_CHANGED_EVENT));
+}
+
 export class ApiError extends Error {
   status: number;
 

@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { apiRequest, type AuthSession } from "@/lib/api";
+import { apiRequest, saveAuthSession, type AuthSession } from "@/lib/api";
 
 function AuthCallbackContent() {
   const router = useRouter();
@@ -19,8 +19,7 @@ function AuthCallbackContent() {
       method: "POST",
       body: JSON.stringify({ code }),
     }).then((session) => {
-      window.localStorage.setItem("vinuni-auth-token", session.access_token);
-      window.localStorage.setItem("vinuni-auth-user", JSON.stringify(session.user));
+      saveAuthSession(session);
       router.replace("/?auth=success");
     }).catch((caught) => {
       setError(caught instanceof Error ? caught.message : "Không thể hoàn tất đăng nhập Google.");

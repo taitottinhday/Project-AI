@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { API_BASE, apiRequest, type AuthSession } from "@/lib/api";
+import { API_BASE, apiRequest, saveAuthSession, type AuthSession } from "@/lib/api";
 
 type Mode = "login" | "register" | "verify";
 
@@ -28,8 +28,7 @@ export function AuthPanel() {
       : "Đăng nhập để tiếp tục hành trình tìm hiểu và ứng tuyển vào VinUni.";
 
   function saveSession(session: AuthSession) {
-    window.localStorage.setItem("vinuni-auth-token", session.access_token);
-    window.localStorage.setItem("vinuni-auth-user", JSON.stringify(session.user));
+    saveAuthSession(session);
     router.replace("/");
   }
 

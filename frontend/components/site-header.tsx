@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ChatIcon, MenuIcon, ShieldIcon, StaffIcon } from "@/components/icons";
-import { ApiError, apiRequest, type AuthUser } from "@/lib/api";
+import { AUTH_CHANGED_EVENT, ApiError, apiRequest, clearAuthSession, type AuthUser } from "@/lib/api";
 
 function readStoredAuthUser(): AuthUser | null {
   if (typeof window === "undefined") return null;
@@ -28,23 +28,43 @@ export function SiteHeader() {
   const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
-    const token = window.localStorage.getItem("vinuni-auth-token");
-    // The local profile is only a fast first paint.  Validate it against the
-    // backend so an expired/revoked session never leaves a false signed-in
-    // state in the shared header.
-    if (!token) return;
-    void apiRequest<AuthUser>("/api/v1/auth/me", { method: "GET" }, 8_000)
-      .then((freshUser) => {
-        setUser(freshUser);
-        window.localStorage.setItem("vinuni-auth-user", JSON.stringify(freshUser));
-      })
-      .catch((caught) => {
-        if (caught instanceof ApiError && caught.status === 401) {
-          window.localStorage.removeItem("vinuni-auth-token");
-          window.localStorage.removeItem("vinuni-auth-user");
-          setUser(null);
-        }
-      });
+    let active = true;
+
+    function syncAuthState() {
+      const token = window.localStorage.getItem("vinuni-auth-token");
+      // Clear stale UI immediately when logout or another tab removes auth.
+      if (!token) {
+        setUser(null);
+        return;
+      }
+
+      // The local profile is only a fast first paint. Validate it against the
+      // backend so an expired/revoked session never leaves a false signed-in
+      // state in the shared header. This function is also called after login
+      // because the root layout survives client-side navigation.
+      void apiRequest<AuthUser>("/api/v1/auth/me", { method: "GET" }, 8_000)
+        .then((freshUser) => {
+          if (!active || window.localStorage.getItem("vinuni-auth-token") !== token) return;
+          setUser(freshUser);
+          window.localStorage.setItem("vinuni-auth-user", JSON.stringify(freshUser));
+        })
+        .catch((caught) => {
+          if (!active) return;
+          if (caught instanceof ApiError && caught.status === 401 && window.localStorage.getItem("vinuni-auth-token") === token) {
+            clearAuthSession();
+            setUser(null);
+          }
+        });
+    }
+
+    syncAuthState();
+    window.addEventListener(AUTH_CHANGED_EVENT, syncAuthState);
+    window.addEventListener("storage", syncAuthState);
+    return () => {
+      active = false;
+      window.removeEventListener(AUTH_CHANGED_EVENT, syncAuthState);
+      window.removeEventListener("storage", syncAuthState);
+    };
   }, []);
 
   function handleLogout() {
@@ -52,8 +72,7 @@ export function SiteHeader() {
     // Revoke the server session in the background, but never make the user
     // wait for a slow/unavailable backend before leaving the protected view.
     void apiRequest("/api/v1/auth/logout", { method: "POST" }).catch(() => undefined);
-    window.localStorage.removeItem("vinuni-auth-token");
-    window.localStorage.removeItem("vinuni-auth-user");
+    clearAuthSession();
     setUser(null);
     setLoggingOut(false);
     setOpen(false);
