@@ -207,6 +207,44 @@ button:disabled {
   background: var(--teal-700);
 }
 
+.auth-user-menu {
+  align-items: center;
+  display: inline-flex;
+  gap: 10px;
+  margin-left: 8px;
+}
+
+.auth-user-name {
+  color: var(--teal-900);
+  font-size: 14px;
+  font-weight: 700;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auth-logout {
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--teal-900);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 13px;
+}
+
+.auth-logout:hover {
+  background: var(--teal-50);
+}
+
+.auth-logout:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 .auth-page {
   align-items: center;
   display: flex;
@@ -2349,6 +2387,12 @@ button:disabled {
 
   .main-nav.nav-open {
     display: flex;
+  }
+
+  .auth-user-menu {
+    justify-content: space-between;
+    margin-left: 0;
+    padding-top: 6px;
   }
 
   .hero-section {
