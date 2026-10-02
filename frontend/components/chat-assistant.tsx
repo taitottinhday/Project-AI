@@ -67,7 +67,7 @@ const statusMeta: Record<AnswerStatus, { label: string; className: string }> = {
 
 const ticketMeta: Record<TicketStatus, { label: string; className: string }> = {
   new: { label: "Mới tiếp nhận", className: "ticket-waiting" },
-  assigned: { label: "Đã phân công", className: "ticket-progress" },
+  assigned: { label: "Mới tiếp nhận", className: "ticket-waiting" },
   in_progress: { label: "Đang xử lý", className: "ticket-progress" },
   waiting_for_user: { label: "Chờ bạn phản hồi", className: "ticket-progress" },
   resolved: { label: "Đã phản hồi", className: "ticket-resolved" },

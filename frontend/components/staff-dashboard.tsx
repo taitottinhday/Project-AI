@@ -23,7 +23,7 @@ const POLL_INTERVAL_MS = 8_000;
 
 const statusLabels: Record<TicketStatus, string> = {
   new: "Mới tiếp nhận",
-  assigned: "Đã phân công",
+  assigned: "Mới tiếp nhận",
   in_progress: "Đang xử lý",
   waiting_for_user: "Đã xử lý",
   resolved: "Đã xử lý",
@@ -50,7 +50,7 @@ const priorityLabels: Record<TicketPriority, string> = {
 const categories = Object.keys(categoryLabels) as TicketCategory[];
 const priorities = Object.keys(priorityLabels) as TicketPriority[];
 const statuses = Object.keys(statusLabels) as TicketStatus[];
-const operatorStatuses = statuses.filter((status) => !["resolved", "closed"].includes(status));
+const operatorStatuses = statuses.filter((status) => !["assigned", "resolved", "closed"].includes(status));
 
 function authHeaders(token: string): HeadersInit {
   return { Authorization: `Bearer ${token}` };
@@ -91,7 +91,7 @@ export function StaffDashboard() {
   );
 
   const visibleTickets = useMemo(() => tickets.filter((ticket) => {
-    if (statusFilter !== "all" && ticket.status !== statusFilter) return false;
+    if (statusFilter !== "all" && (statusFilter !== "new" || !["new", "assigned"].includes(ticket.status))) return false;
     if (categoryFilter !== "all" && ticket.category !== categoryFilter) return false;
     if (priorityFilter !== "all" && ticket.priority !== priorityFilter) return false;
     const needle = search.trim().toLocaleLowerCase("vi");
