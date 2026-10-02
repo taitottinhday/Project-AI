@@ -4,6 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 import { CheckIcon, RefreshIcon, ShieldIcon } from "@/components/icons";
 import {
+  ApiError,
   apiRequest,
   notifyAuthChanged,
   type AnalyticsSummary,
@@ -119,6 +120,11 @@ export function AdminDashboard() {
     } catch (caught) {
       setReady(false);
       setError(caught instanceof Error ? caught.message : "Không thể tải trang quản trị.");
+      if (caught instanceof ApiError && [401, 503].includes(caught.status)) {
+        window.sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+        notifyAuthChanged();
+        setToken("");
+      }
     } finally {
       setLoading(false);
     }

@@ -136,7 +136,17 @@ export function StaffDashboard() {
       setError("");
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Không thể tải dashboard.");
-      if (caught instanceof ApiError && [401, 503].includes(caught.status)) setLoggedIn(false);
+      if (caught instanceof ApiError && [401, 503].includes(caught.status)) {
+        // Remove rejected credentials so the shared Header cannot show a
+        // false signed-in state while this form asks for authentication again.
+        window.sessionStorage.removeItem(STAFF_TOKEN_KEY);
+        window.sessionStorage.removeItem(STAFF_ID_KEY);
+        notifyAuthChanged();
+        setLoggedIn(false);
+        setToken("");
+        setStaffId("");
+        setProfile(null);
+      }
     } finally {
       setLoading(false);
     }
