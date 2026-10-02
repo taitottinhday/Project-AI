@@ -404,8 +404,10 @@ export function StaffDashboard() {
               </div>
 
               <div className="hitl-detail-body">
-                <section className="hitl-panel triage-panel">
-                  <div className="panel-heading"><div><span className="eyebrow">AI triage</span><h3>Tóm tắt xử lý</h3></div><button className="text-button" disabled={actionLoading || !canEdit} onClick={() => void regenerateAi()} type="button"><RefreshIcon /> Tạo lại</button></div>
+                <details className="hitl-panel triage-panel detail-drawer">
+                  <summary><span><span className="eyebrow">AI triage</span><strong>Tóm tắt xử lý</strong></span><span>{selected.ai_summary ? "Đã có tóm tắt" : "Chưa có tóm tắt"}</span></summary>
+                  <div className="detail-drawer-content">
+                    <div className="triage-actions"><button className="text-button" disabled={actionLoading || !canEdit} onClick={() => void regenerateAi()} type="button"><RefreshIcon /> Tạo lại tóm tắt</button></div>
                   <p>{selected.ai_summary || "Chưa có tóm tắt."}</p>
                   <div className="triage-grid">
                     <label>Danh mục<select disabled={actionLoading || !canEdit || ["resolved", "closed"].includes(selected.status)} onChange={(event) => void updateClassification(event.target.value as TicketCategory, selected.priority)} value={selected.category}>{categories.map((value) => <option key={value} value={value}>{categoryLabels[value]}</option>)}</select></label>
@@ -413,10 +415,11 @@ export function StaffDashboard() {
                     <dl><dt>Lý do chuyển</dt><dd>{selected.escalation_reason}</dd></dl>
                     <dl><dt>AI confidence</dt><dd>{selected.ai_confidence == null ? "Không có" : `${Math.round(selected.ai_confidence * 100)}%`}</dd></dl>
                   </div>
-                </section>
+                  </div>
+                </details>
 
                 <section className="hitl-panel assignment-panel">
-                  <div className="panel-heading"><div><span className="eyebrow">Ownership</span><h3>Phân công</h3></div><span>{selected.assigned_to || "Chưa có người nhận"}</span></div>
+                  <div className="panel-heading"><div><span className="eyebrow">Hành động</span><h3>Bước tiếp theo</h3></div><span>{selected.assigned_to || "Chưa có người nhận"}</span></div>
                   <p className="muted-copy">{selected.assigned_to === staffId ? `Ticket do hệ thống/Admin phân công cho bạn${selected.assigned_department ? ` · ${selected.assigned_department}` : ""}.` : selected.assigned_to ? `Ticket hiện do ${selected.assigned_to} phụ trách. Chỉ Admin có thể điều phối lại khi cần.` : "Ticket đang ở hàng chờ nhóm. Bạn chỉ có thể nhận nếu đúng chuyên môn và đang ở trạng thái sẵn sàng."}</p>
                   {!selected.assigned_to && !["resolved", "closed"].includes(selected.status) ? <div className="status-actions"><button className="button button-secondary" disabled={actionLoading || (profile != null && profile.availability !== "available")} onClick={() => void claimTicket()} type="button"><StaffIcon /> Nhận ticket</button></div> : null}
                   {canEdit && selected.status === "assigned" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("in_progress")} type="button">Bắt đầu xử lý</button></div> : null}
@@ -429,10 +432,12 @@ export function StaffDashboard() {
                   <div className="staff-conversation">{selected.messages.map((message) => <article className={`staff-message staff-message-${message.role}`} key={message.message_id}><div><strong>{message.role === "user" ? "Ứng viên" : message.role === "staff" ? message.author_id || "Cán bộ" : "VinUni Guide"}</strong><small>{formatDateTime(message.created_at)}</small></div><p>{message.content}</p>{message.role === "assistant" && message.confidence != null ? <span>Grounded: {message.grounded ? "Có" : "Không"} · Confidence {Math.round(message.confidence * 100)}%</span> : null}</article>)}</div>
                 </section>
 
-                <section className="hitl-panel evidence-panel">
-                  <div className="panel-heading"><div><span className="eyebrow">Evidence</span><h3>Nguồn AI đã sử dụng</h3></div><span>{selected.evidence.length} nguồn</span></div>
+                <details className="hitl-panel evidence-panel detail-drawer">
+                  <summary><span><span className="eyebrow">Evidence</span><strong>Nguồn AI đã sử dụng</strong></span><span>{selected.evidence.length} nguồn</span></summary>
+                  <div className="detail-drawer-content">
                   {!selected.evidence.length ? <p className="muted-copy">Không có nguồn đủ chắc chắn được chuyển kèm. Cán bộ cần kiểm tra trước khi kết luận.</p> : <div className="staff-evidence-list">{selected.evidence.map((item) => <a href={item.url} key={item.evidence_id} rel="noreferrer" target="_blank"><span><strong>{item.title}</strong><small>{item.source_id}{item.source_category ? ` · ${item.source_category}` : ""}</small></span><ExternalIcon /></a>)}</div>}
-                </section>
+                  </div>
+                </details>
 
                 <section className="hitl-panel reply-panel">
                   <div className="panel-heading"><div><span className="eyebrow">Human response</span><h3>Soạn phản hồi</h3></div><span>{selected.user_email ? `Email: ${selected.user_email}` : "Không có email"}</span></div>
@@ -443,11 +448,13 @@ export function StaffDashboard() {
                   {selected.email_delivery_status ? <p className={`delivery-status delivery-${selected.email_delivery_status}`}>Trạng thái email: {selected.email_delivery_status}</p> : null}
                 </section>
 
-                <section className="hitl-panel notes-panel">
-                  <div className="panel-heading"><div><span className="eyebrow">Private</span><h3>Ghi chú nội bộ</h3></div><span>Không hiển thị cho ứng viên</span></div>
+                <details className="hitl-panel notes-panel detail-drawer">
+                  <summary><span><span className="eyebrow">Private</span><strong>Ghi chú nội bộ</strong></span><span>{selected.notes.length} ghi chú</span></summary>
+                  <div className="detail-drawer-content">
                   <div className="inline-form"><input disabled={!canEdit} maxLength={5000} onChange={(event) => setNote(event.target.value)} placeholder={canEdit ? "Thêm ghi chú cho nhóm…" : "Nhận ticket để thêm ghi chú nội bộ"} value={note} /><button className="button button-secondary" disabled={actionLoading || !canEdit || !note.trim()} onClick={() => void addNote()} type="button">Thêm</button></div>
                   <div className="note-list">{selected.notes.map((item) => <article key={item.note_id}><div><strong>{item.author_id}</strong><small>{formatDateTime(item.created_at)}</small></div><p>{item.note}</p></article>)}</div>
-                </section>
+                  </div>
+                </details>
 
                 {selected.status === "waiting_for_user" && selected.assigned_to === staffId ? <section className="hitl-panel resolve-panel"><div className="panel-heading"><div><span className="eyebrow">Resolution</span><h3>Hoàn tất ticket</h3></div></div><textarea maxLength={5000} onChange={(event) => setResolutionSummary(event.target.value)} placeholder="Tóm tắt kết quả đã xử lý…" rows={3} value={resolutionSummary} /><select onChange={(event) => setResolutionType(event.target.value)} value={resolutionType}><option value="answered">Đã trả lời</option><option value="policy_clarified">Đã làm rõ chính sách</option><option value="referred">Đã chuyển đơn vị phụ trách</option><option value="duplicate">Trùng yêu cầu</option></select><label className="consent-row"><input checked={knowledgeGap} onChange={(event) => setKnowledgeGap(event.target.checked)} type="checkbox" /><span>Đây là khoảng trống tri thức cần bổ sung vào knowledge base</span></label>{knowledgeGap ? <textarea maxLength={3000} onChange={(event) => setKnowledgeGapDescription(event.target.value)} placeholder="Mô tả dữ liệu hoặc tài liệu còn thiếu…" rows={2} value={knowledgeGapDescription} /> : null}<button className="button button-primary" disabled={actionLoading || !resolutionSummary.trim()} onClick={() => void resolveTicket()} type="button"><CheckIcon /> Xác nhận hoàn tất</button></section> : null}
 

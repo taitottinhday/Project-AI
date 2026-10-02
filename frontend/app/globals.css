@@ -3123,11 +3123,80 @@ button:disabled {
   margin-top: 16px;
 }
 
+/* Keep the staff workflow focused: conversation and next action first;
+   diagnostic information stays available without competing for attention. */
+.conversation-panel { order: 1; }
+.assignment-panel { order: 2; }
+.reply-panel { order: 3; }
+.resolve-panel { order: 4; }
+.triage-panel { order: 5; }
+.evidence-panel { order: 6; }
+.notes-panel { order: 7; }
+.audit-panel { order: 8; }
+
 .hitl-panel {
   background: #fbfcfb;
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 15px;
+}
+
+.assignment-panel {
+  background: linear-gradient(135deg, #f2f9f7, #fbfdfc);
+  border-color: #b8d8d3;
+}
+
+.detail-drawer {
+  padding: 0;
+}
+
+.detail-drawer > summary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  list-style: none;
+  padding: 14px 15px;
+}
+
+.detail-drawer > summary::-webkit-details-marker { display: none; }
+
+.detail-drawer > summary::after {
+  color: var(--teal-700);
+  content: "+";
+  flex: 0 0 auto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  order: 3;
+}
+
+.detail-drawer[open] > summary::after { content: "−"; }
+
+.detail-drawer > summary > span:first-child {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.detail-drawer > summary strong { font-size: 14px; }
+
+.detail-drawer > summary > span:nth-child(2) {
+  color: var(--ink-soft);
+  font-size: 9px;
+  margin-left: auto;
+}
+
+.detail-drawer-content {
+  border-top: 1px solid var(--line);
+  padding: 0 15px 15px;
+}
+
+.triage-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 11px;
 }
 
 .hitl-panel h3 {
