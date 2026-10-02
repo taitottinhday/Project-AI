@@ -26,8 +26,8 @@ const statusLabels: Record<TicketStatus, string> = {
   assigned: "Đã phân công",
   in_progress: "Đang xử lý",
   waiting_for_user: "Đã xử lý",
-  resolved: "Đã hoàn tất",
-  closed: "Đã đóng",
+  resolved: "Đã xử lý",
+  closed: "Đã xử lý",
 };
 
 const categoryLabels: Record<TicketCategory, string> = {
@@ -50,6 +50,7 @@ const priorityLabels: Record<TicketPriority, string> = {
 const categories = Object.keys(categoryLabels) as TicketCategory[];
 const priorities = Object.keys(priorityLabels) as TicketPriority[];
 const statuses = Object.keys(statusLabels) as TicketStatus[];
+const operatorStatuses = statuses.filter((status) => !["resolved", "closed"].includes(status));
 
 function authHeaders(token: string): HeadersInit {
   return { Authorization: `Bearer ${token}` };
@@ -364,7 +365,7 @@ export function StaffDashboard() {
       <section className="hitl-filterbar" aria-label="Bộ lọc ticket">
         <input aria-label="Tìm ticket" onChange={(event) => setSearch(event.target.value)} placeholder="Tìm mã ticket, câu hỏi, email…" value={search} />
         <select aria-label="Trạng thái" onChange={(event) => setStatusFilter(event.target.value as typeof statusFilter)} value={statusFilter}>
-          <option value="all">Tất cả trạng thái</option>{statuses.map((value) => <option key={value} value={value}>{statusLabels[value]}</option>)}
+          <option value="all">Tất cả trạng thái</option>{operatorStatuses.map((value) => <option key={value} value={value}>{statusLabels[value]}</option>)}
         </select>
         <select aria-label="Danh mục" onChange={(event) => setCategoryFilter(event.target.value as typeof categoryFilter)} value={categoryFilter}>
           <option value="all">Tất cả danh mục</option>{categories.map((value) => <option key={value} value={value}>{categoryLabels[value]}</option>)}
@@ -419,7 +420,7 @@ export function StaffDashboard() {
                   <p className="muted-copy">{selected.assigned_to === staffId ? `Ticket do hệ thống/Admin phân công cho bạn${selected.assigned_department ? ` · ${selected.assigned_department}` : ""}.` : selected.assigned_to ? `Ticket hiện do ${selected.assigned_to} phụ trách. Chỉ Admin có thể điều phối lại khi cần.` : "Ticket đang ở hàng chờ nhóm. Bạn chỉ có thể nhận nếu đúng chuyên môn và đang ở trạng thái sẵn sàng."}</p>
                   {!selected.assigned_to && !["resolved", "closed"].includes(selected.status) ? <div className="status-actions"><button className="button button-secondary" disabled={actionLoading || (profile != null && profile.availability !== "available")} onClick={() => void claimTicket()} type="button"><StaffIcon /> Nhận ticket</button></div> : null}
                   {canEdit && selected.status === "assigned" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("in_progress")} type="button">Bắt đầu xử lý</button></div> : null}
-                  {canEdit && selected.status === "in_progress" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("waiting_for_user")} type="button">Chờ ứng viên</button></div> : null}
+                  {canEdit && selected.status === "in_progress" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("waiting_for_user")} type="button">Đánh dấu đã xử lý</button></div> : null}
                   {canEdit && selected.status === "waiting_for_user" ? <div className="status-actions"><button disabled={actionLoading} onClick={() => void changeStatus("in_progress")} type="button">Tiếp tục xử lý</button></div> : null}
                 </section>
 
