@@ -25,7 +25,7 @@ const statusLabels: Record<TicketStatus, string> = {
   new: "Mới tiếp nhận",
   assigned: "Đã phân công",
   in_progress: "Đang xử lý",
-  waiting_for_user: "Chờ ứng viên",
+  waiting_for_user: "Đã xử lý",
   resolved: "Đã hoàn tất",
   closed: "Đã đóng",
 };
@@ -379,7 +379,7 @@ export function StaffDashboard() {
 
       <div className="staff-workspace hitl-workspace">
         <section className="ticket-queue">
-          <div className="queue-header"><div><span className="eyebrow">Queue</span><h2>Yêu cầu cần xử lý</h2><small className="queue-policy">Ticket đã phân công cho bạn + ticket mới thuộc chuyên môn đang chờ nhận.</small></div><span>{visibleTickets.length} ticket · {metrics?.team_queue_count ?? 0} chờ nhóm</span></div>
+          <div className="queue-header"><div><span className="eyebrow">Queue</span><h2>Ticket đang theo dõi</h2><small className="queue-policy">Ticket đã phân công cho bạn và ticket thuộc chuyên môn; ticket đã phản hồi được giữ để theo dõi.</small></div><span>{visibleTickets.length} ticket · {metrics?.team_queue_count ?? 0} chờ nhóm</span></div>
           <div className="queue-list hitl-queue-list">
             {loading && !tickets.length ? <div className="queue-loading">Đang tải hàng chờ…</div> : null}
             {!loading && !visibleTickets.length ? <div className="empty-state"><CheckIcon /><h3>Không có ticket</h3><p>Thử thay đổi bộ lọc hiện tại.</p></div> : null}
