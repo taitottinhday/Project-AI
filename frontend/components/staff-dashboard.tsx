@@ -91,7 +91,12 @@ export function StaffDashboard() {
   );
 
   const visibleTickets = useMemo(() => tickets.filter((ticket) => {
-    if (statusFilter !== "all" && (statusFilter !== "new" || !["new", "assigned"].includes(ticket.status))) return false;
+    if (
+      statusFilter !== "all"
+      && (statusFilter === "new"
+        ? !["new", "assigned"].includes(ticket.status)
+        : ticket.status !== statusFilter)
+    ) return false;
     if (categoryFilter !== "all" && ticket.category !== categoryFilter) return false;
     if (priorityFilter !== "all" && ticket.priority !== priorityFilter) return false;
     const needle = search.trim().toLocaleLowerCase("vi");
