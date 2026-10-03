@@ -25,9 +25,9 @@ const statusLabels: Record<TicketStatus, string> = {
   new: "Mới tiếp nhận",
   assigned: "Mới tiếp nhận",
   in_progress: "Đang xử lý",
-  waiting_for_user: "Đã xử lý",
-  resolved: "Đã xử lý",
-  closed: "Đã xử lý",
+  waiting_for_user: "Đã phản hồi",
+  resolved: "Đã hoàn tất",
+  closed: "Đã đóng",
 };
 
 const categoryLabels: Record<TicketCategory, string> = {
@@ -50,7 +50,8 @@ const priorityLabels: Record<TicketPriority, string> = {
 const categories = Object.keys(categoryLabels) as TicketCategory[];
 const priorities = Object.keys(priorityLabels) as TicketPriority[];
 const statuses = Object.keys(statusLabels) as TicketStatus[];
-const operatorStatuses = statuses.filter((status) => !["assigned", "resolved", "closed"].includes(status));
+// "new" includes newly created and assigned tickets; the other states are filtered exactly.
+const operatorStatuses = statuses.filter((status) => status !== "assigned");
 
 function authHeaders(token: string): HeadersInit {
   return { Authorization: `Bearer ${token}` };
